@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l1pn6yqsfsml"
-path="res://.godot/imported/istockphoto-846058232-1024x1024.jpg-417af1d641b760ccc5b0668c197ea406.ctex"
+uid="uid://bxrwji1awfwee"
+path="res://.godot/imported/tetrominoes.png-f1df65553bd4ff915cd3e77f1571605d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://istockphoto-846058232-1024x1024.jpg"
-dest_files=["res://.godot/imported/istockphoto-846058232-1024x1024.jpg-417af1d641b760ccc5b0668c197ea406.ctex"]
+source_file="res://TetrisAssets/tetrominoes.png"
+dest_files=["res://.godot/imported/tetrominoes.png-f1df65553bd4ff915cd3e77f1571605d.ctex"]
 
 [params]
 
