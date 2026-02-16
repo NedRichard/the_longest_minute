@@ -95,8 +95,8 @@ func _physics_process(delta: float) -> void:
 	if move_direction != Vector2i.ZERO:
 		move_tetromino(move_direction)
 	
-	#if Input.is_action_just_pressed("ui_up"):
-		#rotate_tetromino()
+	if Input.is_action_just_pressed("ui_up"):
+		rotate_tetromino()
 	
 	var current_fall_interval = fall_interval
 	if Input.is_action_just_pressed("ui_down"):
@@ -137,6 +137,14 @@ func clear_tetromino() -> void:
 	for block in active_tetromino:
 		active_layer.erase_cell(current_position + block)
 
+func rotate_tetromino() -> void:
+	if is_valid_rotation():
+		clear_tetromino()
+		rotation_index = (rotation_index - 1) % 4
+		active_tetromino = current_tetromino_type[rotation_index]
+		render_tetromino(active_tetromino, current_position, piece_atlas)
+		
+
 func move_tetromino(direction: Vector2i) -> void:
 	if is_valid_move(direction):
 		clear_tetromino()
@@ -146,6 +154,15 @@ func move_tetromino(direction: Vector2i) -> void:
 func is_valid_move(new_position: Vector2i) -> bool:
 	for block in active_tetromino:
 		if not is_within_bounds(current_position + block + new_position):
+			return false
+	return true
+
+func is_valid_rotation() -> bool:
+	var next_rotation = (rotation_index + 1) % 4
+	var rotated_tetromino = current_tetromino_type[next_rotation]
+	
+	for block in rotated_tetromino:
+		if not is_within_bounds(current_position + block):
 			return false
 	return true
 
