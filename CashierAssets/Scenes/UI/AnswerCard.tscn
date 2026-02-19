@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cyyi3uumnmwmx"]
+
+[ext_resource type="Script" uid="uid://djrgum8rjfbr2" path="res://CashierAssets/Scripts/AnswerCard.gd" id="1_041ow"]
+[ext_resource type="Texture2D" uid="uid://4q8cui5mda8h" path="res://CashierAssets/cashier_answer_cloud.png" id="2_50rog"]
+
+[node name="AnswerCard" type="Button" unique_id=1303516809 node_paths=PackedStringArray("label")]
+self_modulate = Color(1, 1, 1, 0.34509805)
+custom_minimum_size = Vector2(420, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = -1520.0
+offset_bottom = -705.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_041ow")
+label = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1909105335]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.0
+offset_top = -71.0
+offset_right = 212.52832
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_50rog")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="." unique_id=896105084]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -11.5
+offset_right = 16.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.9647059)
+theme_override_colors/font_shadow_color = Color(0.12061956, 0.05753135, 0.016867999, 0.49411765)
+theme_override_colors/font_outline_color = Color(0.10006079, 0.0033879932, 0.07054296, 1)
+theme_override_font_sizes/font_size = 22
+text = "yes?"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

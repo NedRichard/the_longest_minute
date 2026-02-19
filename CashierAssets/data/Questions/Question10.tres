@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://dvt3fgweuthxf"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_bqay2"]
+
+[resource]
+script = ExtResource("1_bqay2")
+question_text = "If you talk to your reflection in the mirror does it talk back?
+"
+answers = Array[String](["No, of course not.", "Yes it does", "Never", "Sometimes"])
+any_answer_ok = true
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

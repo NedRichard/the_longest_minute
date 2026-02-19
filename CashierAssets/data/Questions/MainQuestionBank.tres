@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="QuestionBank" format=3 uid="uid://bai05mneiauun"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_mwkrp"]
+[ext_resource type="Resource" uid="uid://drhp02jba8ud3" path="res://CashierAssets/data/Questions/Question1.tres" id="2_7frne"]
+[ext_resource type="Script" uid="uid://dshes8gwer8fq" path="res://CashierAssets/Scripts/QuestionBank.gd" id="2_bf244"]
+[ext_resource type="Resource" uid="uid://dn30nab1bkd4b" path="res://CashierAssets/data/Questions/Question2.tres" id="3_k1836"]
+[ext_resource type="Resource" uid="uid://csub3fqlyqxp8" path="res://CashierAssets/data/Questions/Question3.tres" id="4_ncsnh"]
+[ext_resource type="Resource" uid="uid://b4smyiblaq8cv" path="res://CashierAssets/data/Questions/Question4.tres" id="5_wp8bb"]
+[ext_resource type="Resource" uid="uid://b0rpi5dlbl7iw" path="res://CashierAssets/data/Questions/Question5.tres" id="6_mev01"]
+[ext_resource type="Resource" uid="uid://b4mmg4wrkie36" path="res://CashierAssets/data/Questions/Question6.tres" id="7_tma8q"]
+[ext_resource type="Resource" uid="uid://81klrrdqk2tb" path="res://CashierAssets/data/Questions/Question7.tres" id="8_mh6vq"]
+[ext_resource type="Resource" uid="uid://cachn6ttv0d82" path="res://CashierAssets/data/Questions/Question8.tres" id="9_7l2v0"]
+[ext_resource type="Resource" uid="uid://bwifxwgjeq7vf" path="res://CashierAssets/data/Questions/Question9.tres" id="10_wd7o0"]
+[ext_resource type="Resource" uid="uid://dvt3fgweuthxf" path="res://CashierAssets/data/Questions/Question10.tres" id="11_ifyw0"]
+
+[resource]
+script = ExtResource("2_bf244")
+questions = Array[ExtResource("1_mwkrp")]([ExtResource("2_7frne"), ExtResource("3_k1836"), ExtResource("4_ncsnh"), ExtResource("5_wp8bb"), ExtResource("6_mev01"), ExtResource("7_tma8q"), ExtResource("8_mh6vq"), ExtResource("9_7l2v0"), ExtResource("10_wd7o0"), ExtResource("11_ifyw0")])
+metadata/_custom_type_script = "uid://dshes8gwer8fq"

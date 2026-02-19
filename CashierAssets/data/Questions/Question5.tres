@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://b0rpi5dlbl7iw"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_bkgvu"]
+
+[resource]
+script = ExtResource("1_bkgvu")
+question_text = "Is your mom going to be back soon? "
+answers = Array[String](["No, she won't.", "I don't have a mum. ", "Yes, she will be back soon.", "Yes, my dad will be back"])
+correct_answer_indices = Array[int]([2])
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

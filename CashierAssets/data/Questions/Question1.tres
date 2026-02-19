@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://drhp02jba8ud3"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_0yp4n"]
+
+[resource]
+script = ExtResource("1_0yp4n")
+question_text = "Did you find everything?"
+answers = Array[String](["Yes, we did", "No, We didn't get anything", "No, nothing", "We, didn't buy anything"])
+correct_answer_indices = Array[int]([0])
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

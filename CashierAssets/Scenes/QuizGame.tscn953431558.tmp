@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://baibi0k0swmui"]
+
+[ext_resource type="Script" uid="uid://cad43eawbbhqq" path="res://CashierAssets/Scripts/QuizManager.gd" id="1_oh3fi"]
+[ext_resource type="PackedScene" uid="uid://cefw0wyyqjdv6" path="res://CashierAssets/Scenes/UI/DropZone.tscn" id="2_rep7p"]
+[ext_resource type="Script" uid="uid://dupugp5qggbpr" path="res://CashierAssets/Scripts/DropZone.gd" id="3_rkqw4"]
+
+[node name="Control" type="Control" unique_id=2124792219]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuizManager" type="Node" parent="." unique_id=942576591]
+script = ExtResource("1_oh3fi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=99416742]
+
+[node name="UI" type="Control" parent="." unique_id=1513484850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DropZone" parent="UI" unique_id=1122812498 instance=ExtResource("2_rep7p")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -282.0
+offset_right = 300.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_rkqw4")
