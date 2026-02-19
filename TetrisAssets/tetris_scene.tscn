@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://ocddgbgjlhvo"]
 
-[ext_resource type="Script" uid="uid://d12nmgkfv7c2d" path="res://tetris.gd" id="1_621yq"]
+[ext_resource type="Script" uid="uid://d12nmgkfv7c2d" path="res://TetrisAssets/tetris.gd" id="1_621yq"]
 [ext_resource type="Texture2D" uid="uid://2pqbasvlubji" path="res://TetrisAssets/tetris_background.png" id="2_075lc"]
-[ext_resource type="PackedScene" uid="uid://meqwv1el5pnk" path="res://tetris_hud.tscn" id="3_lw01v"]
+[ext_resource type="PackedScene" uid="uid://meqwv1el5pnk" path="res://TetrisAssets/tetris_hud.tscn" id="3_lw01v"]
 [ext_resource type="Texture2D" uid="uid://dq4msbju6mfrs" path="res://TetrisAssets/Tetrogroceries.png" id="4_ps2ti"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_075lc"]
@@ -39,7 +39,7 @@ sources/0 = SubResource("TileSetAtlasSource_621yq")
 
 [node name="Tetris" type="Node2D" unique_id=1779908368]
 script = ExtResource("1_621yq")
-fall_interval = 0.2
+fall_interval = 0.5
 
 [node name="Background" type="Sprite2D" parent="." unique_id=412107219]
 position = Vector2(960, 537)

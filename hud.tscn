@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ch7dxdnrku23d"]
+
+[ext_resource type="Texture2D" uid="uid://do82ammygieki" path="res://HUD/anxious_frame.png" id="1_37p78"]
+[ext_resource type="Script" uid="uid://lj1lmvl3g1mp" path="res://hud.gd" id="1_640wx"]
+[ext_resource type="Texture2D" uid="uid://dnhyi7qw0ijve" path="res://HUD/sweat.png" id="2_64ctp"]
+[ext_resource type="Texture2D" uid="uid://c6u0wpfpivh7p" path="res://HUD/smoke.png" id="3_8sq4i"]
+
+[node name="HUD" type="Control" unique_id=971369467 node_paths=PackedStringArray("anxious_frame", "sweat_frame", "smoke_frame")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_640wx")
+anxious_frame = NodePath("Control/AnxiousFrame")
+sweat_frame = NodePath("Control/SweatFrame")
+smoke_frame = NodePath("Control/SmokeFrame")
+
+[node name="Control" type="Control" parent="." unique_id=680563422]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnxiousFrame" type="TextureRect" parent="Control" unique_id=909845345]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_37p78")
+
+[node name="SweatFrame" type="TextureRect" parent="Control" unique_id=118015268]
+visible = false
+modulate = Color(1, 1, 1, 0.101960786)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_64ctp")
+expand_mode = 3
+
+[node name="SmokeFrame" type="TextureRect" parent="Control" unique_id=1209141104]
+visible = false
+modulate = Color(1, 1, 1, 0.38039216)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8sq4i")
+expand_mode = 3

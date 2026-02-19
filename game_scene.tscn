@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://dbhkfu3oe5ouf"]
 
-[ext_resource type="PackedScene" uid="uid://cpg7u055pjmpi" path="res://mom_scene.tscn" id="1_mlf6e"]
+[ext_resource type="PackedScene" uid="uid://cpg7u055pjmpi" path="res://MomAssets/mom_scene.tscn" id="1_mlf6e"]
 [ext_resource type="Script" uid="uid://cnjr5cyftdx38" path="res://game_scene.gd" id="1_v1wow"]
-[ext_resource type="PackedScene" uid="uid://ocddgbgjlhvo" path="res://tetris_scene.tscn" id="2_po0ka"]
+[ext_resource type="PackedScene" uid="uid://ocddgbgjlhvo" path="res://TetrisAssets/tetris_scene.tscn" id="2_po0ka"]
 [ext_resource type="PackedScene" uid="uid://baibi0k0swmui" path="res://CashierAssets/Scenes/QuizGame.tscn" id="4_mixcd"]
+[ext_resource type="PackedScene" uid="uid://ch7dxdnrku23d" path="res://hud.tscn" id="5_mj2jn"]
 
 [node name="GameScene" type="Node2D" unique_id=474596551]
 script = ExtResource("1_v1wow")
@@ -14,21 +15,32 @@ script = ExtResource("1_v1wow")
 position = Vector2(1364, 1080)
 
 [node name="CameraMom" type="Camera2D" parent="." unique_id=864138137]
+visible = false
 offset = Vector2(960, 540)
 
 [node name="CameraTetris" type="Camera2D" parent="." unique_id=895682263]
+visible = false
 position = Vector2(-556, 731)
 offset = Vector2(2880, 886)
 
 [node name="CameraCashier" type="Camera2D" parent="." unique_id=602974345]
+visible = false
 position = Vector2(-556, 731)
 offset = Vector2(3430, -190.06)
+
+[node name="CameraGame" type="Camera2D" parent="." unique_id=2096979846]
+visible = false
+offset = Vector2(960, 540)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1277906608]
 follow_viewport_enabled = true
 
-[node name="Control" parent="CanvasLayer" unique_id=2124792219 instance=ExtResource("4_mixcd")]
+[node name="Cashier" parent="CanvasLayer" unique_id=2124792219 instance=ExtResource("4_mixcd")]
 offset_left = 1922.0
 offset_top = -3.0
 offset_right = 1922.0
 offset_bottom = -3.0
+
+[node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1025179045]
+
+[node name="HUD" parent="HUDCanvas" unique_id=1911995513 instance=ExtResource("5_mj2jn")]

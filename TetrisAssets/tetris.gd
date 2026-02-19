@@ -242,6 +242,7 @@ func is_game_over() -> void:
 	for i in active_tetromino:
 		if not is_within_bounds(i + current_position):
 			land_tetromino()
-			game_over_label.visible = true
+			#game_over_label.visible = true
+			EventBus.add_strike()
 			next_bag_button.visible = true
 			is_game_running = false
