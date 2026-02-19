@@ -107,12 +107,12 @@ func _start_question(index: int) -> void:
 	# --- Start timers ---
 	# Answer window timer
 	answer_timer.stop()
-	answer_timer.wait_time = _current_question.answer_time_seconds
+	#answer_timer.wait_time = _current_question.answer_time_seconds
 	answer_timer.start()
 
 	# Total question interval timer
 	interval_timer.stop()
-	interval_timer.wait_time = _current_question.total_interval_seconds
+	#interval_timer.wait_time = _current_question.total_interval_seconds
 	interval_timer.start()
 
 	# Enable _process so we can update the timer label smoothly
