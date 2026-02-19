@@ -33,9 +33,11 @@ questionPopup = NodePath("../UI/QuestionPanel")
 
 [node name="AnswerTimer" type="Timer" parent="QuizManager" unique_id=264047810]
 wait_time = 20.0
+one_shot = true
 
 [node name="Interval" type="Timer" parent="QuizManager" unique_id=1595800105]
 wait_time = 30.0
+one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=99416742]
 
