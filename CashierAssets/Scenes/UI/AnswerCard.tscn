@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cyyi3uumnmwmx"]
+
+[ext_resource type="Script" uid="uid://djrgum8rjfbr2" path="res://CashierAssets/Scripts/AnswerCard.gd" id="1_041ow"]
+
+[node name="AnswerCard" type="Control" unique_id=1761940941]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_041ow")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1364897497]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=896105084]
+layout_mode = 2

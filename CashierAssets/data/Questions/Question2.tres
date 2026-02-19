@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://dn30nab1bkd4b"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_8l7s6"]
+
+[resource]
+script = ExtResource("1_8l7s6")
+question_text = "What is your name?"
+answers = Array[String](["Nono", "Yes Yes", "Oui Oui"])
+correct_answer_indices = Array[int]([0])
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"
