@@ -6,6 +6,7 @@ extends Node2D
 @onready var camera_cashier: Camera2D = $CameraCashier
 @onready var hud: Control = $HUDCanvas/HUD
 
+@onready var cashier_voice: AudioStreamPlayer = $Audio/CashierVoice
 
 var current_camera: Camera2D
 
@@ -16,6 +17,7 @@ var cashier_active: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	switch_to_tetris_screen()
+	EventBus.start_talking.connect(start_talking_sfx)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,3 +61,6 @@ func switch_to_cashier_screen() -> void:
 	mom_active = false
 	cashier_active = true
 	tetris_active = false
+
+func start_talking_sfx() -> void:
+	cashier_voice.play()

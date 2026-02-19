@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dov6e1fcer25f"
+path="res://.godot/imported/Seeburg Background Music Record BASIC B06B (1962) 4.mp3-29ed0221946586ddf33665648d9e82e8.mp3str"
+
+[deps]
+
+source_file="res://Audio/Seeburg Background Music Record BASIC B06B (1962) 4.mp3"
+dest_files=["res://.godot/imported/Seeburg Background Music Record BASIC B06B (1962) 4.mp3-29ed0221946586ddf33665648d9e82e8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

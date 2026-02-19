@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://ocddgbgjlhvo" path="res://TetrisAssets/tetris_scene.tscn" id="2_po0ka"]
 [ext_resource type="PackedScene" uid="uid://baibi0k0swmui" path="res://CashierAssets/Scenes/QuizGame.tscn" id="4_mixcd"]
 [ext_resource type="PackedScene" uid="uid://ch7dxdnrku23d" path="res://hud.tscn" id="5_mj2jn"]
+[ext_resource type="AudioStream" uid="uid://dsj1v3hpjso8b" path="res://Audio/SFX_SupermarketAmbience.mp3" id="6_kdryc"]
+[ext_resource type="AudioStream" uid="uid://dov6e1fcer25f" path="res://Audio/Seeburg Background Music Record BASIC B06B (1962) 4.mp3" id="7_6e45b"]
+[ext_resource type="AudioStream" uid="uid://bpsuc4g6d7ss2" path="res://Audio/SFX_Voice.mp3" id="8_e35lh"]
 
 [node name="GameScene" type="Node2D" unique_id=474596551]
 script = ExtResource("1_v1wow")
@@ -44,3 +47,22 @@ offset_bottom = -3.0
 [node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1025179045]
 
 [node name="HUD" parent="HUDCanvas" unique_id=1911995513 instance=ExtResource("5_mj2jn")]
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="Audio" type="Node" parent="." unique_id=444948966]
+
+[node name="Ambience" type="AudioStreamPlayer" parent="Audio" unique_id=1293822707]
+stream = ExtResource("6_kdryc")
+volume_db = -20.0
+autoplay = true
+
+[node name="BGM" type="AudioStreamPlayer" parent="Audio" unique_id=709621734]
+stream = ExtResource("7_6e45b")
+volume_db = -6.0
+autoplay = true
+
+[node name="CashierVoice" type="AudioStreamPlayer" parent="Audio" unique_id=85850532]
+stream = ExtResource("8_e35lh")
+volume_db = 9.0
+pitch_scale = 1.16

@@ -5,7 +5,7 @@ var strike: int = 0
 signal strike1
 signal strike2
 signal strike3
-
+signal start_talking
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

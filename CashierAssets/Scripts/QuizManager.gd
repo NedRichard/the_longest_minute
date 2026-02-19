@@ -147,6 +147,7 @@ func _spawn_answers(answers: Array[String]) -> void:
 		card.set_data(i, answers[i])
 		card.OnClick.connect(_on_answer_clicked)
 		answers_container.add_child(card)
+		EventBus.start_talking.emit()
 
 
 func _play_voice_over(stream: AudioStream) -> void:
