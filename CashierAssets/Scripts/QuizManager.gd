@@ -1,38 +1,60 @@
 extends Node
 class_name QuizManager
-@export var answerTimer: Timer
-@export var intervaltimer: Timer
+
+## --- Assign these in Inspector ---
 @export var question_bank: QuestionBank
-@export var answer_card_scene: PackedScene  # drag AnswerCard.tscn here
-#UI------------------------------------
+@export var answer_card_scene: PackedScene  # AnswerCard.tscn
+
+## UI references
 @export var question_label: Label
 @export var answers_container: HBoxContainer
-@export var timer_label: Label 
+@export var timer_label: Label
 @export var feedback_label: Label
 @export var question_counter_label: Label
-@export var drop_zone: DropZone 
-@export var voice_player: AudioStreamPlayer 
-@export var questionPopup :PanelContainer
-signal  OnCorrectAnswer
-signal  OnMiss
-#Variables---------------------------------------------
+@export var drop_zone: DropZone
+@export var voice_player: AudioStreamPlayer
+@export var questionPopup: PanelContainer
+
+## Timers (add as children of QuizManager and drag them in)
+@export var answer_timer: Timer        # 20s window
+@export var interval_timer: Timer      # 30s total per question
+
 ## Internal state
 var _current_index: int = 0
 var _current_question: QuestionData
-var _answered: bool = false
 var _accepting_input: bool = false
-var _answer_deadline_time: float = 0.0  # engine time in seconds
+var _answered: bool = false
 
-## To cancel running loops when scene resets
-var _session_id: int = 0
+##Signals
+signal  OnCorrectAnswer
+signal  OnMiss
 
 
 func _ready() -> void:
 	feedback_label.text = ""
 	timer_label.text = ""
 	questionPopup.hide()
-	#drop_zone.answer_dropped.connect(_on_answer_dropped)
 
+	# Connect timer timeouts
+	if answer_timer:
+		answer_timer.one_shot = true
+		answer_timer.autostart = false
+		answer_timer.timeout.connect(_on_answer_timer_timeout)
+	else:
+		push_error("QuizManager: answer_timer not assigned!")
+
+	if interval_timer:
+		interval_timer.one_shot = true
+		interval_timer.autostart = false
+		interval_timer.timeout.connect(_on_interval_timer_timeout)
+	else:
+		push_error("QuizManager: interval_timer not assigned!")
+
+	# Optional: if you're still using drop zone
+	if drop_zone:
+		drop_zone.answer_dropped.connect(_on_answer_dropped)
+
+	# Validate setup
 	if question_bank == null:
 		push_error("QuizManager: question_bank is not assigned.")
 		return
@@ -47,14 +69,11 @@ func _ready() -> void:
 
 
 func start_quiz() -> void:
-	_session_id += 1
 	_current_index = 0
-	_start_question(_current_index, _session_id)
+	_start_question(_current_index)
 
 
-func _start_question(index: int, session: int) -> void:
-	if session != _session_id:
-		return
+func _start_question(index: int) -> void:
 	questionPopup.show()
 
 	_current_question = question_bank.get_question(index)
@@ -62,41 +81,63 @@ func _start_question(index: int, session: int) -> void:
 		_finish_quiz()
 		return
 
-	var validation_error := _current_question.validate()
+	var validation_error: String = _current_question.validate()
 	if validation_error != "":
 		push_error("Question %s invalid: %s" % [index, validation_error])
 
-	# Reset state, make this seperate method
+	# Reset state
 	_answered = false
 	_accepting_input = true
-	drop_zone.set_enabled(true)
+	if drop_zone:
+		drop_zone.set_enabled(true)
+
 	feedback_label.text = ""
 
-	# UI: question counter and text
-	question_counter_label.text = "%d " % [index + 1]
+	# UI
+	question_counter_label.text = "%d" % (index + 1)
 	question_label.text = _current_question.question_text
 
-	# Build answer cards
+	# Build answers
 	_clear_answers()
 	_spawn_answers(_current_question.answers)
 
-	# Audio: play voice-over if assigned
-	#_play_voice_over(_current_question.audio_stream)
+	# Voice over (optional)
+	# _play_voice_over(_current_question.audio_stream)
 
-	# Timers
-	_answer_deadline_time = Time.get_ticks_msec() / 1000.0 + _current_question.answer_time_seconds
+	# --- Start timers ---
+	# Answer window timer
+	answer_timer.stop()
+	answer_timer.wait_time = _current_question.answer_time_seconds
+	answer_timer.start()
 
-	# Start update loop for timer label (non-blocking)
-	_update_timer_label_loop(session)
+	# Total question interval timer
+	interval_timer.stop()
+	interval_timer.wait_time = _current_question.total_interval_seconds
+	interval_timer.start()
 
-	# Start the question lifecycle (wait for answer or timeout, then wait remainder of interval)
-	_question_lifecycle_async(session)
+	# Enable _process so we can update the timer label smoothly
+	set_process(true)
+
+
+func _process(_delta: float) -> void:
+	# Update countdown label using the Timer's remaining time
+	if _accepting_input and answer_timer and answer_timer.is_stopped() == false:
+		timer_label.text = "Time: %.1f" % answer_timer.time_left
+	else:
+		# After answer/timeout, you can either keep it at 0.0 or clear it
+		timer_label.text = "Time: 0.0"
 
 
 func _clear_answers() -> void:
-	for child in answers_container.get_children() :
-		var card := child as AnswerCard
-		card.OnClick.disconnect(_on_answer_clicked)
+	# Safe disconnect + free
+	var cb := Callable(self, "_on_answer_clicked")
+
+	for child in answers_container.get_children():
+		if child is AnswerCard:
+			var card := child as AnswerCard
+			# Disconnect only if connected
+			if card.OnClick.is_connected(cb):
+				card.OnClick.disconnect(cb)
 		child.queue_free()
 
 
@@ -115,112 +156,85 @@ func _play_voice_over(stream: AudioStream) -> void:
 		voice_player.play()
 
 
-# --- Main flow async ---
-func _question_lifecycle_async(session: int) -> void:
-	# Run as "fire and forget" using await in an async function pattern.
-	# In Godot, any function can use await; this is just to keep logic readable.
-	call_deferred("_question_lifecycle_async_impl", session)
-
-
-func _question_lifecycle_async_impl(session: int) -> void:
-	if session != _session_id:
-		return
-
-	# 1) Wait until answered or answer time runs out.
-	while session == _session_id and _accepting_input:
-		var now := Time.get_ticks_msec() / 1000.0
-		if now >= _answer_deadline_time:
-			_on_timeout()
-			break
-		await get_tree().process_frame
-
-	if session != _session_id:
-		return
-
-	# 2) Ensure total interval is respected (30s total including answer time).
-	# If player answered early, wait remaining time.
-	var total := _current_question.total_interval_seconds
-	var remaining := maxf(0.0, _answer_deadline_time + (total - _current_question.answer_time_seconds) - (Time.get_ticks_msec() / 1000.0))
-
-	# Alternative simpler: measure from start time; but this is explicit and data-driven.
-
-	if remaining > 0.0:
-		await get_tree().create_timer(remaining).timeout
-
-	if session != _session_id:
-		return
-
-	# 3) Advance to next question
-	_current_index += 1
-	if _current_index >= question_bank.get_count():
-		_current_index =0
-	else:
-		_start_question(_current_index, session)
-
-
-func _update_timer_label_loop(session: int) -> void:
-	call_deferred("_update_timer_label_loop_impl", session)
-
-func _update_timer_label_loop_impl(session: int) -> void:
-	while session == _session_id and _accepting_input:
-		var now :float = float(Time.get_ticks_msec()) / 1000.0
-		var remaining : float = maxf(0.0, _answer_deadline_time - now)
-		timer_label.text = "Time: %.1f" % remaining
-		await get_tree().process_frame
-
-	# After answer/timeout, freeze or clear timer display as you prefer
-	timer_label.text = "Time: 0.0"
-
-func _on_answer_clicked(answercard : AnswerCard ) ->void :
-	print(answercard.answer_index)
-	print(answercard.answer_text)
+# ---------------------------
+# Answer click (your main logic)
+# ---------------------------
+func _on_answer_clicked(answercard: AnswerCard) -> void:
 	if not _accepting_input:
 		return
-		
-	var is_correct := _is_answer_accepted(answercard.answer_index)
 
+	_accepting_input = false
+	_answered = true
+
+	# Stop the answer timer so timeout won't fire after answering
+	answer_timer.stop()
+
+	# Disable drop zone if you use it
+	if drop_zone:
+		drop_zone.set_enabled(false)
+
+	var is_correct: bool = _is_answer_accepted(answercard.answer_index)
 	if is_correct:
 		feedback_label.text = "✅ Correct!"
 		OnCorrectAnswer.emit()
+		
 	else:
 		feedback_label.text = "❌ Wrong!"
 		OnMiss.emit()
-	_accepting_input = false
-	_answered = true
+
+	# If you want to hide popup and clear answers immediately (like you do now):
 	questionPopup.hide()
 	_clear_answers()
-# --- Input results ---
-#func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
-	## Ignore drops after answer window ends
-	#if not _accepting_input:
-		#return
-#
-	#_accepting_input = false
-	#drop_zone.set_enabled(false)
-#
-	#var is_correct := _is_answer_accepted(answer_index)
-#
-	#if is_correct:
-		#feedback_label.text = "✅ Correct!"
-	#else:
-		#feedback_label.text = "❌ Wrong!"
-#
-	#_answered = true
-#
-	## Optional: stop VO once answered
-	## voice_player.stop()
 
 
-func _on_timeout() -> void:
+# ---------------------------
+# Optional: drop zone support
+# ---------------------------
+func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
 	if not _accepting_input:
 		return
 
 	_accepting_input = false
-	drop_zone.set_enabled(false)
+	_answered = true
+	answer_timer.stop()
+
+	if drop_zone:
+		drop_zone.set_enabled(false)
+
+	var is_correct: bool = _is_answer_accepted(answer_index)
+	feedback_label.text = "✅ Correct!" if is_correct else "❌ Wrong!"
+
+
+# ---------------------------
+# Timer callbacks
+# ---------------------------
+func _on_answer_timer_timeout() -> void:
+	# Fired exactly when answer time ends
+	if not _accepting_input:
+		return
+
+	_accepting_input = false
+	_answered = false
+
+	if drop_zone:
+		drop_zone.set_enabled(false)
 
 	feedback_label.text = "⏱️ Timeout!"
 	OnMiss.emit()
-	_answered = false
+	questionPopup.hide()
+	_clear_answers()
+
+
+func _on_interval_timer_timeout() -> void:
+	# Fired exactly when total interval ends -> advance question
+	_next_question()
+
+
+func _next_question() -> void:
+	_current_index += 1
+	if _current_index >= question_bank.get_count():
+		_current_index = 0  # you currently loop back to start
+	_start_question(_current_index)
 
 
 func _is_answer_accepted(answer_index: int) -> bool:
@@ -231,7 +245,13 @@ func _is_answer_accepted(answer_index: int) -> bool:
 
 func _finish_quiz() -> void:
 	_accepting_input = false
-	drop_zone.set_enabled(false)
+	if drop_zone:
+		drop_zone.set_enabled(false)
+
+	answer_timer.stop()
+	interval_timer.stop()
+	set_process(false)
+
 	_clear_answers()
 	question_label.text = "Quiz complete!"
 	feedback_label.text = "Thanks for playing."

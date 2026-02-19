@@ -16,10 +16,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("answerTimer", "intervaltimer", "question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup")]
+[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup", "answer_timer", "interval_timer")]
 script = ExtResource("1_oh3fi")
-answerTimer = NodePath("AnswerTimer")
-intervaltimer = NodePath("Interval")
 question_bank = ExtResource("2_ud5qk")
 answer_card_scene = ExtResource("3_a3hhh")
 question_label = NodePath("../UI/QuestionPanel/TextureRect/PanelContainer/Label_Question")
@@ -30,6 +28,8 @@ question_counter_label = NodePath("../UI/Label_QuestionCounter")
 drop_zone = NodePath("../UI/DropZone")
 voice_player = NodePath("../AudioStreamPlayer")
 questionPopup = NodePath("../UI/QuestionPanel")
+answer_timer = NodePath("AnswerTimer")
+interval_timer = NodePath("Interval")
 
 [node name="AnswerTimer" type="Timer" parent="QuizManager" unique_id=264047810]
 wait_time = 20.0
