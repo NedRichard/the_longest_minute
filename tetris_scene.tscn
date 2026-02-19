@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://d12nmgkfv7c2d" path="res://tetris.gd" id="1_621yq"]
 [ext_resource type="Texture2D" uid="uid://2pqbasvlubji" path="res://TetrisAssets/tetris_background.png" id="2_075lc"]
-[ext_resource type="Texture2D" uid="uid://bxrwji1awfwee" path="res://TetrisAssets/tetrominoes.png" id="2_lw01v"]
 [ext_resource type="PackedScene" uid="uid://meqwv1el5pnk" path="res://tetris_hud.tscn" id="3_lw01v"]
+[ext_resource type="Texture2D" uid="uid://dq4msbju6mfrs" path="res://TetrisAssets/Tetrogroceries.png" id="4_ps2ti"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_075lc"]
-texture = ExtResource("2_lw01v")
+texture = ExtResource("4_ps2ti")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -22,7 +22,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_075lc")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_621yq"]
-texture = ExtResource("2_lw01v")
+texture = ExtResource("4_ps2ti")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -41,7 +41,7 @@ sources/0 = SubResource("TileSetAtlasSource_621yq")
 script = ExtResource("1_621yq")
 fall_interval = 0.2
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=412107219]
+[node name="Background" type="Sprite2D" parent="." unique_id=412107219]
 position = Vector2(960, 537)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_075lc")

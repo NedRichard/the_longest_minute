@@ -109,7 +109,7 @@ func _physics_process(delta: float) -> void:
 			rotate_tetromino()
 		
 		var current_fall_interval = fall_interval
-		if Input.is_action_just_pressed("ui_down"):
+		if Input.is_action_pressed("ui_down"):
 			current_fall_interval /= fast_fall_multipler
 		
 		fall_timer += delta
