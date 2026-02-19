@@ -1,11 +1,10 @@
 extends Node
 class_name QuizManager
-
-## --- Assign these in Inspector ---
+@export var answerTimer: Timer
+@export var intervaltimer: Timer
 @export var question_bank: QuestionBank
 @export var answer_card_scene: PackedScene  # drag AnswerCard.tscn here
-
-## Node references (hook up via unique names or drag in inspector if you prefer)
+#UI------------------------------------
 @export var question_label: Label
 @export var answers_container: HBoxContainer
 @export var timer_label: Label 
@@ -16,6 +15,7 @@ class_name QuizManager
 @export var questionPopup :PanelContainer
 signal  OnCorrectAnswer
 signal  OnMiss
+#Variables---------------------------------------------
 ## Internal state
 var _current_index: int = 0
 var _current_question: QuestionData
