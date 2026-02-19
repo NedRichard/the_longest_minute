@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_8l7s6")
-question_text = "Is your mom with you?"
-answers = Array[String](["YES", ".....", "...no..."])
+question_text = "So whats your name?"
+answers = Array[String](["Nono", "Nonno", "Nick", "Nino"])
 correct_answer_indices = Array[int]([0])
 any_answer_ok = true
 metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

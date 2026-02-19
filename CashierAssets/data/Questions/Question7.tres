@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://81klrrdqk2tb"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_7vxao"]
+
+[resource]
+script = ExtResource("1_7vxao")
+question_text = "The store closes at 9pm and it is already 8:30pm. How much longer will it stay open?
+"
+answers = Array[String](["1h 30 minutes", "1h", "30 minutes ", "20 minutes "])
+correct_answer_indices = Array[int]([2])
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

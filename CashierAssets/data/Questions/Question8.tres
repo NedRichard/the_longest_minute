@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://cachn6ttv0d82"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_mccbt"]
+
+[resource]
+script = ExtResource("1_mccbt")
+question_text = "If you have five coins and you pay with 3 how many do you have left?
+"
+answers = Array[String](["3 coins", "1 coin ", "4 coins ", "2 coins"])
+correct_answer_indices = Array[int]([3])
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

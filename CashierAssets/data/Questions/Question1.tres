@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_0yp4n")
-question_text = "What is your name?"
-answers = Array[String](["Nono", "Yes Yes", "Oui Oui"])
+question_text = "Did you find everything?"
+answers = Array[String](["Yes, we did", "No, We didn't get anything", "No, nothing", "We, didn't buy anything"])
 correct_answer_indices = Array[int]([0])
 metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

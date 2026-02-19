@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://bwifxwgjeq7vf"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_jd0dv"]
+
+[resource]
+script = ExtResource("1_jd0dv")
+question_text = "Do you think the moon landing was real?
+"
+answers = Array[String](["Yes", "No", "The what?", "What is a moon?"])
+any_answer_ok = true
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

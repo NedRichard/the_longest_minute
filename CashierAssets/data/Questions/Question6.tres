@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuestionData" format=3 uid="uid://b4mmg4wrkie36"]
+
+[ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_rp8wt"]
+
+[resource]
+script = ExtResource("1_rp8wt")
+question_text = "What is heavier: a kilogram of feather or a kilogram of rocks?"
+answers = Array[String](["Both are the same", "Rocks", "Feathers", "Neither are the same. "])
+correct_answer_indices = Array[int]([0])
+metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

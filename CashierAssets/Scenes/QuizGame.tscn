@@ -29,6 +29,10 @@ drop_zone = NodePath("../UI/DropZone")
 voice_player = NodePath("../AudioStreamPlayer")
 questionPopup = NodePath("../UI/QuestionPanel")
 
+[node name="Timer" type="Timer" parent="QuizManager" unique_id=264047810]
+
+[node name="Timer2" type="Timer" parent="QuizManager" unique_id=1595800105]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=99416742]
 
 [node name="UI" type="Control" parent="." unique_id=1513484850]
@@ -97,7 +101,7 @@ offset_left = 8.0
 offset_top = 69.0
 offset_right = 1928.0
 offset_bottom = 103.0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 40
 text = "999"
 
 [node name="QuestionPanel" type="PanelContainer" parent="UI" unique_id=1826018018]
@@ -145,19 +149,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnswerContainer" type="HBoxContainer" parent="UI" unique_id=180780104]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
-anchors_preset = 14
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 477.0
-offset_top = -112.0
-offset_right = -431.0
-offset_bottom = 88.0
+offset_left = -615.0
+offset_top = -150.0
+offset_right = 615.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
 
 [node name="AnswerCard" parent="UI/AnswerContainer" unique_id=1303516809 instance=ExtResource("3_a3hhh")]
 layout_mode = 2

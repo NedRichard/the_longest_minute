@@ -14,6 +14,8 @@ class_name QuizManager
 @export var drop_zone: DropZone 
 @export var voice_player: AudioStreamPlayer 
 @export var questionPopup :PanelContainer
+signal  OnCorrectAnswer
+signal  OnMiss
 ## Internal state
 var _current_index: int = 0
 var _current_question: QuestionData
@@ -29,7 +31,7 @@ func _ready() -> void:
 	feedback_label.text = ""
 	timer_label.text = ""
 	questionPopup.hide()
-	drop_zone.answer_dropped.connect(_on_answer_dropped)
+	#drop_zone.answer_dropped.connect(_on_answer_dropped)
 
 	if question_bank == null:
 		push_error("QuizManager: question_bank is not assigned.")
@@ -151,7 +153,7 @@ func _question_lifecycle_async_impl(session: int) -> void:
 	# 3) Advance to next question
 	_current_index += 1
 	if _current_index >= question_bank.get_count():
-		_finish_quiz()
+		_current_index =0
 	else:
 		_start_question(_current_index, session)
 
@@ -179,32 +181,34 @@ func _on_answer_clicked(answercard : AnswerCard ) ->void :
 
 	if is_correct:
 		feedback_label.text = "✅ Correct!"
+		OnCorrectAnswer.emit()
 	else:
 		feedback_label.text = "❌ Wrong!"
+		OnMiss.emit()
 	_accepting_input = false
 	_answered = true
 	questionPopup.hide()
 	_clear_answers()
 # --- Input results ---
-func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
-	# Ignore drops after answer window ends
-	if not _accepting_input:
-		return
-
-	_accepting_input = false
-	drop_zone.set_enabled(false)
-
-	var is_correct := _is_answer_accepted(answer_index)
-
-	if is_correct:
-		feedback_label.text = "✅ Correct!"
-	else:
-		feedback_label.text = "❌ Wrong!"
-
-	_answered = true
-
-	# Optional: stop VO once answered
-	# voice_player.stop()
+#func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
+	## Ignore drops after answer window ends
+	#if not _accepting_input:
+		#return
+#
+	#_accepting_input = false
+	#drop_zone.set_enabled(false)
+#
+	#var is_correct := _is_answer_accepted(answer_index)
+#
+	#if is_correct:
+		#feedback_label.text = "✅ Correct!"
+	#else:
+		#feedback_label.text = "❌ Wrong!"
+#
+	#_answered = true
+#
+	## Optional: stop VO once answered
+	## voice_player.stop()
 
 
 func _on_timeout() -> void:
@@ -215,6 +219,7 @@ func _on_timeout() -> void:
 	drop_zone.set_enabled(false)
 
 	feedback_label.text = "⏱️ Timeout!"
+	OnMiss.emit()
 	_answered = false
 
 
