@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://baibi0k0swmui"]
 
+[ext_resource type="Texture2D" uid="uid://16iyggptgnoh" path="res://CashierAssets/cashier_background.png" id="1_jh3om"]
 [ext_resource type="Script" uid="uid://cad43eawbbhqq" path="res://CashierAssets/Scripts/QuizManager.gd" id="1_oh3fi"]
 [ext_resource type="PackedScene" uid="uid://cefw0wyyqjdv6" path="res://CashierAssets/Scenes/UI/DropZone.tscn" id="2_rep7p"]
 [ext_resource type="Resource" uid="uid://bai05mneiauun" path="res://CashierAssets/data/Questions/MainQuestionBank.tres" id="2_ud5qk"]
+[ext_resource type="PackedScene" uid="uid://cyyi3uumnmwmx" path="res://CashierAssets/Scenes/UI/AnswerCard.tscn" id="3_a3hhh"]
 [ext_resource type="Script" uid="uid://dupugp5qggbpr" path="res://CashierAssets/Scripts/DropZone.gd" id="3_rkqw4"]
+[ext_resource type="Texture2D" uid="uid://crfoafbj2itw6" path="res://CashierAssets/cashier_dialogue_box.png" id="7_cvnos"]
 
 [node name="Control" type="Control" unique_id=2124792219]
 layout_mode = 3
@@ -13,11 +16,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("drop_zone", "voice_player")]
+[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup")]
 script = ExtResource("1_oh3fi")
 question_bank = ExtResource("2_ud5qk")
+answer_card_scene = ExtResource("3_a3hhh")
+question_label = NodePath("../UI/QuestionPanel/TextureRect/PanelContainer/Label_Question")
+answers_container = NodePath("../UI/AnswerContainer")
+timer_label = NodePath("../UI/Label_Timer")
+feedback_label = NodePath("../UI/Label_Feedback")
+question_counter_label = NodePath("../UI/Label_QuestionCounter")
 drop_zone = NodePath("../UI/DropZone")
 voice_player = NodePath("../AudioStreamPlayer")
+questionPopup = NodePath("../UI/QuestionPanel")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=99416742]
 
@@ -29,6 +39,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PanelContainer" type="PanelContainer" parent="UI" unique_id=756159273]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect_CashierBG" type="TextureRect" parent="UI/PanelContainer" unique_id=392054502]
+layout_mode = 2
+texture = ExtResource("1_jh3om")
+expand_mode = 5
+
 [node name="DropZone" parent="UI" unique_id=1122812498 instance=ExtResource("2_rep7p")]
 layout_mode = 1
 anchors_preset = 7
@@ -36,26 +59,114 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -282.0
-offset_right = 300.0
-offset_bottom = -82.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("3_rkqw4")
 
-[node name="HBoxContainer_TopBar" type="HBoxContainer" parent="UI" unique_id=1753812136]
+[node name="Label_QuestionCounter" type="Label" parent="UI" unique_id=1934273250]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 5.0
+offset_top = 33.0
+offset_right = 115.0
+offset_bottom = 56.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "QUestiooon 1 "
 
-[node name="Label_QuestionCounter" type="Label" parent="UI/HBoxContainer_TopBar" unique_id=1934273250]
-layout_mode = 2
+[node name="Label_Feedback" type="Label" parent="UI" unique_id=738429171]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = 368.0
+offset_right = -7.0
+offset_bottom = 402.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "wwwowww"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label_Timer" type="Label" parent="UI/HBoxContainer_TopBar" unique_id=129974507]
-layout_mode = 2
+[node name="Label_Timer" type="Label" parent="UI" unique_id=129974507]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 69.0
+offset_right = 1928.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 24
+text = "999"
 
 [node name="QuestionPanel" type="PanelContainer" parent="UI" unique_id=1826018018]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1895.0
+offset_top = 93.0
+offset_right = -1014.48047
+offset_bottom = 293.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/QuestionPanel" unique_id=1638024954]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_cvnos")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/QuestionPanel/TextureRect" unique_id=1703671259]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -81.0
+offset_right = -156.51947
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Question" type="Label" parent="UI/QuestionPanel/TextureRect/PanelContainer" unique_id=1531777033]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.92, 0.68, 0.9647059)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.8336643, 0.80470425, 0.7999792, 1)
+theme_override_font_sizes/font_size = 32
+text = "Do you think that thghjghjghjhgjhgjghjhgjgjgj"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnswerContainer" type="HBoxContainer" parent="UI" unique_id=180780104]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 477.0
+offset_top = -112.0
+offset_right = -431.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="AnswerCard" parent="UI/AnswerContainer" unique_id=1303516809 instance=ExtResource("3_a3hhh")]
+layout_mode = 2
+
+[node name="AnswerCard2" parent="UI/AnswerContainer" unique_id=931279503 instance=ExtResource("3_a3hhh")]
+layout_mode = 2
+
+[node name="AnswerCard3" parent="UI/AnswerContainer" unique_id=855528957 instance=ExtResource("3_a3hhh")]
+layout_mode = 2
+
+[node name="AnswerCard4" parent="UI/AnswerContainer" unique_id=1223694666 instance=ExtResource("3_a3hhh")]
+layout_mode = 2

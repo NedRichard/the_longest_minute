@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuestionBank" format=3 uid="uid://bai05mneiauun"]
 
 [ext_resource type="Script" uid="uid://d4mnncm6ubd8l" path="res://CashierAssets/Scripts/QuestionData.gd" id="1_mwkrp"]
-[ext_resource type="Resource" uid="uid://csub3fqlyqxp8" path="res://CashierAssets/data/Questions/Question1.tres" id="2_7frne"]
+[ext_resource type="Resource" uid="uid://drhp02jba8ud3" path="res://CashierAssets/data/Questions/Question1.tres" id="2_7frne"]
 [ext_resource type="Script" uid="uid://dshes8gwer8fq" path="res://CashierAssets/Scripts/QuestionBank.gd" id="2_bf244"]
 [ext_resource type="Resource" uid="uid://dn30nab1bkd4b" path="res://CashierAssets/data/Questions/Question2.tres" id="3_k1836"]
-[ext_resource type="Resource" uid="uid://drhp02jba8ud3" path="res://CashierAssets/data/Questions/Question3.tres" id="4_ncsnh"]
+[ext_resource type="Resource" uid="uid://csub3fqlyqxp8" path="res://CashierAssets/data/Questions/Question3.tres" id="4_ncsnh"]
 
 [resource]
 script = ExtResource("2_bf244")

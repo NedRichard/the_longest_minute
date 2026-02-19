@@ -7,13 +7,13 @@ class_name QuizManager
 
 ## Node references (hook up via unique names or drag in inspector if you prefer)
 @export var question_label: Label
-@export var answers_container: VBoxContainer
+@export var answers_container: HBoxContainer
 @export var timer_label: Label 
-@onready var feedback_label: Label = %FeedbackLabel
+@export var feedback_label: Label
 @export var question_counter_label: Label
 @export var drop_zone: DropZone 
 @export var voice_player: AudioStreamPlayer 
-
+@export var questionPopup :PanelContainer
 ## Internal state
 var _current_index: int = 0
 var _current_question: QuestionData
@@ -28,6 +28,7 @@ var _session_id: int = 0
 func _ready() -> void:
 	feedback_label.text = ""
 	timer_label.text = ""
+	questionPopup.hide()
 	drop_zone.answer_dropped.connect(_on_answer_dropped)
 
 	if question_bank == null:
@@ -52,6 +53,7 @@ func start_quiz() -> void:
 func _start_question(index: int, session: int) -> void:
 	if session != _session_id:
 		return
+	questionPopup.show()
 
 	_current_question = question_bank.get_question(index)
 	if _current_question == null:
@@ -62,14 +64,14 @@ func _start_question(index: int, session: int) -> void:
 	if validation_error != "":
 		push_error("Question %s invalid: %s" % [index, validation_error])
 
-	# Reset state
+	# Reset state, make this seperate method
 	_answered = false
 	_accepting_input = true
 	drop_zone.set_enabled(true)
 	feedback_label.text = ""
 
 	# UI: question counter and text
-	question_counter_label.text = "%d / %d" % [index + 1, question_bank.get_count()]
+	question_counter_label.text = "%d " % [index + 1]
 	question_label.text = _current_question.question_text
 
 	# Build answer cards
@@ -77,7 +79,7 @@ func _start_question(index: int, session: int) -> void:
 	_spawn_answers(_current_question.answers)
 
 	# Audio: play voice-over if assigned
-	_play_voice_over(_current_question.audio_stream)
+	#_play_voice_over(_current_question.audio_stream)
 
 	# Timers
 	_answer_deadline_time = Time.get_ticks_msec() / 1000.0 + _current_question.answer_time_seconds
@@ -90,7 +92,9 @@ func _start_question(index: int, session: int) -> void:
 
 
 func _clear_answers() -> void:
-	for child in answers_container.get_children():
+	for child in answers_container.get_children() :
+		var card := child as AnswerCard
+		card.OnClick.disconnect(_on_answer_clicked)
 		child.queue_free()
 
 
@@ -98,6 +102,7 @@ func _spawn_answers(answers: Array[String]) -> void:
 	for i in range(answers.size()):
 		var card := answer_card_scene.instantiate() as AnswerCard
 		card.set_data(i, answers[i])
+		card.OnClick.connect(_on_answer_clicked)
 		answers_container.add_child(card)
 
 
@@ -164,7 +169,22 @@ func _update_timer_label_loop_impl(session: int) -> void:
 	# After answer/timeout, freeze or clear timer display as you prefer
 	timer_label.text = "Time: 0.0"
 
+func _on_answer_clicked(answercard : AnswerCard ) ->void :
+	print(answercard.answer_index)
+	print(answercard.answer_text)
+	if not _accepting_input:
+		return
+		
+	var is_correct := _is_answer_accepted(answercard.answer_index)
 
+	if is_correct:
+		feedback_label.text = "✅ Correct!"
+	else:
+		feedback_label.text = "❌ Wrong!"
+	_accepting_input = false
+	_answered = true
+	questionPopup.hide()
+	_clear_answers()
 # --- Input results ---
 func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
 	# Ignore drops after answer window ends

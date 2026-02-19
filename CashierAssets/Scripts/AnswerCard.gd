@@ -1,12 +1,13 @@
-extends Control
+extends Button
 class_name AnswerCard
 ## Draggable UI element representing one answer option.
 
 @export var answer_index: int = -1
 @export var answer_text: String = ""
 
-@onready var label: Label = $PanelContainer/Label if has_node("PanelContainer/Label") else $Label
+@export var label: Label
 
+signal OnClick (AnswerCard)
 func _ready() -> void:
 	# Keep visual text in sync with data.
 	if label:
@@ -25,15 +26,20 @@ func set_data(index: int, text: String) -> void:
 
 # --- Godot UI drag & drop API ---
 # Called when the drag begins. Return any Variant payload you want.
-func get_drag_data(at_position: Vector2) -> Variant:
-	# Create a small preview so player sees what they're dragging.
-	var preview := duplicate() as Control
-	preview.modulate.a = 0.8
-	set_drag_preview(preview)
+#func get_drag_data(at_position: Vector2) -> Variant:
+	## Create a small preview so player sees what they're dragging.
+	#var preview := duplicate() as Control
+	#preview.modulate.a = 0.8
+	#set_drag_preview(preview)
+#
+	## Payload: dictionary with what the drop zone needs.
+	#return {
+		#"type": "answer_card",
+		#"answer_index": answer_index,
+		#"answer_text": answer_text
+	#}
 
-	# Payload: dictionary with what the drop zone needs.
-	return {
-		"type": "answer_card",
-		"answer_index": answer_index,
-		"answer_text": answer_text
-	}
+
+func _on_pressed() -> void:
+	OnClick.emit(self)
+	
