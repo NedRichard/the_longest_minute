@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://meqwv1el5pnk"]
+
+[node name="TetrisHUD" type="CanvasLayer" unique_id=1845199848]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2133695815]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+
+[node name="GameOverLabel" type="Label" parent="MarginContainer" unique_id=857382150]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "Game Over!"
+
+[node name="NextBagButton" type="Button" parent="MarginContainer" unique_id=1591435721]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "Start Filling
+Next Bag"
