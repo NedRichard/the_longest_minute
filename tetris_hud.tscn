@@ -8,22 +8,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
 
 [node name="GameOverLabel" type="Label" parent="MarginContainer" unique_id=857382150]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 text = "Game Over!"
 
 [node name="NextBagButton" type="Button" parent="MarginContainer" unique_id=1591435721]
-visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 4
 text = "Start Filling
 Next Bag"

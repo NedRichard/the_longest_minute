@@ -1,5 +1,9 @@
 extends Node2D
 
+@onready var game_over_label: Label = $TetrisHUD/MarginContainer/GameOverLabel
+@onready var next_bag_button: Button = $TetrisHUD/MarginContainer/NextBagButton
+
+
 var i_tetromino: Array = [
 	[Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)], # 0 degrees
 	[Vector2i(2, 0), Vector2i(2, 1), Vector2i(2, 2), Vector2i(2, 3)], # 90 degrees
@@ -59,9 +63,6 @@ const START_POSITION: Vector2i = Vector2i(5,1)
 const movement_directions: Array[Vector2i] = [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT]
 var current_position: Vector2i
 
-
-@onready var game_over_label: Label = $TetrisHUD/GameOverLabel
-@onready var next_bag_button: Button = $TetrisHUD/MarginContainer/NextBagButton
 
 
 @export var fall_timer: float = 0
