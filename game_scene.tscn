@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dbhkfu3oe5ouf"]
+
+[ext_resource type="PackedScene" uid="uid://cpg7u055pjmpi" path="res://mom_scene.tscn" id="1_mlf6e"]
+[ext_resource type="Script" uid="uid://cnjr5cyftdx38" path="res://game_scene.gd" id="1_v1wow"]
+[ext_resource type="PackedScene" uid="uid://ocddgbgjlhvo" path="res://tetris_scene.tscn" id="2_po0ka"]
+
+[node name="GameScene" type="Node2D" unique_id=474596551]
+script = ExtResource("1_v1wow")
+
+[node name="MomScene" parent="." unique_id=1127077684 instance=ExtResource("1_mlf6e")]
+
+[node name="Tetris" parent="." unique_id=1779908368 instance=ExtResource("2_po0ka")]
+position = Vector2(1919, 347)
+
+[node name="CameraMom" type="Camera2D" parent="." unique_id=864138137]
+offset = Vector2(960, 540)
+
+[node name="CameraTetris" type="Camera2D" parent="." unique_id=895682263]
+offset = Vector2(2875, 880)
