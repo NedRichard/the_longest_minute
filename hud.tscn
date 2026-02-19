@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://lj1lmvl3g1mp" path="res://hud.gd" id="1_640wx"]
 [ext_resource type="Texture2D" uid="uid://dnhyi7qw0ijve" path="res://HUD/sweat.png" id="2_64ctp"]
 [ext_resource type="Texture2D" uid="uid://c6u0wpfpivh7p" path="res://HUD/smoke.png" id="3_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://vuuotlgtgken" path="res://HUD/crying.jpg" id="5_a2258"]
 
 [node name="HUD" type="Control" unique_id=971369467 node_paths=PackedStringArray("anxious_frame", "sweat_frame", "smoke_frame")]
 layout_mode = 3
@@ -58,3 +59,40 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_8sq4i")
 expand_mode = 3
+
+[node name="GameOver" type="Control" parent="Control" unique_id=305396554]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverFrame" type="TextureRect" parent="Control/GameOver" unique_id=1947181875]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("5_a2258")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/GameOver" unique_id=1319163289]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = -625
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="GameOverLabel" type="Label" parent="Control/GameOver/MarginContainer" unique_id=1455254337]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Boo freaking ooh,
+you lil baby :'(("
+horizontal_alignment = 1

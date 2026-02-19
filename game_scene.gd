@@ -6,6 +6,9 @@ extends Node2D
 @onready var camera_cashier: Camera2D = $CameraCashier
 @onready var hud: Control = $HUDCanvas/HUD
 
+@onready var ambience: AudioStreamPlayer = $Audio/Ambience
+@onready var bgm: AudioStreamPlayer = $Audio/BGM
+
 @onready var cashier_voice: AudioStreamPlayer = $Audio/CashierVoice
 
 var current_camera: Camera2D
@@ -18,7 +21,7 @@ var cashier_active: bool = false
 func _ready() -> void:
 	switch_to_tetris_screen()
 	EventBus.start_talking.connect(start_talking_sfx)
-
+	EventBus.game_over.connect(is_game_over)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -64,3 +67,8 @@ func switch_to_cashier_screen() -> void:
 
 func start_talking_sfx() -> void:
 	cashier_voice.play()
+
+func is_game_over() -> void:
+	ambience.stop()
+	bgm.stop()
+	cashier_voice.stop()

@@ -118,6 +118,7 @@ func _physics_process(delta: float) -> void:
 			fall_timer = 0
 
 func start_new_game() -> void:
+	next_bag_button.visible = false
 	is_game_running = true
 	clear_tetromino()
 	clear_board()
@@ -243,6 +244,7 @@ func is_game_over() -> void:
 		if not is_within_bounds(i + current_position):
 			land_tetromino()
 			#game_over_label.visible = true
-			EventBus.add_strike()
 			next_bag_button.visible = true
 			is_game_running = false
+			if is_game_running == false:
+				EventBus.add_strike()

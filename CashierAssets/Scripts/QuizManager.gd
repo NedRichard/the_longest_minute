@@ -182,6 +182,7 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 	else:
 		feedback_label.text = "❌ Wrong!"
 		OnMiss.emit()
+		EventBus.add_strike()
 
 	# If you want to hide popup and clear answers immediately (like you do now):
 	questionPopup.hide()
@@ -222,6 +223,7 @@ func _on_answer_timer_timeout() -> void:
 
 	feedback_label.text = "⏱️ Timeout!"
 	OnMiss.emit()
+	EventBus.add_strike()
 	questionPopup.hide()
 	_clear_answers()
 
