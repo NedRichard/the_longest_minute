@@ -20,14 +20,14 @@ grow_vertical = 2
 script = ExtResource("1_oh3fi")
 question_bank = ExtResource("2_ud5qk")
 answer_card_scene = ExtResource("3_a3hhh")
-question_label = NodePath("../UI/QuestionPanel/TextureRect/PanelContainer/Label_Question")
+question_label = NodePath("../UI/Panel/PanelContainer/Label_Question")
 answers_container = NodePath("../UI/AnswerContainer")
 timer_label = NodePath("../UI/Label_Timer")
 feedback_label = NodePath("../UI/Label_Feedback")
 question_counter_label = NodePath("../UI/Label_QuestionCounter")
 drop_zone = NodePath("../UI/DropZone")
 voice_player = NodePath("../AudioStreamPlayer")
-questionPopup = NodePath("../UI/QuestionPanel")
+questionPopup = NodePath("../UI/Panel")
 answer_timer = NodePath("AnswerTimer")
 interval_timer = NodePath("Interval")
 
@@ -110,6 +110,54 @@ offset_bottom = 103.0
 theme_override_font_sizes/font_size = 40
 text = "999"
 
+[node name="Panel" type="Panel" parent="UI" unique_id=1164032223]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 93.0
+offset_right = 905.51953
+offset_bottom = 293.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Panel" unique_id=1638024954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_cvnos")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Panel" unique_id=1703671259]
+self_modulate = Color(1, 0.45882353, 0.7254902, 0)
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -30.0
+offset_right = -135.51953
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Question" type="Label" parent="UI/Panel/PanelContainer" unique_id=1531777033]
+custom_minimum_size = Vector2(730, 60)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.92, 0.68, 0.9647059)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.8336643, 0.80470425, 0.7999792, 1)
+theme_override_font_sizes/font_size = 26
+text = "So your mom we666666666666666666666666666666666666666666666666666666666ghcg"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="QuestionPanel" type="PanelContainer" parent="UI" unique_id=1826018018]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -121,38 +169,6 @@ offset_top = 93.0
 offset_right = -1014.48047
 offset_bottom = 293.0
 grow_horizontal = 0
-
-[node name="TextureRect" type="TextureRect" parent="UI/QuestionPanel" unique_id=1638024954]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("7_cvnos")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/QuestionPanel/TextureRect" unique_id=1703671259]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = -81.0
-offset_right = -156.51947
-offset_bottom = 69.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label_Question" type="Label" parent="UI/QuestionPanel/TextureRect/PanelContainer" unique_id=1531777033]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 0.92, 0.68, 0.9647059)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.8336643, 0.80470425, 0.7999792, 1)
-theme_override_font_sizes/font_size = 32
-text = "Do you think that thghjghjghjhgjhgjghjhgjgjgj"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="AnswerContainer" type="HBoxContainer" parent="UI" unique_id=180780104]
 custom_minimum_size = Vector2(300, 0)

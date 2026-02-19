@@ -13,7 +13,7 @@ class_name QuizManager
 @export var question_counter_label: Label
 @export var drop_zone: DropZone
 @export var voice_player: AudioStreamPlayer
-@export var questionPopup: PanelContainer
+@export var questionPopup: Panel
 
 ## Timers (add as children of QuizManager and drag them in)
 @export var answer_timer: Timer        # 20s window
