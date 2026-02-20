@@ -179,6 +179,7 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 		feedback_label.text = "✅ Correct!"
 		OnCorrectAnswer.emit()
 		
+		
 	else:
 		feedback_label.text = "❌ Wrong!"
 		OnMiss.emit()
