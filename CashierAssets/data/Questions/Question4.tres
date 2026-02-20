@@ -7,4 +7,5 @@ script = ExtResource("1_3xslg")
 question_text = "So your mom went to get something, yeah? What is she getting?"
 answers = Array[String](["I forgot", "Bread", "Toast", "Beans"])
 correct_answer_indices = Array[int]([1])
+any_answer_ok = true
 metadata/_custom_type_script = "uid://d4mnncm6ubd8l"
