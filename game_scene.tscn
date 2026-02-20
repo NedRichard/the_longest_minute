@@ -16,6 +16,7 @@ script = ExtResource("1_v1wow")
 
 [node name="Tetris" parent="." unique_id=1779908368 instance=ExtResource("2_po0ka")]
 position = Vector2(1364, 1080)
+fall_interval = 0.5
 
 [node name="CameraMom" type="Camera2D" parent="." unique_id=864138137]
 visible = false
