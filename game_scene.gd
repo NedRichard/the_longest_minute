@@ -11,17 +11,34 @@ extends Node2D
 
 @onready var cashier_voice: AudioStreamPlayer = $Audio/CashierVoice
 
+signal on_mode_change(int)
 var current_camera: Camera2D
 
 var tetris_active: bool = true
 var mom_active: bool = false
 var cashier_active: bool = false
 
+
+@export var current_mode: int:
+	get: return current_mode
+	set(value):
+		if(current_mode==value):
+			return	
+		current_mode = value
+		EventBus.GameModeChanged.emit(current_mode)
+		on_mode_change.emit(current_mode)
+		
+
+
+	
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	switch_to_tetris_screen()
 	EventBus.start_talking.connect(start_talking_sfx)
 	EventBus.game_over.connect(is_game_over)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -50,6 +67,7 @@ func switch_to_mom_screen() -> void:
 	mom_active = true
 	cashier_active = false
 	tetris_active = false
+	current_mode = GameModes.Mode.MOM
 	
 func switch_to_tetris_screen() -> void:
 	camera_game.position = camera_tetris.position
@@ -57,14 +75,14 @@ func switch_to_tetris_screen() -> void:
 	mom_active = false
 	cashier_active = false
 	tetris_active = true
-	
+	current_mode = GameModes.Mode.TETRIS
 func switch_to_cashier_screen() -> void:
 	camera_game.position = camera_cashier.position
 	camera_cashier.make_current()
 	mom_active = false
 	cashier_active = true
 	tetris_active = false
-
+	current_mode = GameModes.Mode.CASHIER
 func start_talking_sfx() -> void:
 	cashier_voice.play()
 
@@ -72,3 +90,7 @@ func is_game_over() -> void:
 	ambience.stop()
 	bgm.stop()
 	cashier_voice.stop()
+
+
+
+	pass # Replace with function body.
