@@ -39,7 +39,8 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_50rog")
-expand_mode = 3
+expand_mode = 5
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="TextureRect" unique_id=1722004563]
 self_modulate = Color(1, 1, 1, 0)

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dupugp5qggbpr" path="res://CashierAssets/Scripts/DropZone.gd" id="3_rkqw4"]
 [ext_resource type="Texture2D" uid="uid://chpp67lg02l71" path="res://CashierAssets/cashier_background_neutral.png" id="4_cvnos"]
 [ext_resource type="Texture2D" uid="uid://crfoafbj2itw6" path="res://CashierAssets/cashier_dialogue_box.png" id="7_cvnos"]
+[ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="8_kxse7"]
 
 [node name="Control" type="Control" unique_id=2124792219]
 layout_mode = 3
@@ -80,6 +81,7 @@ grow_vertical = 0
 script = ExtResource("3_rkqw4")
 
 [node name="Label_QuestionCounter" type="Label" parent="UI" unique_id=1934273250]
+visible = false
 layout_mode = 0
 offset_left = 5.0
 offset_top = 33.0
@@ -105,10 +107,10 @@ vertical_alignment = 1
 
 [node name="Label_Timer" type="Label" parent="UI" unique_id=129974507]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 69.0
-offset_right = 1928.0
-offset_bottom = 103.0
+offset_left = 6.0
+offset_top = 625.0
+offset_right = 1926.0
+offset_bottom = 680.0
 theme_override_font_sizes/font_size = 40
 text = "999"
 
@@ -184,7 +186,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Panel" type="Panel" parent="UI/Panel_Answers" unique_id=2009791322]
-self_modulate = Color(1, 0.3647059, 0.6, 1)
+self_modulate = Color(1, 0.3647059, 0.6, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 
@@ -235,6 +237,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Panel_Answer_Container" type="HBoxContainer" parent="UI/Panel_Answers/Panel" unique_id=1095987293]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,3 +282,13 @@ layout_mode = 2
 
 [node name="AnswerCard4" parent="UI/AnswerContainer" unique_id=1223694666 instance=ExtResource("3_a3hhh")]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI" unique_id=751769140]
+layout_mode = 0
+offset_left = -33.0
+offset_top = 23.0
+offset_right = 180.0
+offset_bottom = 142.0
+texture = ExtResource("8_kxse7")
+expand_mode = 3
+stretch_mode = 5
