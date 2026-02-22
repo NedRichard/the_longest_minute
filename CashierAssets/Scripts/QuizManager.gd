@@ -7,7 +7,7 @@ class_name QuizManager
 
 ## UI references
 @export var question_label: Label
-@export var answers_container: Panel
+@export var answers_container: Node
 @export var timer_label: Label
 @export var feedback_label: Label
 @export var question_counter_label: Label
@@ -152,9 +152,12 @@ func _spawn_answers(answers: Array[String]) -> void:
 		card.set_data(i, answers[i])
 		card.OnClick.connect(_on_answer_clicked)
 		answers_container.add_child(card)
-		card.position =  answer_spawn_points[i].position
+	#	card.position =  answer_spawn_points[i].position
 		current_answer_card.append(card)
+		card.grab_click_focus()
 		EventBus.start_talking.emit()
+		
+	current_answer_card[0].grab_focus.call_deferred()	
 
 
 func _play_voice_over(stream: AudioStream) -> void:
@@ -214,22 +217,23 @@ func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
 	var is_correct: bool = _is_answer_accepted(answer_index)
 	feedback_label.text = "✅ Correct!" if is_correct else "❌ Wrong!"
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not _accepting_input :
-		return
-	if not currentMode==GameModes.Mode.CASHIER:
-		return
-	if event.is_action_pressed("ui_left")	:
-		_on_answer_clicked(current_answer_card[0])
-			
-	if event.is_action_pressed("ui_right")	:
-		_on_answer_clicked(current_answer_card[1])
-				
-	if event.is_action_pressed("ui_up")	:
-		_on_answer_clicked(current_answer_card[2])
-		
-	if event.is_action_pressed("ui_down")	:
-		_on_answer_clicked(current_answer_card[3])
+#func _unhandled_input(event: InputEvent) -> void:
+	##return
+	#if not _accepting_input :
+		#return
+	#if not currentMode==GameModes.Mode.CASHIER:
+		#return
+	#if event.is_action_pressed("ui_left")	:
+		#_on_answer_clicked(current_answer_card[0])
+			#
+	#if event.is_action_pressed("ui_right")	:
+		#_on_answer_clicked(current_answer_card[1])
+				#
+	#if event.is_action_pressed("ui_up")	:
+		#_on_answer_clicked(current_answer_card[2])
+		#
+	#if event.is_action_pressed("ui_down")	:
+		#_on_answer_clicked(current_answer_card[3])
 				
 # ---------------------------
 # Timer callbacks

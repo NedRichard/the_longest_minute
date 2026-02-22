@@ -4,12 +4,14 @@ class_name AnswerCard
 
 @export var answer_index: int = -1
 @export var answer_text: String = ""
-
+@export var selected_texture: Texture2D
+@export var unselected_texture: Texture2D
 @export var label: Label
-
+@export var texturect: TextureRect
 signal OnClick (AnswerCard)
 func _ready() -> void:
 	# Keep visual text in sync with data.
+	
 	if label:
 		label.text = answer_text
 
@@ -22,6 +24,7 @@ func set_data(index: int, text: String) -> void:
 	answer_text = text
 	if label:
 		label.text = answer_text
+
 
 
 # --- Godot UI drag & drop API ---
@@ -43,3 +46,11 @@ func set_data(index: int, text: String) -> void:
 func _on_pressed() -> void:
 	OnClick.emit(self)
 	
+
+
+func _on_focus_entered() -> void:
+	texturect.texture = selected_texture
+
+
+func _on_focus_exited() -> void:
+		texturect.texture = unselected_texture
