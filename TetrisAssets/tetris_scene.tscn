@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://d12nmgkfv7c2d" path="res://TetrisAssets/tetris.gd" id="1_621yq"]
 [ext_resource type="Texture2D" uid="uid://2pqbasvlubji" path="res://TetrisAssets/tetris_background.png" id="2_075lc"]
 [ext_resource type="PackedScene" uid="uid://meqwv1el5pnk" path="res://TetrisAssets/tetris_hud.tscn" id="3_lw01v"]
+[ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="4_ppmu1"]
 [ext_resource type="Texture2D" uid="uid://dq4msbju6mfrs" path="res://TetrisAssets/Tetrogroceries.png" id="4_ps2ti"]
+[ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_ci6gq"]
+[ext_resource type="AudioStream" uid="uid://dd2edl0jw6xnh" path="res://Audio/product scan 2.mp3" id="7_4xfwj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_075lc"]
 texture = ExtResource("4_ps2ti")
@@ -42,11 +45,27 @@ script = ExtResource("1_621yq")
 fall_interval = 0.2
 
 [node name="Background" type="Sprite2D" parent="." unique_id=412107219]
-position = Vector2(941, 395)
-scale = Vector2(0.42083335, 0.63148147)
+position = Vector2(960.49994, 475.00003)
+scale = Vector2(0.4033854, 0.5472222)
 texture = ExtResource("2_075lc")
 
 [node name="TetrisHUD" parent="." unique_id=1845199848 instance=ExtResource("3_lw01v")]
+
+[node name="MarginContainer" parent="TetrisHUD" index="0" unique_id=2133695815]
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="ToLeftScreen" type="TextureRect" parent="TetrisHUD/MarginContainer" index="2" unique_id=1642115981]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_ppmu1")
+
+[node name="ToRightScreen" type="TextureRect" parent="TetrisHUD/MarginContainer" index="3" unique_id=675843146]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("5_ci6gq")
 
 [node name="Board" type="TileMapLayer" parent="." unique_id=501633393]
 position = Vector2(625, 97)
@@ -57,5 +76,8 @@ tile_set = SubResource("TileSet_ps2ti")
 position = Vector2(625, 97)
 scale = Vector2(1.8, 1.8)
 tile_set = SubResource("TileSet_bdwim")
+
+[node name="SFX_Scan" type="AudioStreamPlayer" parent="." unique_id=966299150]
+stream = ExtResource("7_4xfwj")
 
 [editable path="TetrisHUD"]

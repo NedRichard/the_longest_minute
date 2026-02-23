@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var game_over_label: Label = $TetrisHUD/MarginContainer/GameOverLabel
 @onready var next_bag_button: Button = $TetrisHUD/MarginContainer/NextBagButton
+@onready var sfx_scan: AudioStreamPlayer = $SFX_Scan
 
 var current_mode: int
 
@@ -150,6 +151,7 @@ func initialize_tetromino() -> void:
 	active_tetromino = current_tetromino_type[rotation_index]
 	render_tetromino(active_tetromino, current_position, piece_atlas)
 	render_tetromino(next_tetromino_type[0], Vector2i(5,-4), next_piece_atlas)
+	sfx_scan.play()
 
 func render_tetromino(tetromino: Array, position: Vector2i, atlas: Vector2i) -> void:
 	for block in tetromino:

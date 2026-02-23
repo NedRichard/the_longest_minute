@@ -8,6 +8,7 @@ signal strike2
 signal strike3
 signal onStrikeGained(int)
 signal game_over
+signal win
 signal GameModeChanged(int)
 signal start_talking
 

@@ -30,13 +30,13 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if mom_is_walking:
 		mom_walks()
-		scale += Vector2(0.0005,0.0005)
+		scale += Vector2(0.001,0.001)
 	else:
 		if scale >= Vector2(0.055,0.055):
-			scale -= Vector2(0.00005,0.00005)
+			scale -= Vector2(0.0001,0.0001)
 
 	if scale >= Vector2(1.0, 1.0):
-		win()
+		EventBus.win.emit()
 
 
 func _on_sign_mom_timer_timeout() -> void:
@@ -63,6 +63,3 @@ func mom_stops_walking() -> void:
 	sfx_footsteps.stop()
 	sfx_squeak.stop()
 	
-
-func win() -> void:
-	win_text.visible = true
