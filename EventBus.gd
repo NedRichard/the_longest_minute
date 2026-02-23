@@ -3,7 +3,6 @@ extends Node
 var strike: int = 0
 var is_on_cooldown: bool = false
 var current_mode: GameModes.Mode
-
 signal strike1
 signal strike2
 signal strike3

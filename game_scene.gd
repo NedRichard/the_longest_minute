@@ -25,6 +25,7 @@ var cashier_active: bool = false
 		if(current_mode==value):
 			return	
 		current_mode = value
+		print("CURR MODE IN GAME SCENE IS  %d", value)
 		EventBus.GameModeChanged.emit(current_mode)
 		on_mode_change.emit(current_mode)
 		

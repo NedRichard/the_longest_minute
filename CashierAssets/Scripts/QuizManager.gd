@@ -187,7 +187,7 @@ func play_SFX(stream: AudioStream) ->void:
 func _on_answer_clicked(answercard: AnswerCard) -> void:
 	if not _accepting_input:
 		return
-	if not currentMode== GameModes.Mode.CASHIER:
+	if not EventBus.current_mode== GameModes.Mode.CASHIER:
 		return
 	_accepting_input = false
 	_answered = true
