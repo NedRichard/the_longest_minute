@@ -7,14 +7,15 @@ class_name QuizManager
 
 ## UI references
 @export var question_label: Label
-@export var answers_container: HBoxContainer
+@export var answers_container: Node
 @export var timer_label: Label
 @export var feedback_label: Label
 @export var question_counter_label: Label
 @export var drop_zone: DropZone
 @export var voice_player: AudioStreamPlayer
 @export var questionPopup: Panel
-
+@export var answer_spawn_points : Array[Control] =[]
+var current_answer_card : Array[AnswerCard] = []
 ## Timers (add as children of QuizManager and drag them in)
 @export var answer_timer: Timer        # 20s window
 @export var interval_timer: Timer      # 30s total per question
@@ -24,16 +25,20 @@ var _current_index: int = 0
 var _current_question: QuestionData
 var _accepting_input: bool = false
 var _answered: bool = false
-
+var currentMode : int
 ##Signals
 signal  OnCorrectAnswer
 signal  OnMiss
 
-
+func  ChangeCurrentMode(value : int) -> void:
+	currentMode= value
+	print("mode changed %d ",value)
 func _ready() -> void:
 	feedback_label.text = ""
 	timer_label.text = ""
 	questionPopup.hide()
+	EventBus.GameModeChanged.connect(ChangeCurrentMode)
+	
 
 	# Connect timer timeouts
 	if answer_timer:
@@ -114,7 +119,7 @@ func _start_question(index: int) -> void:
 	interval_timer.stop()
 	#interval_timer.wait_time = _current_question.total_interval_seconds
 	interval_timer.start()
-
+ #this is BS
 	# Enable _process so we can update the timer label smoothly
 	set_process(true)
 
@@ -131,7 +136,7 @@ func _process(_delta: float) -> void:
 func _clear_answers() -> void:
 	# Safe disconnect + free
 	var cb := Callable(self, "_on_answer_clicked")
-
+	current_answer_card.clear()
 	for child in answers_container.get_children():
 		if child is AnswerCard:
 			var card := child as AnswerCard
@@ -147,7 +152,12 @@ func _spawn_answers(answers: Array[String]) -> void:
 		card.set_data(i, answers[i])
 		card.OnClick.connect(_on_answer_clicked)
 		answers_container.add_child(card)
+	#	card.position =  answer_spawn_points[i].position
+		current_answer_card.append(card)
+		card.grab_click_focus()
 		EventBus.start_talking.emit()
+		
+	current_answer_card[0].grab_focus.call_deferred()	
 
 
 func _play_voice_over(stream: AudioStream) -> void:
@@ -207,7 +217,24 @@ func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
 	var is_correct: bool = _is_answer_accepted(answer_index)
 	feedback_label.text = "✅ Correct!" if is_correct else "❌ Wrong!"
 
-
+#func _unhandled_input(event: InputEvent) -> void:
+	##return
+	#if not _accepting_input :
+		#return
+	#if not currentMode==GameModes.Mode.CASHIER:
+		#return
+	#if event.is_action_pressed("ui_left")	:
+		#_on_answer_clicked(current_answer_card[0])
+			#
+	#if event.is_action_pressed("ui_right")	:
+		#_on_answer_clicked(current_answer_card[1])
+				#
+	#if event.is_action_pressed("ui_up")	:
+		#_on_answer_clicked(current_answer_card[2])
+		#
+	#if event.is_action_pressed("ui_down")	:
+		#_on_answer_clicked(current_answer_card[3])
+				
 # ---------------------------
 # Timer callbacks
 # ---------------------------

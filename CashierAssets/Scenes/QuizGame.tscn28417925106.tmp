@@ -1,16 +1,12 @@
 [gd_scene format=3 uid="uid://baibi0k0swmui"]
 
+[ext_resource type="Texture2D" uid="uid://16iyggptgnoh" path="res://CashierAssets/cashier_background.png" id="1_jh3om"]
 [ext_resource type="Script" uid="uid://cad43eawbbhqq" path="res://CashierAssets/Scripts/QuizManager.gd" id="1_oh3fi"]
 [ext_resource type="PackedScene" uid="uid://cefw0wyyqjdv6" path="res://CashierAssets/Scenes/UI/DropZone.tscn" id="2_rep7p"]
 [ext_resource type="Resource" uid="uid://bai05mneiauun" path="res://CashierAssets/data/Questions/MainQuestionBank.tres" id="2_ud5qk"]
 [ext_resource type="PackedScene" uid="uid://cyyi3uumnmwmx" path="res://CashierAssets/Scenes/UI/AnswerCard.tscn" id="3_a3hhh"]
 [ext_resource type="Script" uid="uid://dupugp5qggbpr" path="res://CashierAssets/Scripts/DropZone.gd" id="3_rkqw4"]
-[ext_resource type="Texture2D" uid="uid://chpp67lg02l71" path="res://CashierAssets/cashier_background_neutral.png" id="4_cvnos"]
 [ext_resource type="Texture2D" uid="uid://crfoafbj2itw6" path="res://CashierAssets/cashier_dialogue_box.png" id="7_cvnos"]
-[ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="8_kxse7"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxse7"]
-texture = ExtResource("7_cvnos")
 
 [node name="Control" type="Control" unique_id=2124792219]
 layout_mode = 3
@@ -55,7 +51,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="UI" unique_id=756159273]
-self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,7 +60,7 @@ grow_vertical = 2
 
 [node name="TextureRect_CashierBG" type="TextureRect" parent="UI/PanelContainer" unique_id=392054502]
 layout_mode = 2
-texture = ExtResource("4_cvnos")
+texture = ExtResource("1_jh3om")
 expand_mode = 5
 
 [node name="DropZone" parent="UI" unique_id=1122812498 instance=ExtResource("2_rep7p")]
@@ -84,7 +79,6 @@ grow_vertical = 0
 script = ExtResource("3_rkqw4")
 
 [node name="Label_QuestionCounter" type="Label" parent="UI" unique_id=1934273250]
-visible = false
 layout_mode = 0
 offset_left = 5.0
 offset_top = 33.0
@@ -110,10 +104,10 @@ vertical_alignment = 1
 
 [node name="Label_Timer" type="Label" parent="UI" unique_id=129974507]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 625.0
-offset_right = 1926.0
-offset_bottom = 680.0
+offset_left = 8.0
+offset_top = 69.0
+offset_right = 1928.0
+offset_bottom = 103.0
 theme_override_font_sizes/font_size = 40
 text = "999"
 
@@ -124,7 +118,6 @@ offset_left = 25.0
 offset_top = 93.0
 offset_right = 905.51953
 offset_bottom = 293.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_kxse7")
 
 [node name="TextureRect" type="TextureRect" parent="UI/Panel" unique_id=1638024954]
 layout_mode = 1
@@ -180,18 +173,23 @@ grow_horizontal = 0
 
 [node name="Panel_Answers" type="PanelContainer" parent="UI" unique_id=886697369]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -290.0
-offset_right = -235.0
+offset_left = -500.0
+offset_top = -709.0
+offset_right = 500.0
+offset_bottom = -109.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Panel" type="Panel" parent="UI/Panel_Answers" unique_id=2009791322]
-self_modulate = Color(1, 0.3647059, 0.6, 0)
+self_modulate = Color(1, 0.3647059, 0.6, 1)
+custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_stretch_ratio = 0.0
 
 [node name="Control" type="Control" parent="UI/Panel_Answers/Panel" unique_id=380145750]
@@ -240,26 +238,13 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Panel_Answer_Container" type="HBoxContainer" parent="UI/Panel_Answers/Panel" unique_id=1095987293]
-self_modulate = Color(1, 1, 1, 0)
+[node name="Panel_Answer_Container" type="Panel" parent="UI/Panel_Answers/Panel" unique_id=42516962]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="AnswerCard" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=1303516809 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard2" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=862964824 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard3" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=1365600083 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard4" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=1558037040 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
 
 [node name="AnswerContainer" type="HBoxContainer" parent="UI" unique_id=180780104]
 visible = false
@@ -286,13 +271,3 @@ layout_mode = 2
 
 [node name="AnswerCard4" parent="UI/AnswerContainer" unique_id=1223694666 instance=ExtResource("3_a3hhh")]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI" unique_id=751769140]
-layout_mode = 0
-offset_left = -33.0
-offset_top = 23.0
-offset_right = 180.0
-offset_bottom = 142.0
-texture = ExtResource("8_kxse7")
-expand_mode = 3
-stretch_mode = 5
