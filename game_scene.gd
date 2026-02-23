@@ -67,7 +67,7 @@ func switch_to_mom_screen() -> void:
 	mom_active = true
 	cashier_active = false
 	tetris_active = false
-	current_mode = GameModes.Mode.MOM
+	EventBus.current_mode = GameModes.Mode.MOM
 	
 func switch_to_tetris_screen() -> void:
 	camera_game.position = camera_tetris.position
@@ -75,14 +75,14 @@ func switch_to_tetris_screen() -> void:
 	mom_active = false
 	cashier_active = false
 	tetris_active = true
-	current_mode = GameModes.Mode.TETRIS
+	EventBus.current_mode = GameModes.Mode.TETRIS
 func switch_to_cashier_screen() -> void:
 	camera_game.position = camera_cashier.position
 	camera_cashier.make_current()
 	mom_active = false
 	cashier_active = true
 	tetris_active = false
-	current_mode = GameModes.Mode.CASHIER
+	EventBus.current_mode = GameModes.Mode.CASHIER
 func start_talking_sfx() -> void:
 	cashier_voice.play()
 

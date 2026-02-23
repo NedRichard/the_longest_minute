@@ -20,10 +20,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed('interact'):
-		mom_walks()
-		sign_mom_timer.stop()
-		sign_mom_timer.start()
+	if EventBus.current_mode == GameModes.Mode.MOM:
+		if event.is_action_pressed('interact'):
+			mom_walks()
+			sign_mom_timer.stop()
+			sign_mom_timer.start()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

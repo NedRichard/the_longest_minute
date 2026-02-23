@@ -2,6 +2,7 @@ extends Node
 
 var strike: int = 0
 var is_on_cooldown: bool = false
+var current_mode: GameModes.Mode
 
 signal strike1
 signal strike2
@@ -9,7 +10,6 @@ signal strike3
 signal game_over
 signal GameModeChanged(int)
 signal start_talking
-# Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
 	pass
