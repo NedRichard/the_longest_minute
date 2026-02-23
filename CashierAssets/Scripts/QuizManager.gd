@@ -154,7 +154,7 @@ func _spawn_answers(answers: Array[String]) -> void:
 		answers_container.add_child(card)
 	#	card.position =  answer_spawn_points[i].position
 		current_answer_card.append(card)
-		card.grab_click_focus()
+		
 		EventBus.start_talking.emit()
 		
 	current_answer_card[0].grab_focus.call_deferred()	
@@ -173,7 +173,8 @@ func _play_voice_over(stream: AudioStream) -> void:
 func _on_answer_clicked(answercard: AnswerCard) -> void:
 	if not _accepting_input:
 		return
-
+	if not currentMode== GameModes.Mode.CASHIER:
+		return
 	_accepting_input = false
 	_answered = true
 

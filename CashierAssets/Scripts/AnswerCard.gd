@@ -45,6 +45,7 @@ func set_data(index: int, text: String) -> void:
 
 func _on_pressed() -> void:
 	OnClick.emit(self)
+	pass
 	
 
 
