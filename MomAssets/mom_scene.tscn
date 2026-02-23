@@ -4,6 +4,46 @@
 [ext_resource type="Texture2D" uid="uid://ro4007y645c2" path="res://MomAssets/istockphoto-886619850-1024x1024.jpg" id="2_e3y17"]
 [ext_resource type="Script" uid="uid://do27nspitxjk0" path="res://MomAssets/mom.gd" id="3_65yso"]
 [ext_resource type="AudioStream" uid="uid://cxgo414ijmcbi" path="res://MomAssets/SFX_Footsteps.mp3" id="4_78lb6"]
+[ext_resource type="Texture2D" uid="uid://cecxseehe57bc" path="res://MomAssets/mum_hand_waving.png" id="5_t2wny"]
+[ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
+
+[sub_resource type="Animation" id="Animation_t2wny"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_q3qsy"]
+resource_name = "wave"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23, 0.5),
+"transitions": PackedFloat32Array(1, 0.61557204, 1),
+"update": 0,
+"values": [0.0, 1.0053097, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qce2s"]
+_data = {
+&"RESET": SubResource("Animation_t2wny"),
+&"wave": SubResource("Animation_q3qsy")
+}
 
 [node name="MomScene" type="Node2D" unique_id=1127077684]
 
@@ -43,5 +83,17 @@ text = "YOU WIN OMG!!!"
 
 [node name="SignMomTimer" type="Timer" parent="." unique_id=883057996]
 wait_time = 0.5
+
+[node name="KidHand" type="Sprite2D" parent="." unique_id=1830020499]
+position = Vector2(482.00003, 1009.0001)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_t2wny")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="KidHand" unique_id=1421634985]
+libraries/ = SubResource("AnimationLibrary_qce2s")
+
+[node name="SFX_Squeak" type="AudioStreamPlayer" parent="KidHand" unique_id=117698167]
+stream = ExtResource("6_q3qsy")
+parameters/looping = true
 
 [connection signal="timeout" from="SignMomTimer" to="Mom" method="_on_sign_mom_timer_timeout"]

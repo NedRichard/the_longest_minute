@@ -5,6 +5,11 @@ const waiting_sprite = preload("uid://ro4007y645c2")
 
 @onready var sign_mom_timer: Timer = $"../SignMomTimer"
 @onready var win_text: Label = $"../CanvasLayer/MarginContainer/WinText"
+@onready var sfx_squeak: AudioStreamPlayer = $"../KidHand/SFX_Squeak"
+
+@onready var kid_animation_player: AnimationPlayer = $"../KidHand/AnimationPlayer"
+var animation_target_time: float = 0.0
+
 
 @export var sfx_footsteps: AudioStreamPlayer
 
@@ -15,40 +20,49 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _input(event: InputEvent) -> void:
-	pass
+	if EventBus.current_mode == GameModes.Mode.MOM:
+		if event.is_action_pressed('interact'):
+			mom_walks()
+			sign_mom_timer.stop()
+			sign_mom_timer.start()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if mom_is_walking == false:
-		mom_stops_walking()
-	
-	if Input.is_action_just_pressed("sign_mom"):
+	if mom_is_walking:
 		mom_walks()
-		
-	#else:
-		#mom_stops_walking()
+		scale += Vector2(0.0005,0.0005)
+	else:
+		if scale >= Vector2(0.055,0.055):
+			scale -= Vector2(0.00005,0.00005)
 
 	if scale >= Vector2(1.0, 1.0):
 		win()
-		
+
+
+func _on_sign_mom_timer_timeout() -> void:
+	if mom_is_walking:
+		mom_stops_walking()
+
 func mom_walks() -> void:
-	sign_mom_timer.start()
-	mom_is_walking = true
-	scale += Vector2(0.0030,0.0030)
-	texture = walking_sprite
+	if !mom_is_walking:
+		mom_is_walking = true
+		texture = walking_sprite
+		kid_animation_player.seek(animation_target_time, true)
+		kid_animation_player.play('wave')
 	
 	if !sfx_footsteps.is_playing():
 		sfx_footsteps.play()
+	if !sfx_squeak.is_playing():
+		sfx_squeak.play()
 		
 func mom_stops_walking() -> void:
 	mom_is_walking = false
-	scale -= Vector2(0.00005,0.00005)
+	animation_target_time = kid_animation_player.current_animation_position
+	kid_animation_player.stop()
 	texture = waiting_sprite
 	sfx_footsteps.stop()
-
+	sfx_squeak.stop()
+	
 
 func win() -> void:
 	win_text.visible = true
-
-func _on_sign_mom_timer_timeout() -> void:
-	mom_stops_walking()

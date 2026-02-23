@@ -3,6 +3,7 @@ extends Node2D
 @onready var game_over_label: Label = $TetrisHUD/MarginContainer/GameOverLabel
 @onready var next_bag_button: Button = $TetrisHUD/MarginContainer/NextBagButton
 
+var current_mode: int
 
 var i_tetromino: Array = [
 	[Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)], # 0 degrees
@@ -57,7 +58,7 @@ var tetrominoes: Array = [i_tetromino, t_tetromino, o_tetromino, z_tetromino, s_
 var all_tetrominoes: Array = tetrominoes.duplicate()
 
 const COLS: int = 10
-const ROWS: int = 20
+const ROWS: int = 15
 
 const START_POSITION: Vector2i = Vector2i(5,1)
 const movement_directions: Array[Vector2i] = [Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT]
@@ -89,6 +90,9 @@ var is_game_running: bool
 func _ready() -> void:
 	start_new_game()
 	next_bag_button.pressed.connect(start_new_game)
+	EventBus.strike1.connect(raise_difficulty)
+	EventBus.strike2.connect(raise_difficulty)
+	EventBus.strike3.connect(raise_difficulty)
 	next_bag_button.visible = false
 	game_over_label.visible = false
 
@@ -105,7 +109,7 @@ func _physics_process(delta: float) -> void:
 		if move_direction != Vector2i.ZERO:
 			move_tetromino(move_direction)
 		
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("interact"):
 			rotate_tetromino()
 		
 		var current_fall_interval = fall_interval
@@ -238,6 +242,9 @@ func is_within_bounds(pos: Vector2i) -> bool:
 	
 	var tile_id = board_layer.get_cell_source_id(pos)
 	return tile_id == -1
+
+func raise_difficulty() -> void:
+	fall_interval -= 0.1
 
 func is_game_over() -> void:
 	for i in active_tetromino:
