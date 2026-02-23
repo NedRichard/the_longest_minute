@@ -5,6 +5,7 @@ const waiting_sprite = preload("uid://ro4007y645c2")
 
 @onready var sign_mom_timer: Timer = $"../SignMomTimer"
 @onready var win_text: Label = $"../CanvasLayer/MarginContainer/WinText"
+@onready var sfx_squeak: AudioStreamPlayer = $"../KidHand/SFX_Squeak"
 
 @onready var kid_animation_player: AnimationPlayer = $"../KidHand/AnimationPlayer"
 var animation_target_time: float = 0.0
@@ -50,6 +51,8 @@ func mom_walks() -> void:
 	
 	if !sfx_footsteps.is_playing():
 		sfx_footsteps.play()
+	if !sfx_squeak.is_playing():
+		sfx_squeak.play()
 		
 func mom_stops_walking() -> void:
 	mom_is_walking = false
@@ -57,6 +60,7 @@ func mom_stops_walking() -> void:
 	kid_animation_player.stop()
 	texture = waiting_sprite
 	sfx_footsteps.stop()
+	sfx_squeak.stop()
 	
 
 func win() -> void:
