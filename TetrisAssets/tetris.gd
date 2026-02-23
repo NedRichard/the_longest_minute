@@ -89,6 +89,9 @@ var is_game_running: bool
 func _ready() -> void:
 	start_new_game()
 	next_bag_button.pressed.connect(start_new_game)
+	EventBus.strike1.connect(raise_difficulty)
+	EventBus.strike2.connect(raise_difficulty)
+	EventBus.strike3.connect(raise_difficulty)
 	next_bag_button.visible = false
 	game_over_label.visible = false
 
@@ -238,6 +241,9 @@ func is_within_bounds(pos: Vector2i) -> bool:
 	
 	var tile_id = board_layer.get_cell_source_id(pos)
 	return tile_id == -1
+
+func raise_difficulty() -> void:
+	fall_interval -= 0.15
 
 func is_game_over() -> void:
 	for i in active_tetromino:
