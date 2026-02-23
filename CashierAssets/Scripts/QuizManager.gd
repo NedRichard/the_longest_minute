@@ -16,6 +16,15 @@ class_name QuizManager
 @export var questionPopup: Panel
 @export var answer_spawn_points : Array[Control] =[]
 var current_answer_card : Array[AnswerCard] = []
+## cashier BG change
+@export var bg_cashier :TextureRect
+@export var angryleveltextures: Array[Texture2D] =[]
+var _currentCashierIndex = 0;
+##
+##sound
+@export var sfxPlayer : AudioStreamPlayer
+@export var audio_stream_correct : Array[ AudioStream]
+@export var audio_stream_fail : Array [AudioStream]
 ## Timers (add as children of QuizManager and drag them in)
 @export var answer_timer: Timer        # 20s window
 @export var interval_timer: Timer      # 30s total per question
@@ -38,7 +47,7 @@ func _ready() -> void:
 	timer_label.text = ""
 	questionPopup.hide()
 	EventBus.GameModeChanged.connect(ChangeCurrentMode)
-	
+	EventBus.onStrikeGained.connect(_updateCashierMood)
 
 	# Connect timer timeouts
 	if answer_timer:
@@ -122,8 +131,10 @@ func _start_question(index: int) -> void:
  #this is BS
 	# Enable _process so we can update the timer label smoothly
 	set_process(true)
-
-
+func _updateCashierMood(index: int) -> void:
+	index = clamp(index,0,angryleveltextures.size()-1)
+	bg_cashier.texture = angryleveltextures[index]
+	
 func _process(_delta: float) -> void:
 	# Update countdown label using the Timer's remaining time
 	if _accepting_input and answer_timer and answer_timer.is_stopped() == false:
@@ -131,7 +142,6 @@ func _process(_delta: float) -> void:
 	else:
 		# After answer/timeout, you can either keep it at 0.0 or clear it
 		timer_label.text = "Time: 0.0"
-
 
 func _clear_answers() -> void:
 	# Safe disconnect + free
@@ -166,6 +176,10 @@ func _play_voice_over(stream: AudioStream) -> void:
 	if stream != null:
 		voice_player.play()
 
+func play_SFX(stream: AudioStream) ->void:
+	sfxPlayer.stream =stream
+	sfxPlayer.stop()
+	sfxPlayer.play()
 
 # ---------------------------
 # Answer click (your main logic)
@@ -189,12 +203,16 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 	if is_correct:
 		feedback_label.text = "✅ Correct!"
 		OnCorrectAnswer.emit()
+		var i = randi_range(0,audio_stream_correct.size()-1)
+		play_SFX(audio_stream_correct[i])
 		
 		
 	else:
 		feedback_label.text = "❌ Wrong!"
 		OnMiss.emit()
 		EventBus.add_strike()
+		var i = randi_range(0,audio_stream_fail.size()-1)
+		play_SFX(audio_stream_fail[i])
 
 	# If you want to hide popup and clear answers immediately (like you do now):
 	questionPopup.hide()
@@ -251,6 +269,8 @@ func _on_answer_timer_timeout() -> void:
 		drop_zone.set_enabled(false)
 
 	feedback_label.text = "⏱️ Timeout!"
+	var i = randi_range(0,audio_stream_fail.size()-1)
+	play_SFX(audio_stream_fail[i])
 	OnMiss.emit()
 	EventBus.add_strike()
 	questionPopup.hide()

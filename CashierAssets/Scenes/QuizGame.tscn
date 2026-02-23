@@ -6,8 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://cyyi3uumnmwmx" path="res://CashierAssets/Scenes/UI/AnswerCard.tscn" id="3_a3hhh"]
 [ext_resource type="Script" uid="uid://dupugp5qggbpr" path="res://CashierAssets/Scripts/DropZone.gd" id="3_rkqw4"]
 [ext_resource type="Texture2D" uid="uid://chpp67lg02l71" path="res://CashierAssets/cashier_background_neutral.png" id="4_cvnos"]
+[ext_resource type="Texture2D" uid="uid://d3ar3nmgbjao8" path="res://CashierAssets/cashier_background_angry1.png" id="5_fw8rb"]
+[ext_resource type="Texture2D" uid="uid://boud21y0eyfr5" path="res://CashierAssets/cashier_background_angry2.png" id="6_4vs4d"]
 [ext_resource type="Texture2D" uid="uid://crfoafbj2itw6" path="res://CashierAssets/cashier_dialogue_box.png" id="7_cvnos"]
+[ext_resource type="AudioStream" uid="uid://lxamaglsnaw0" path="res://Audio/product scan.mp3" id="7_h2e7g"]
 [ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="8_kxse7"]
+[ext_resource type="AudioStream" uid="uid://dd2edl0jw6xnh" path="res://Audio/product scan 2.mp3" id="8_v0wym"]
+[ext_resource type="AudioStream" uid="uid://c8uq6u2sa2dt2" path="res://Audio/glass shatter 1.wav" id="9_wpvef"]
+[ext_resource type="AudioStream" uid="uid://bda8g3e0j8vhe" path="res://Audio/glass shatter 2.wav" id="10_hisi2"]
+[ext_resource type="AudioStream" uid="uid://cy8cnmiofuj2o" path="res://Audio/machine fault.wav" id="11_4pifc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxse7"]
 texture = ExtResource("7_cvnos")
@@ -20,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup", "answer_spawn_points", "answer_timer", "interval_timer")]
+[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup", "bg_cashier", "sfxPlayer", "answer_timer", "interval_timer")]
 script = ExtResource("1_oh3fi")
 question_bank = ExtResource("2_ud5qk")
 answer_card_scene = ExtResource("3_a3hhh")
@@ -30,21 +37,27 @@ timer_label = NodePath("../UI/Label_Timer")
 feedback_label = NodePath("../UI/Label_Feedback")
 question_counter_label = NodePath("../UI/Label_QuestionCounter")
 drop_zone = NodePath("../UI/DropZone")
-voice_player = NodePath("../AudioStreamPlayer")
+voice_player = NodePath("AudioStreamPlayer")
 questionPopup = NodePath("../UI/Panel")
-answer_spawn_points = [NodePath("../UI/Panel_Answers/Panel/Control"), NodePath("../UI/Panel_Answers/Panel/Control2"), NodePath("../UI/Panel_Answers/Panel/Control3"), NodePath("../UI/Panel_Answers/Panel/Control4")]
+bg_cashier = NodePath("../UI/PanelContainer/TextureRect_CashierBG")
+angryleveltextures = Array[Texture2D]([ExtResource("4_cvnos"), ExtResource("5_fw8rb"), ExtResource("6_4vs4d")])
+sfxPlayer = NodePath("AudioStreamPlayer2")
+audio_stream_correct = Array[AudioStream]([ExtResource("7_h2e7g"), ExtResource("8_v0wym")])
+audio_stream_fail = Array[AudioStream]([ExtResource("9_wpvef"), ExtResource("10_hisi2"), ExtResource("11_4pifc")])
 answer_timer = NodePath("AnswerTimer")
 interval_timer = NodePath("Interval")
 
 [node name="AnswerTimer" type="Timer" parent="QuizManager" unique_id=264047810]
-wait_time = 20.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Interval" type="Timer" parent="QuizManager" unique_id=1595800105]
-wait_time = 30.0
+wait_time = 11.0
 one_shot = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=99416742]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="QuizManager" unique_id=99416742]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="QuizManager" unique_id=8346359]
 
 [node name="UI" type="Control" parent="." unique_id=1513484850]
 layout_mode = 1
@@ -146,15 +159,15 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 6.0
-offset_top = -30.0
-offset_right = -135.51953
-offset_bottom = 41.0
+offset_left = 133.0
+offset_top = -61.0
+offset_right = -181.51953
+offset_bottom = 55.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label_Question" type="Label" parent="UI/Panel/PanelContainer" unique_id=1531777033]
-custom_minimum_size = Vector2(730, 60)
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 0.92, 0.68, 0.9647059)
@@ -167,15 +180,16 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="QuestionPanel" type="PanelContainer" parent="UI" unique_id=1826018018]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -1895.0
-offset_top = 93.0
-offset_right = -1014.48047
-offset_bottom = 293.0
+offset_left = -1904.0
+offset_top = 91.0
+offset_right = -1023.48047
+offset_bottom = 291.0
 grow_horizontal = 0
 
 [node name="Panel_Answers" type="PanelContainer" parent="UI" unique_id=886697369]

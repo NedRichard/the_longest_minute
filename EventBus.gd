@@ -6,6 +6,7 @@ var is_on_cooldown: bool = false
 signal strike1
 signal strike2
 signal strike3
+signal onStrikeGained(int)
 signal game_over
 signal GameModeChanged(int)
 signal start_talking
@@ -23,7 +24,7 @@ func add_strike() -> void:
 	if !is_on_cooldown:
 		start_cooldown()
 		strike += 1
-	
+		onStrikeGained.emit(strike)
 		
 		match strike:
 			1:
