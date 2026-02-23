@@ -19,7 +19,10 @@ func _input(event: InputEvent) -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("sign_mom"):
+	if mom_is_walking == false:
+		mom_stops_walking()
+	
+	if Input.is_action_just_pressed("sign_mom"):
 		mom_walks()
 		
 	#else:
@@ -31,13 +34,14 @@ func _process(delta: float) -> void:
 func mom_walks() -> void:
 	sign_mom_timer.start()
 	mom_is_walking = true
-	scale += Vector2(0.0003,0.0003)
+	scale += Vector2(0.0030,0.0030)
 	texture = walking_sprite
 	
 	if !sfx_footsteps.is_playing():
 		sfx_footsteps.play()
 		
 func mom_stops_walking() -> void:
+	mom_is_walking = false
 	scale -= Vector2(0.00005,0.00005)
 	texture = waiting_sprite
 	sfx_footsteps.stop()
