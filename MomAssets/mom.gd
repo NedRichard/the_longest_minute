@@ -42,9 +42,10 @@ func mom_walks() -> void:
 		
 func mom_stops_walking() -> void:
 	mom_is_walking = false
-	scale -= Vector2(0.00005,0.00005)
 	texture = waiting_sprite
 	sfx_footsteps.stop()
+	if scale >= Vector2(0.055,0.055):
+		scale -= Vector2(0.00005,0.00005)
 
 
 func win() -> void:
