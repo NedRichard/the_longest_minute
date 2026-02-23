@@ -28,8 +28,7 @@ position = Vector2(-556, 731)
 offset = Vector2(2880, 886)
 
 [node name="CameraCashier" type="Camera2D" parent="." unique_id=602974345]
-visible = false
-position = Vector2(-556, 731)
+position = Vector2(-602, 777)
 offset = Vector2(3430, -190.06)
 
 [node name="CameraGame" type="Camera2D" parent="." unique_id=2096979846]
@@ -40,10 +39,10 @@ offset = Vector2(960, 540)
 follow_viewport_enabled = true
 
 [node name="Cashier" parent="CanvasLayer" unique_id=2124792219 instance=ExtResource("4_mixcd")]
-offset_left = 1922.0
-offset_top = -3.0
-offset_right = 1922.0
-offset_bottom = -3.0
+offset_left = 1876.0
+offset_top = 43.0
+offset_right = 1876.0
+offset_bottom = 43.0
 
 [node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1025179045]
 

@@ -30,6 +30,7 @@ var _currentCashierIndex = 0;
 @export var interval_timer: Timer      # 30s total per question
 
 ## Internal state
+var selectedAnswerIndex =0
 var _current_index: int = 0
 var _current_question: QuestionData
 var _accepting_input: bool = false
@@ -158,16 +159,19 @@ func _clear_answers() -> void:
 
 func _spawn_answers(answers: Array[String]) -> void:
 	for i in range(answers.size()):
-		var card := answer_card_scene.instantiate() as AnswerCard
+		print("Z")
+		var cardparent := answer_card_scene.instantiate() 
+		var card : = cardparent.get_child(0) as AnswerCard
 		card.set_data(i, answers[i])
 		card.OnClick.connect(_on_answer_clicked)
-		answers_container.add_child(card)
+		answers_container.add_child(cardparent)
 	#	card.position =  answer_spawn_points[i].position
 		current_answer_card.append(card)
-		
+		current_answer_card[0].grab_click_focus.call_deferred()
 		EventBus.start_talking.emit()
 		
 	current_answer_card[0].grab_focus.call_deferred()	
+	print(current_answer_card[0].answer_text)
 
 
 func _play_voice_over(stream: AudioStream) -> void:
@@ -236,24 +240,31 @@ func _on_answer_dropped(answer_index: int, answer_text: String) -> void:
 	var is_correct: bool = _is_answer_accepted(answer_index)
 	feedback_label.text = "✅ Correct!" if is_correct else "❌ Wrong!"
 
-#func _unhandled_input(event: InputEvent) -> void:
-	##return
-	#if not _accepting_input :
-		#return
-	#if not currentMode==GameModes.Mode.CASHIER:
-		#return
-	#if event.is_action_pressed("ui_left")	:
-		#_on_answer_clicked(current_answer_card[0])
-			#
-	#if event.is_action_pressed("ui_right")	:
-		#_on_answer_clicked(current_answer_card[1])
-				#
-	#if event.is_action_pressed("ui_up")	:
-		#_on_answer_clicked(current_answer_card[2])
-		#
-	#if event.is_action_pressed("ui_down")	:
-		#_on_answer_clicked(current_answer_card[3])
+func _unhandled_input(event: InputEvent) -> void:
+	#return
+	if not _accepting_input :
+		return
+	if not EventBus.current_mode ==GameModes.Mode.CASHIER:
+		return
+	if event.is_action_pressed("ui_left")	:
+		selectedAnswerIndex-=1
+		selectedAnswerIndex = clampi(selectedAnswerIndex,0,3)
+		highlightAnswer(selectedAnswerIndex)
+			
+	if event.is_action_pressed("ui_right")	:
+		selectedAnswerIndex+=1
+		selectedAnswerIndex = clampi(selectedAnswerIndex,0,3)
+		highlightAnswer(selectedAnswerIndex)
+	if event.is_action_pressed("ui_accept"):
+		_on_answer_clicked(current_answer_card[selectedAnswerIndex])
+		
+	
 				
+func highlightAnswer(index:int)-> void:
+	for i in current_answer_card.size():
+		current_answer_card[i].focus_exited.emit()
+		
+	current_answer_card[index].focus_entered.emit()				
 # ---------------------------
 # Timer callbacks
 # ---------------------------

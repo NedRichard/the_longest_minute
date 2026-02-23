@@ -9,6 +9,7 @@ class_name AnswerCard
 @export var label: Label
 @export var texturect: TextureRect
 signal OnClick (AnswerCard)
+var tween = create_tween()
 func _ready() -> void:
 	# Keep visual text in sync with data.
 	
@@ -43,15 +44,30 @@ func set_data(index: int, text: String) -> void:
 	#}
 
 
-func _on_pressed() -> void:
-	OnClick.emit(self)
-	pass
-	
 
+	
+func reset_tween() -> void:
+	if tween:
+		tween.kill()
+	tween = create_tween()	
 
 func _on_focus_entered() -> void:
+	print("ii am fouccs")
+	
 	texturect.texture = selected_texture
+	reset_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(self,"scale",Vector2(1.1,1.1),0.4)
 
 
 func _on_focus_exited() -> void:
-		texturect.texture = unselected_texture
+	texturect.texture = unselected_texture
+	reset_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(self,"scale",Vector2(1,1),0.4)
+
+
+
+func _on_on_click(AnswerCard: Variant) -> void:
+	OnClick.emit(self)
+	

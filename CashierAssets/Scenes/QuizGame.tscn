@@ -260,20 +260,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.5
+offset_top = -5.0
+offset_right = 3.5
+offset_bottom = 505.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="AnswerCard" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=1303516809 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard2" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=862964824 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard3" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=1365600083 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard4" parent="UI/Panel_Answers/Panel/Panel_Answer_Container" unique_id=1558037040 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
 
 [node name="AnswerContainer" type="HBoxContainer" parent="UI" unique_id=180780104]
 visible = false
@@ -291,15 +283,6 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
-
-[node name="AnswerCard2" parent="UI/AnswerContainer" unique_id=931279503 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard3" parent="UI/AnswerContainer" unique_id=855528957 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
-
-[node name="AnswerCard4" parent="UI/AnswerContainer" unique_id=1223694666 instance=ExtResource("3_a3hhh")]
-layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="UI" unique_id=751769140]
 layout_mode = 0
