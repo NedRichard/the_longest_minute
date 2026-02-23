@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://crfoafbj2itw6" path="res://CashierAssets/cashier_dialogue_box.png" id="7_cvnos"]
 [ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="8_kxse7"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxse7"]
+texture = ExtResource("7_cvnos")
+
 [node name="Control" type="Control" unique_id=2124792219]
 layout_mode = 3
 anchors_preset = 15
@@ -121,6 +124,7 @@ offset_left = 25.0
 offset_top = 93.0
 offset_right = 905.51953
 offset_bottom = 293.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kxse7")
 
 [node name="TextureRect" type="TextureRect" parent="UI/Panel" unique_id=1638024954]
 layout_mode = 1

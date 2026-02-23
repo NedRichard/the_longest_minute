@@ -32,7 +32,7 @@ signal  OnMiss
 
 func  ChangeCurrentMode(value : int) -> void:
 	currentMode= value
-	print("in mode cashier")
+	print("mode changed %d ",value)
 func _ready() -> void:
 	feedback_label.text = ""
 	timer_label.text = ""
