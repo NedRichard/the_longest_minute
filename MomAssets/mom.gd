@@ -7,6 +7,8 @@ extends Sprite2D
 @onready var mom_close_up: Sprite2D = $"../MomCloseUp"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var press_space: TextureRect = $"../CanvasLayer/MarginContainer/PressSpaceContainer/PressSpace"
+
 @onready var intermission_text_1: Label = $"../CanvasLayer/MarginContainer/IntermissionText1"
 @onready var intermission_text_2: Label = $"../CanvasLayer/MarginContainer/IntermissionText2"
 @onready var intermission_text_3: Label = $"../CanvasLayer/MarginContainer/IntermissionText3"
@@ -49,6 +51,7 @@ func _input(event: InputEvent) -> void:
 				if can_skip_dialogue == true:
 					dialogue += 1
 					can_skip_dialogue = false
+					press_space.visible = false
 					skip_dialogue_timer.start()
 					print(dialogue)
 	
@@ -122,3 +125,6 @@ func mom_stops_walking() -> void:
 
 func _on_skip_dialogue_timer_timeout() -> void:
 	can_skip_dialogue = true
+	press_space.visible = true
+	#if EventBus.phase == 3:
+		#press_space.visible = false

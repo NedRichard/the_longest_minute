@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="6_8vr6q"]
 [ext_resource type="Texture2D" uid="uid://5cylm4kugwj8" path="res://MomAssets/mum_walking2.png" id="6_egldb"]
 [ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
+[ext_resource type="Texture2D" uid="uid://dtvikyt3xemoa" path="res://HUD/space_button.png" id="9_egldb"]
 [ext_resource type="Texture2D" uid="uid://b5pr4rlmj6bbq" path="res://MomAssets/mum_leaving1.png" id="7_48vwb"]
 [ext_resource type="Texture2D" uid="uid://bwodkkas2ngbp" path="res://MomAssets/mum_leaving_2.png" id="8_px3ym"]
 
@@ -150,7 +151,8 @@ libraries/ = SubResource("AnimationLibrary_0g53w")
 
 [node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
 visible = false
-position = Vector2(1243, 1378)
+position = Vector2(1302.85, 1387)
+rotation = -0.064577185
 scale = Vector2(1.904, 1.904)
 texture = ExtResource("4_3rct6")
 
@@ -196,12 +198,12 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -30
+theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("6_8vr6q")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
-text = "Bread? Oh oops, 
-momma forgot it, hehe...
+text = "Bread? 
+Oh oops, momma forgot it, hehe...
 I'll be just a minute honey!"
 horizontal_alignment = 1
 
@@ -211,14 +213,12 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -30
+theme_override_constants/line_spacing = 7
 theme_override_fonts/font = ExtResource("6_8vr6q")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
-text = "Chit chat with 
-the lovely cashier 
-and stall for momma, 
-will ya? :)"
+text = "Chit chat with the lovely cashier 
+and stall for momma, will ya? :)"
 horizontal_alignment = 1
 
 [node name="ToRightScreen" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1794463846]
@@ -227,6 +227,20 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture = ExtResource("5_qce2s")
+
+[node name="PressSpaceContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer" unique_id=1850482993]
+layout_mode = 2
+theme_override_constants/margin_left = -88
+theme_override_constants/margin_top = 160
+
+[node name="PressSpace" type="TextureRect" parent="CanvasLayer/MarginContainer/PressSpaceContainer" unique_id=1230633810]
+visible = false
+custom_minimum_size = Vector2(285.255, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_egldb")
+expand_mode = 3
 
 [node name="SignMomTimer" type="Timer" parent="." unique_id=883057996]
 wait_time = 0.5
