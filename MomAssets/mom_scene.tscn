@@ -4,13 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://d0ts0pnrpc0ex" path="res://MomAssets/mum_standing.png" id="2_8n2mh"]
 [ext_resource type="Script" uid="uid://do27nspitxjk0" path="res://MomAssets/mom.gd" id="3_65yso"]
 [ext_resource type="Texture2D" uid="uid://cgy7gpbmf00m5" path="res://MomAssets/mum_walking1.png" id="4_3rct6"]
+[ext_resource type="Texture2D" uid="uid://ct58wl2nkqe3f" path="res://MomAssets/mum_background_angry1.png" id="4_6kdu6"]
 [ext_resource type="AudioStream" uid="uid://cxgo414ijmcbi" path="res://MomAssets/SFX_Footsteps.mp3" id="4_78lb6"]
 [ext_resource type="StyleBox" uid="uid://bx5uscbmapojf" path="res://HUD/dialogue_box.tres" id="5_8n2mh"]
+[ext_resource type="Texture2D" uid="uid://dd7fypi3nugm0" path="res://MomAssets/mum_background_angry2.png" id="5_jpvox"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_qce2s"]
 [ext_resource type="Texture2D" uid="uid://cecxseehe57bc" path="res://MomAssets/mum_hand_waving.png" id="5_t2wny"]
 [ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="6_8vr6q"]
 [ext_resource type="Texture2D" uid="uid://5cylm4kugwj8" path="res://MomAssets/mum_walking2.png" id="6_egldb"]
 [ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
+[ext_resource type="Texture2D" uid="uid://c7pp20yyitjl8" path="res://MomAssets/mum_background_angry3.png" id="6_ww54a"]
 [ext_resource type="Texture2D" uid="uid://b5pr4rlmj6bbq" path="res://MomAssets/mum_leaving1.png" id="7_48vwb"]
 [ext_resource type="Texture2D" uid="uid://bwodkkas2ngbp" path="res://MomAssets/mum_leaving_2.png" id="8_px3ym"]
 [ext_resource type="Texture2D" uid="uid://dtvikyt3xemoa" path="res://HUD/space_button.png" id="9_egldb"]
@@ -137,6 +140,9 @@ position = Vector2(1014.49, 518.695)
 scale = Vector2(0.055, 0.055)
 texture = ExtResource("2_8n2mh")
 script = ExtResource("3_65yso")
+bg_2 = ExtResource("4_6kdu6")
+bg_3 = ExtResource("5_jpvox")
+bg_4 = ExtResource("6_ww54a")
 walking_sprite = ExtResource("4_3rct6")
 waiting_sprite = ExtResource("2_8n2mh")
 sfx_footsteps = NodePath("Footsteps")
