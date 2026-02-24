@@ -15,6 +15,7 @@ var dialogue: int = 0
 var intermission: bool = false
 var can_skip_dialogue = true
 
+var initial_scale: Vector2i
 @onready var sign_mom_timer: Timer = $"../SignMomTimer"
 @onready var win_text: Label = $"../CanvasLayer/MarginContainer/WinText"
 @onready var sfx_squeak: AudioStreamPlayer = $"../KidHand/SFX_Squeak"
@@ -29,7 +30,8 @@ var mom_is_walking: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	initial_scale = self.scale
+	print(scale)
 
 func _input(event: InputEvent) -> void:
 	if EventBus.current_mode == GameModes.Mode.MOM:
@@ -66,11 +68,20 @@ func _process(delta: float) -> void:
 			3:
 				intermission_text_2.visible = false
 				intermission_text_3.visible = true
+			4:
+				intermission_text_3.visible = false
+				phase = 2
+				intermission = false
 	
 	if scale >= Vector2(1.0, 1.0):
 		if phase == 1:
 			intermission = true
 		elif phase == 2:
+			self.visible = true
+			mom_close_up.visible = false
+			self.scale = Vector2(0.055, 0.055)
+			phase = 3
+		elif phase == 3:
 			EventBus.win.emit()
 
 
