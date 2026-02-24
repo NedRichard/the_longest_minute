@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bdvm16aaims45"]
+
+[ext_resource type="Script" uid="uid://cw75dgsq3b2mw" path="res://Main Menu/Scripts/main_menu.gd" id="1_5ms5j"]
+[ext_resource type="Texture2D" uid="uid://d0ts0pnrpc0ex" path="res://MomAssets/mum_standing.png" id="1_ku1ks"]
+
+[node name="MainMenu" type="Node2D" unique_id=435551171]
+script = ExtResource("1_5ms5j")
+mum_path = NodePath("MumStanding")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=244979916]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=406573033]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=123847353]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 500.0
+offset_bottom = -580.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel" unique_id=329476234]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/MarginContainer" unique_id=1653323724]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer" unique_id=2073559800]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "PLAY
+
+
+"
+
+[node name="Exit" type="Button" parent="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer" unique_id=650465451]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "EXIT"
+
+[node name="MumStanding" type="Sprite2D" parent="." unique_id=321783693]
+position = Vector2(1457.0001, 763)
+scale = Vector2(0.38154277, 0.38496375)
+texture = ExtResource("1_ku1ks")
+
+[connection signal="pressed" from="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
