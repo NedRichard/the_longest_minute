@@ -30,7 +30,6 @@ var text_tween: Tween  # typewriter tween
 func _ready() -> void:
 	if mum:
 		_mom_base_scale = mum.scale
-		push_warning("mum not assigned; flip won't run.")
 
 	print("Starting state: State.READY")
 	hide_textbox()
@@ -124,7 +123,7 @@ func display_text() -> void:
 	var next_text := text_queue.pop_front() as String
 	_set_quote_text(next_text)
 	_set_reveal_ratio(0.0)
-
+	flip_mom_juicy()
 	change_state(State.READING)
 	show_textbox()
 
@@ -191,3 +190,39 @@ func _set_reveal_ratio(r: float) -> void:
 		var count := lbl.text.length()
 		lbl.visible_characters = int(round(r * count))
 		
+
+func flip_mom_juicy() -> void:
+	if mum == null:
+		print("flip_mom_juicy: mum is null")
+		return
+
+	# Ensure we captured a sane base scale
+	if _mom_base_scale == Vector2.ZERO:
+		_mom_base_scale = mum.scale
+
+	# Stop previous flip tween so they don't stack
+	if mom_flip_tween and mom_flip_tween.is_valid():
+		mom_flip_tween.kill()
+
+	print("flip called | flip_h before:", mum.flip_h, " | scale:", mum.scale)
+
+	# Make sure we start from base scale each time (prevents drift)
+	mum.scale = _mom_base_scale
+
+	mom_flip_tween = create_tween()
+	mom_flip_tween.set_trans(Tween.TRANS_BACK)
+	mom_flip_tween.set_ease(Tween.EASE_OUT)
+
+	# 1) Squash X to 0 (turn sideways)
+	mom_flip_tween.tween_property(mum, "scale:x", 0.0, 0.08)
+
+	# 2) Toggle flip at the "thin" moment
+	mom_flip_tween.tween_callback(func():
+		mum.flip_h = !mum.flip_h
+	)
+
+	# 3) Expand back (bounce)
+	mom_flip_tween.tween_property(mum, "scale:x", _mom_base_scale.x, 0.14)
+
+	mom_flip_tween.finished.connect(func():
+		print("flip done | flip_h after:", mum.flip_h, " | scale:", mum.scale))
