@@ -2,10 +2,20 @@
 
 [ext_resource type="Script" uid="uid://cw75dgsq3b2mw" path="res://Main Menu/Scripts/main_menu.gd" id="1_5ms5j"]
 [ext_resource type="Texture2D" uid="uid://d0ts0pnrpc0ex" path="res://MomAssets/mum_standing.png" id="1_ku1ks"]
+[ext_resource type="Texture2D" uid="uid://bg4ujvq75fd4h" path="res://Main Menu/ButtonsAssets/start_button_idle.png" id="2_bgqmh"]
+[ext_resource type="Texture2D" uid="uid://5bkvo367r58c" path="res://Main Menu/ButtonsAssets/start_button_pressed.png" id="3_4wqtw"]
+[ext_resource type="Texture2D" uid="uid://dm0bhpbdwtt7l" path="res://Main Menu/ButtonsAssets/start_button_hower.png" id="4_xm72b"]
+[ext_resource type="Texture2D" uid="uid://cpj3cjsw3h2pj" path="res://Main Menu/ButtonsAssets/quit_button_idle.png" id="5_62v7d"]
+[ext_resource type="Texture2D" uid="uid://bbyirkvv443tk" path="res://Main Menu/ButtonsAssets/quit_button_pressed.png" id="6_hx6c7"]
+[ext_resource type="Texture2D" uid="uid://os5ds8fr3fbq" path="res://Main Menu/ButtonsAssets/quit_button_hower.png" id="7_wpo0r"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5ms5j"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_i0jnm"]
 
 [node name="MainMenu" type="Node2D" unique_id=435551171]
 script = ExtResource("1_5ms5j")
-mum_path = NodePath("MumStanding")
+mum_path = NodePath("CanvasLayer2/MumStanding")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=244979916]
 
@@ -17,50 +27,59 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=123847353]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 500.0
-offset_bottom = -580.0
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=329476234]
+visible = false
+layout_mode = 0
+offset_right = 930.0
+offset_bottom = 827.0
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel" unique_id=329476234]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/Control" unique_id=1172561926]
+visible = false
+layout_mode = 0
+offset_right = 730.0
+offset_bottom = 627.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/MarginContainer" unique_id=1653323724]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=1653323724]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 23.0
+offset_right = 740.0
+offset_bottom = 650.0
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer" unique_id=2073559800]
-custom_minimum_size = Vector2(150, 150)
+[node name="Play" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer" unique_id=1563369151]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "PLAY
+size_flags_vertical = 3
+texture_normal = ExtResource("2_bgqmh")
+texture_pressed = ExtResource("3_4wqtw")
+texture_hover = ExtResource("4_xm72b")
+texture_focused = ExtResource("4_xm72b")
 
-
-"
-
-[node name="Exit" type="Button" parent="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer" unique_id=650465451]
-custom_minimum_size = Vector2(150, 150)
+[node name="Exit" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer" unique_id=816987635]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "EXIT"
+size_flags_vertical = 3
+texture_normal = ExtResource("5_62v7d")
+texture_pressed = ExtResource("6_hx6c7")
+texture_hover = ExtResource("7_wpo0r")
+texture_focused = ExtResource("7_wpo0r")
 
-[node name="MumStanding" type="Sprite2D" parent="." unique_id=321783693]
-position = Vector2(1457.0001, 763)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=185623620]
+modulate = Color(0.1288298, 0.12882978, 0.12882978, 1)
+material = SubResource("CanvasItemMaterial_5ms5j")
+position = Vector2(-223, -85.99999)
+scale = Vector2(5000, 5000)
+texture = SubResource("CanvasTexture_i0jnm")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1948989536]
+
+[node name="MumStanding" type="Sprite2D" parent="CanvasLayer2" unique_id=321783693]
+visibility_layer = 7
+position = Vector2(1578, 763)
 scale = Vector2(0.38154277, 0.38496375)
 texture = ExtResource("1_ku1ks")
 
-[connection signal="pressed" from="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/Panel/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
