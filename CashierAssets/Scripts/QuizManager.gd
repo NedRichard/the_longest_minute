@@ -6,6 +6,7 @@ class_name QuizManager
 @export var answer_card_scene: PackedScene  # AnswerCard.tscn
 
 ## UI references
+
 @export var question_label: Label
 @export var answers_container: Node
 @export var timer_label: Label
@@ -178,8 +179,8 @@ func _spawn_answers(answers: Array[String]) -> void:
 		card.play_spawn_in(i * 0.05)
 		EventBus.start_talking.emit()
 		
-	current_answer_card[0].grab_focus.call_deferred()	
-	print(current_answer_card[0].answer_text)
+	#current_answer_card[0].grab_focus.call_deferred()	
+	#print(current_answer_card[0].answer_text)
 	await get_tree().create_timer(0.35).timeout
 	selectedAnswerIndex=0
 	highlightAnswer(0)

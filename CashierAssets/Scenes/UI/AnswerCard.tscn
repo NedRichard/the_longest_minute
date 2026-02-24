@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djrgum8rjfbr2" path="res://CashierAssets/Scripts/AnswerCard.gd" id="1_041ow"]
 [ext_resource type="Texture2D" uid="uid://ccado0jjvuqlw" path="res://CashierAssets/cashier_answer_cloud_selected.png" id="2_2gttq"]
 [ext_resource type="Texture2D" uid="uid://4q8cui5mda8h" path="res://CashierAssets/cashier_answer_cloud.png" id="2_50rog"]
+[ext_resource type="Texture2D" uid="uid://cdh4ws2klf70n" path="res://CashierAssets/cashier_hand.png" id="4_thgjg"]
 
 [node name="AnswerCard" type="Control" unique_id=1635349371]
 self_modulate = Color(1, 1, 1, 0)
@@ -22,7 +23,7 @@ grow_vertical = 2
 pivot_offset = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="." unique_id=2059165337 node_paths=PackedStringArray("label", "texturect")]
+[node name="Button" type="Button" parent="." unique_id=2059165337 node_paths=PackedStringArray("label", "texturect", "hand")]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(420, 200)
 layout_mode = 1
@@ -37,6 +38,7 @@ selected_texture = ExtResource("2_2gttq")
 unselected_texture = ExtResource("2_50rog")
 label = NodePath("TextureRect/PanelContainer/Label")
 texturect = NodePath("TextureRect")
+hand = NodePath("HandTexture")
 
 [node name="TextureRect" type="TextureRect" parent="Button" unique_id=1909105335]
 layout_mode = 1
@@ -79,6 +81,23 @@ theme_override_font_sizes/font_size = 26
 text = "yes?"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="HandTexture" type="TextureRect" parent="Button" unique_id=1050179633]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = 35.0
+offset_right = 24.0
+offset_bottom = 501.66663
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_thgjg")
+expand_mode = 5
+stretch_mode = 4
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

@@ -13,6 +13,7 @@ var _tween = create_tween()
 var _selected:=false
 
 # --- Juice tuning ---
+@export var hand : TextureRect
 @export var spawn_from_y: float = 80.0
 ## goes here on spawn
 @export var drop_to_y: float = 0.0 
@@ -33,7 +34,7 @@ var _selected:=false
 
 func _ready() -> void:
 	# Keep visual text in sync with data.
-	
+	hand.hide()
 	if label:
 		label.text = answer_text
 
@@ -133,14 +134,16 @@ func reset_tween() -> void:
 
 func _on_focus_entered() -> void:
 	print("ii am fouccs")
+	hand.show();
 	_selected =true
 	texturect.texture = selected_texture
 	reset_tween()
 	_tween.set_ease(_tween.EASE_OUT).set_trans(_tween.TRANS_ELASTIC)
 	_tween.tween_property(self,"scale",Vector2(1.1,1.1),0.4)
-
+	
 
 func _on_focus_exited() -> void:
+	hand.hide();
 	_selected=false
 	texturect.texture = unselected_texture
 	reset_tween()
