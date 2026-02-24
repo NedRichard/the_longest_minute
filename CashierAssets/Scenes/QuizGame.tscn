@@ -87,7 +87,8 @@ grow_vertical = 2
 [node name="TextureRect_CashierBG" type="TextureRect" parent="UI/PanelContainer" unique_id=392054502]
 layout_mode = 2
 texture = ExtResource("4_cvnos")
-expand_mode = 5
+expand_mode = 3
+stretch_mode = 5
 
 [node name="DropZone" parent="UI" unique_id=1122812498 instance=ExtResource("2_rep7p")]
 layout_mode = 1

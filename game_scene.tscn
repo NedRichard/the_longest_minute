@@ -38,12 +38,18 @@ offset = Vector2(960, 540)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1277906608]
 follow_viewport_enabled = true
 
-[node name="Cashier" parent="CanvasLayer" unique_id=2124792219 instance=ExtResource("4_mixcd")]
-offset_left = 4184.0
-offset_top = 16.0
-offset_right = 4184.0
-offset_bottom = 16.0
-metadata/_edit_use_anchors_ = true
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1689468038]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Cashier" parent="CanvasLayer/Control" unique_id=2124792219 instance=ExtResource("4_mixcd")]
+layout_mode = 1
+offset_left = 4169.0
+offset_top = 69.0
+offset_right = 4169.0
+offset_bottom = 69.0
 
 [node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=1025179045]
 
