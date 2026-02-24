@@ -11,9 +11,9 @@
 [ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="6_8vr6q"]
 [ext_resource type="Texture2D" uid="uid://5cylm4kugwj8" path="res://MomAssets/mum_walking2.png" id="6_egldb"]
 [ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
-[ext_resource type="Texture2D" uid="uid://dtvikyt3xemoa" path="res://HUD/space_button.png" id="9_egldb"]
 [ext_resource type="Texture2D" uid="uid://b5pr4rlmj6bbq" path="res://MomAssets/mum_leaving1.png" id="7_48vwb"]
 [ext_resource type="Texture2D" uid="uid://bwodkkas2ngbp" path="res://MomAssets/mum_leaving_2.png" id="8_px3ym"]
+[ext_resource type="Texture2D" uid="uid://dtvikyt3xemoa" path="res://HUD/space_button.png" id="9_egldb"]
 
 [sub_resource type="Animation" id="Animation_8vr6q"]
 length = 0.001

@@ -47,7 +47,9 @@ func _input(event: InputEvent) -> void:
 				mom_walks()
 				sign_mom_timer.stop()
 				sign_mom_timer.start()
-			else:
+				
+			elif intermission == true:
+				
 				if can_skip_dialogue == true:
 					dialogue += 1
 					can_skip_dialogue = false
@@ -62,14 +64,15 @@ func _process(delta: float) -> void:
 		scale += Vector2(0.005,0.005)
 		position += Vector2(0, 1.5)
 	else:
-		if scale >= Vector2(0.055,0.055):
+		if scale >= initial_scale:
 			scale -= Vector2(0.0001,0.0001)
 	
 	if intermission == true:
 		mom_close_up.visible = true
 		self.visible = false
-		intermission_text_1.visible = true
 		match dialogue:
+			1:
+				intermission_text_1.visible = true
 		
 			2:
 				intermission_text_1.visible = false
@@ -78,9 +81,10 @@ func _process(delta: float) -> void:
 				intermission_text_2.visible = false
 				intermission_text_3.visible = true
 			4:
+				intermission = false
 				intermission_text_3.visible = false
 				EventBus.phase = 2
-				intermission = false
+				
 	
 	if scale >= Vector2(1.0, 1.0):
 		if EventBus.phase == 1:
@@ -124,7 +128,6 @@ func mom_stops_walking() -> void:
 
 
 func _on_skip_dialogue_timer_timeout() -> void:
-	can_skip_dialogue = true
-	press_space.visible = true
-	#if EventBus.phase == 3:
-		#press_space.visible = false
+	if intermission == true:
+		can_skip_dialogue = true
+		press_space.visible = true
