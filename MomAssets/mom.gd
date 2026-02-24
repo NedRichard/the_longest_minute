@@ -2,8 +2,18 @@ extends Sprite2D
 
 @export var walking_sprite: Texture2D
 @export var waiting_sprite: Texture2D
+@onready var mom_close_up: Sprite2D = $"../MomCloseUp"
+
+@onready var intermission_text_1: Label = $"../CanvasLayer/MarginContainer/IntermissionText1"
+@onready var intermission_text_2: Label = $"../CanvasLayer/MarginContainer/IntermissionText2"
+@onready var intermission_text_3: Label = $"../CanvasLayer/MarginContainer/IntermissionText3"
+
+@onready var skip_dialogue_timer: Timer = $"../SkipDialogueTimer"
 
 var phase: int = 1
+var dialogue: int = 0
+var intermission: bool = false
+var can_skip_dialogue = true
 
 @onready var sign_mom_timer: Timer = $"../SignMomTimer"
 @onready var win_text: Label = $"../CanvasLayer/MarginContainer/WinText"
@@ -24,22 +34,42 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if EventBus.current_mode == GameModes.Mode.MOM:
 		if event.is_action_pressed('interact'):
-			mom_walks()
-			sign_mom_timer.stop()
-			sign_mom_timer.start()
+			if intermission == false:
+				mom_walks()
+				sign_mom_timer.stop()
+				sign_mom_timer.start()
+			else:
+				if can_skip_dialogue == true:
+					dialogue += 1
+					can_skip_dialogue = false
+					skip_dialogue_timer.start()
+					print(dialogue)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if mom_is_walking:
 		mom_walks()
-		scale += Vector2(0.001,0.001)
+		scale += Vector2(0.005,0.005)
 	else:
 		if scale >= Vector2(0.055,0.055):
 			scale -= Vector2(0.0001,0.0001)
-
+	
+	if intermission == true:
+		mom_close_up.visible = true
+		self.visible = false
+		match dialogue:
+			1:
+				intermission_text_1.visible = true
+			2:
+				intermission_text_1.visible = false
+				intermission_text_2.visible = true
+			3:
+				intermission_text_2.visible = false
+				intermission_text_3.visible = true
+	
 	if scale >= Vector2(1.0, 1.0):
 		if phase == 1:
-			pass
+			intermission = true
 		elif phase == 2:
 			EventBus.win.emit()
 
@@ -68,3 +98,7 @@ func mom_stops_walking() -> void:
 	sfx_footsteps.stop()
 	sfx_squeak.stop()
 	
+
+
+func _on_skip_dialogue_timer_timeout() -> void:
+	can_skip_dialogue = true

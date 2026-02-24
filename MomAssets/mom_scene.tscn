@@ -55,11 +55,6 @@ position = Vector2(964.2222, 538)
 scale = Vector2(0.49907407, 0.49907407)
 texture = ExtResource("1_unoao")
 
-[node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
-position = Vector2(964.2222, 538)
-scale = Vector2(0.49907407, 0.49907407)
-texture = ExtResource("1_unoao")
-
 [node name="Mom" type="Sprite2D" parent="." unique_id=1144749035 node_paths=PackedStringArray("sfx_footsteps")]
 position = Vector2(1014.49, 518.695)
 scale = Vector2(0.055, 0.055)
@@ -73,6 +68,12 @@ sfx_footsteps = NodePath("Footsteps")
 stream = ExtResource("4_78lb6")
 volume_db = 10.811
 parameters/looping = true
+
+[node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
+visible = false
+position = Vector2(1243, 1378)
+scale = Vector2(1.904, 1.904)
+texture = ExtResource("4_3rct6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=746477889]
 
@@ -101,11 +102,13 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -40
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
 text = "Hey love, I got you M&M's:
 your favorites!"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IntermissionText2" type="Label" parent="CanvasLayer/MarginContainer" unique_id=880446483]
 visible = false
@@ -113,9 +116,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
-text = "Bread? Oh oops, mama forgot it hehe
+text = "Bread? Oh oops, 
+momma forgot it, hehe...
 I'll be just a minute honey!"
 horizontal_alignment = 1
 
@@ -125,10 +130,13 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -10
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
-text = "Chit chat with the lovely cashier and
-stall for momma, will ya?"
+text = "Chit chat with 
+the lovely cashier 
+and stall for momma, 
+will ya? :)"
 horizontal_alignment = 1
 
 [node name="ToRightScreen" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1794463846]
@@ -140,6 +148,9 @@ texture = ExtResource("5_qce2s")
 
 [node name="SignMomTimer" type="Timer" parent="." unique_id=883057996]
 wait_time = 0.5
+
+[node name="SkipDialogueTimer" type="Timer" parent="." unique_id=1633681860]
+wait_time = 2.0
 
 [node name="KidHand" type="Sprite2D" parent="." unique_id=1830020499]
 position = Vector2(482.00003, 1009.0001)
@@ -154,3 +165,5 @@ stream = ExtResource("6_q3qsy")
 parameters/looping = true
 
 [connection signal="timeout" from="SignMomTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
+[connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_skip_dialogue_timer_timeout"]
+[connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
