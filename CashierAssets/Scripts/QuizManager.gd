@@ -91,11 +91,19 @@ func _ready() -> void:
 func start_quiz() -> void:
 	_current_index = 0
 	_start_question(_current_index)
+var popup_tween: Tween
 
-
+func juice_popup() -> void:
+		print("twin?")
+		questionPopup.pivot_offset = questionPopup.size * 0.5
+		questionPopup.scale = Vector2(1, 0)
+		popup_tween = create_tween()
+		#popup_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		popup_tween.tween_property(questionPopup, "scale", Vector2(1.0, 1.0), .2)
+		
 func _start_question(index: int) -> void:
 	questionPopup.show()
-
+	juice_popup()
 	_current_question = question_bank.get_question(index)
 	if _current_question == null:
 		_finish_quiz()
