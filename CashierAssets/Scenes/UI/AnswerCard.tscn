@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djrgum8rjfbr2" path="res://CashierAssets/Scripts/AnswerCard.gd" id="1_041ow"]
 [ext_resource type="Texture2D" uid="uid://ccado0jjvuqlw" path="res://CashierAssets/cashier_answer_cloud_selected.png" id="2_2gttq"]
 [ext_resource type="Texture2D" uid="uid://4q8cui5mda8h" path="res://CashierAssets/cashier_answer_cloud.png" id="2_50rog"]
+[ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="4_o5n2y"]
 [ext_resource type="Texture2D" uid="uid://cdh4ws2klf70n" path="res://CashierAssets/cashier_hand.png" id="4_thgjg"]
 
 [node name="AnswerCard" type="Control" unique_id=1635349371]
@@ -77,7 +78,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.33093688, 0.09582443, 0.30601856, 0.9647059)
 theme_override_colors/font_shadow_color = Color(0.12061956, 0.05753135, 0.016867999, 0.49411765)
 theme_override_colors/font_outline_color = Color(0.42299417, 0.19958729, 0.15037712, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_fonts/font = ExtResource("4_o5n2y")
+theme_override_font_sizes/font_size = 36
 text = "yes?"
 horizontal_alignment = 1
 vertical_alignment = 2

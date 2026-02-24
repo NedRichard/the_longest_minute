@@ -8,7 +8,84 @@
 [ext_resource type="StyleBox" uid="uid://bx5uscbmapojf" path="res://HUD/dialogue_box.tres" id="5_8n2mh"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_qce2s"]
 [ext_resource type="Texture2D" uid="uid://cecxseehe57bc" path="res://MomAssets/mum_hand_waving.png" id="5_t2wny"]
+[ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="6_8vr6q"]
+[ext_resource type="Texture2D" uid="uid://5cylm4kugwj8" path="res://MomAssets/mum_walking2.png" id="6_egldb"]
 [ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
+[ext_resource type="Texture2D" uid="uid://b5pr4rlmj6bbq" path="res://MomAssets/mum_leaving1.png" id="7_48vwb"]
+[ext_resource type="Texture2D" uid="uid://bwodkkas2ngbp" path="res://MomAssets/mum_leaving_2.png" id="8_px3ym"]
+[ext_resource type="Texture2D" uid="uid://dtvikyt3xemoa" path="res://HUD/space_button.png" id="9_egldb"]
+
+[sub_resource type="Animation" id="Animation_8vr6q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8n2mh")]
+}
+
+[sub_resource type="Animation" id="Animation_egldb"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8n2mh")]
+}
+
+[sub_resource type="Animation" id="Animation_0g53w"]
+resource_name = "walking"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_3rct6"), ExtResource("6_egldb"), ExtResource("4_3rct6")]
+}
+
+[sub_resource type="Animation" id="Animation_qesb7"]
+resource_name = "walking_back"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_48vwb"), ExtResource("8_px3ym")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0g53w"]
+_data = {
+&"RESET": SubResource("Animation_8vr6q"),
+&"idle": SubResource("Animation_egldb"),
+&"walking": SubResource("Animation_0g53w"),
+&"walking_back": SubResource("Animation_qesb7")
+}
 
 [sub_resource type="Animation" id="Animation_t2wny"]
 length = 0.001
@@ -55,11 +132,6 @@ position = Vector2(964.2222, 538)
 scale = Vector2(0.49907407, 0.49907407)
 texture = ExtResource("1_unoao")
 
-[node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
-position = Vector2(964.2222, 538)
-scale = Vector2(0.49907407, 0.49907407)
-texture = ExtResource("1_unoao")
-
 [node name="Mom" type="Sprite2D" parent="." unique_id=1144749035 node_paths=PackedStringArray("sfx_footsteps")]
 position = Vector2(1014.49, 518.695)
 scale = Vector2(0.055, 0.055)
@@ -73,6 +145,16 @@ sfx_footsteps = NodePath("Footsteps")
 stream = ExtResource("4_78lb6")
 volume_db = 10.811
 parameters/looping = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mom" unique_id=1642315705]
+libraries/ = SubResource("AnimationLibrary_0g53w")
+
+[node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
+visible = false
+position = Vector2(1302.85, 1387)
+rotation = -0.064577185
+scale = Vector2(1.904, 1.904)
+texture = ExtResource("4_3rct6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=746477889]
 
@@ -101,11 +183,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -30
+theme_override_fonts/font = ExtResource("6_8vr6q")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
 text = "Hey love, I got you M&M's:
 your favorites!"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IntermissionText2" type="Label" parent="CanvasLayer/MarginContainer" unique_id=880446483]
 visible = false
@@ -113,9 +198,12 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("6_8vr6q")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
-text = "Bread? Oh oops, mama forgot it hehe
+text = "Bread? 
+Oh oops, momma forgot it, hehe...
 I'll be just a minute honey!"
 horizontal_alignment = 1
 
@@ -125,10 +213,12 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 7
+theme_override_fonts/font = ExtResource("6_8vr6q")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("5_8n2mh")
-text = "Chit chat with the lovely cashier and
-stall for momma, will ya?"
+text = "Chit chat with the lovely cashier 
+and stall for momma, will ya? :)"
 horizontal_alignment = 1
 
 [node name="ToRightScreen" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1794463846]
@@ -138,8 +228,25 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 texture = ExtResource("5_qce2s")
 
+[node name="PressSpaceContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer" unique_id=1850482993]
+layout_mode = 2
+theme_override_constants/margin_left = -88
+theme_override_constants/margin_top = 160
+
+[node name="PressSpace" type="TextureRect" parent="CanvasLayer/MarginContainer/PressSpaceContainer" unique_id=1230633810]
+visible = false
+custom_minimum_size = Vector2(285.255, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_egldb")
+expand_mode = 3
+
 [node name="SignMomTimer" type="Timer" parent="." unique_id=883057996]
 wait_time = 0.5
+
+[node name="SkipDialogueTimer" type="Timer" parent="." unique_id=1633681860]
+wait_time = 2.0
 
 [node name="KidHand" type="Sprite2D" parent="." unique_id=1830020499]
 position = Vector2(482.00003, 1009.0001)
@@ -154,3 +261,5 @@ stream = ExtResource("6_q3qsy")
 parameters/looping = true
 
 [connection signal="timeout" from="SignMomTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
+[connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_skip_dialogue_timer_timeout"]
+[connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
