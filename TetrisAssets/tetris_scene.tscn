@@ -261,8 +261,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4xfwj")
 
 [node name="Bag" type="Sprite2D" parent="." unique_id=791330192]
-position = Vector2(866.5, 534.27936)
-scale = Vector2(0.4689856, 0.6697058)
+position = Vector2(857.5, 534.27936)
+scale = Vector2(0.4794203, 0.6697058)
 texture = ExtResource("3_rdkc4")
 
 [node name="Hand" type="Sprite2D" parent="." unique_id=19162908]
