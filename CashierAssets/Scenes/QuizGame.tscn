@@ -286,6 +286,7 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 
 [node name="TextureRect" type="TextureRect" parent="UI" unique_id=751769140]
+visible = false
 layout_mode = 0
 offset_left = -33.0
 offset_top = 23.0

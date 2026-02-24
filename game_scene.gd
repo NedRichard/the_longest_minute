@@ -4,7 +4,10 @@ extends Node2D
 @onready var camera_mom: Camera2D = $CameraMom
 @onready var camera_tetris: Camera2D = $CameraTetris
 @onready var camera_cashier: Camera2D = $CameraCashier
+
 @onready var hud: Control = $HUDCanvas/HUD
+@onready var to_left_screen: TextureRect = $HUDCanvas/HUD/Control/MarginContainer/ToLeftScreen
+@onready var to_right_screen: TextureRect = $HUDCanvas/HUD/Control/MarginContainer/ToRightScreen
 
 @onready var ambience: AudioStreamPlayer = $Audio/Ambience
 @onready var bgm: AudioStreamPlayer = $Audio/BGM
@@ -30,9 +33,6 @@ var cashier_active: bool = false
 		on_mode_change.emit(current_mode)
 		
 
-
-	
-	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -69,6 +69,8 @@ func switch_to_mom_screen() -> void:
 	cashier_active = false
 	tetris_active = false
 	EventBus.current_mode = GameModes.Mode.MOM
+	to_left_screen.visible = false
+	to_right_screen.visible = true
 	
 func switch_to_tetris_screen() -> void:
 	camera_game.position = camera_tetris.position
@@ -77,6 +79,8 @@ func switch_to_tetris_screen() -> void:
 	cashier_active = false
 	tetris_active = true
 	EventBus.current_mode = GameModes.Mode.TETRIS
+	to_left_screen.visible = true
+	to_right_screen.visible = true
 func switch_to_cashier_screen() -> void:
 	camera_game.position = camera_cashier.position
 	camera_cashier.make_current()
@@ -84,6 +88,8 @@ func switch_to_cashier_screen() -> void:
 	cashier_active = true
 	tetris_active = false
 	EventBus.current_mode = GameModes.Mode.CASHIER
+	to_left_screen.visible = true
+	to_right_screen.visible = false
 func start_talking_sfx() -> void:
 	cashier_voice.play()
 

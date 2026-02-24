@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c6u0wpfpivh7p" path="res://HUD/smoke.png" id="3_8sq4i"]
 [ext_resource type="Texture2D" uid="uid://vuuotlgtgken" path="res://HUD/crying.jpg" id="5_a2258"]
 [ext_resource type="Texture2D" uid="uid://kagn8c2gacb3" path="res://HUD/win.jpg" id="6_1xsix"]
+[ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="7_61f8s"]
+[ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="8_g10ll"]
 
 [node name="HUD" type="Control" unique_id=971369467 node_paths=PackedStringArray("anxious_frame", "sweat_frame", "smoke_frame")]
 layout_mode = 3
@@ -138,3 +140,27 @@ theme_override_font_sizes/font_size = 60
 text = "it wasn't so bad
 after all"
 horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1931752843]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="ToLeftScreen" type="TextureRect" parent="Control/MarginContainer" unique_id=824756103]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("7_61f8s")
+
+[node name="ToRightScreen" type="TextureRect" parent="Control/MarginContainer" unique_id=1528665552]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("8_g10ll")

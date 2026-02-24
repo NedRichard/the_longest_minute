@@ -67,3 +67,5 @@ autoplay = true
 stream = ExtResource("8_e35lh")
 volume_db = 9.0
 pitch_scale = 1.16
+
+[editable path="HUDCanvas/HUD"]

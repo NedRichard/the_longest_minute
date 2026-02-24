@@ -267,20 +267,18 @@ texture = ExtResource("3_rdkc4")
 [node name="TetrisHUD" parent="." unique_id=1845199848 instance=ExtResource("3_lw01v")]
 
 [node name="MarginContainer" parent="TetrisHUD" index="0" unique_id=2133695815]
-offset_left = -43.0
-offset_top = -43.0
-offset_right = -43.0
-offset_bottom = -43.0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
 [node name="ToLeftScreen" type="TextureRect" parent="TetrisHUD/MarginContainer" index="2" unique_id=1642115981]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("4_ppmu1")
 
 [node name="ToRightScreen" type="TextureRect" parent="TetrisHUD/MarginContainer" index="3" unique_id=675843146]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

@@ -11,6 +11,9 @@ func _ready() -> void:
 	EventBus.strike1.connect(display_anxiety)
 	EventBus.strike2.connect(display_sweat)
 	EventBus.strike3.connect(display_smoke)
+	
+	
+	
 	EventBus.game_over.connect(display_game_over)
 	EventBus.win.connect(display_win)
 
