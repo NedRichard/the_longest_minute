@@ -180,6 +180,9 @@ func _spawn_answers(answers: Array[String]) -> void:
 		
 	current_answer_card[0].grab_focus.call_deferred()	
 	print(current_answer_card[0].answer_text)
+	await get_tree().create_timer(0.35).timeout
+	selectedAnswerIndex=0
+	highlightAnswer(0)
 
 
 func _play_voice_over(stream: AudioStream) -> void:
@@ -218,9 +221,11 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 		var i = randi_range(0,audio_stream_correct.size()-1)
 		play_SFX(audio_stream_correct[i])
 		answercard.play_correct()
-		for c in current_answer_card :
+		await get_tree().create_timer(.2).timeout
+		for j in range(current_answer_card.size()) :
+			var c = current_answer_card[j]
 			if c!= answercard:
-				answercard.play_drop_out()
+				c.play_drop_out(j * 0.25)
 
 		
 	else:
@@ -232,12 +237,12 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 		answercard.play_wrong_shake()
 		for j in range(current_answer_card.size()):
 			var c := current_answer_card[j]
-			c.play_drop_out(0.05) # tiny delay so shake reads; adjust or remove
+			c.play_drop_out(j * 0.25) # tiny delay so shake reads; adjust or remove
 
 
 	# If you want to hide popup and clear answers immediately (like you do now):
 	questionPopup.hide()
-	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(1).timeout
 	_clear_answers()
 
 

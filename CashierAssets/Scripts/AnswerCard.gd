@@ -14,8 +14,9 @@ var _selected:=false
 
 # --- Juice tuning ---
 @export var spawn_from_y: float = 80.0
-@export var drop_to_y: float = 0.0
-
+## goes here on spawn
+@export var drop_to_y: float = 0.0 
+## goes here after spawn
 @export var spawn_time: float = 0.28
 @export var drop_time: float = 0.20
 @export var pop_time: float = 0.18
@@ -93,7 +94,7 @@ func play_drop_out(delay:float =0.0) ->void:
 	_tween=create_tween()
 	_tween.tween_interval(delay)
 	_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	_tween.tween_property(self, "position", Vector2(position.x, drop_to_y), drop_time)
+	_tween.tween_property(self, "position", Vector2(position.x, spawn_from_y), drop_time)
 	_tween.parallel().tween_property(self, "modulate:a", 0.0, drop_time)
 
 
