@@ -28,7 +28,7 @@ var _currentCashierIndex = 0;
 ## Timers (add as children of QuizManager and drag them in)
 @export var answer_timer: Timer        # 20s window
 @export var interval_timer: Timer      # 30s total per question
-
+@export var initial_timer: Timer
 ## Internal state
 var selectedAnswerIndex =0
 var _current_index: int = 0
@@ -57,11 +57,15 @@ func _ready() -> void:
 		answer_timer.timeout.connect(_on_answer_timer_timeout)
 	else:
 		push_error("QuizManager: answer_timer not assigned!")
-
+	if initial_timer:
+		initial_timer.one_shot =true
+		initial_timer.autostart = false
+		initial_timer.start()
 	if interval_timer:
 		interval_timer.one_shot = true
 		interval_timer.autostart = false
 		interval_timer.timeout.connect(_on_interval_timer_timeout)
+		
 	else:
 		push_error("QuizManager: interval_timer not assigned!")
 
@@ -80,7 +84,7 @@ func _ready() -> void:
 		push_error("QuizManager: question_bank has no questions.")
 		return
 
-	start_quiz()
+	
 
 
 func start_quiz() -> void:
@@ -320,3 +324,7 @@ func _finish_quiz() -> void:
 	feedback_label.text = "Thanks for playing."
 	timer_label.text = ""
 	voice_player.stop()
+
+
+func _on_initial_timer_timeout() -> void:
+	start_quiz()

@@ -27,8 +27,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup", "bg_cashier", "sfxPlayer", "answer_timer", "interval_timer")]
+[node name="QuizManager" type="Node" parent="." unique_id=942576591 node_paths=PackedStringArray("question_label", "answers_container", "timer_label", "feedback_label", "question_counter_label", "drop_zone", "voice_player", "questionPopup", "bg_cashier", "sfxPlayer", "answer_timer", "interval_timer", "initial_timer")]
 script = ExtResource("1_oh3fi")
 question_bank = ExtResource("2_ud5qk")
 answer_card_scene = ExtResource("3_a3hhh")
@@ -47,6 +49,11 @@ audio_stream_correct = Array[AudioStream]([ExtResource("7_h2e7g"), ExtResource("
 audio_stream_fail = Array[AudioStream]([ExtResource("9_wpvef"), ExtResource("10_hisi2"), ExtResource("11_4pifc")])
 answer_timer = NodePath("AnswerTimer")
 interval_timer = NodePath("Interval")
+initial_timer = NodePath("initialTimer")
+
+[node name="initialTimer" type="Timer" parent="QuizManager" unique_id=192186641]
+wait_time = 15.0
+one_shot = true
 
 [node name="AnswerTimer" type="Timer" parent="QuizManager" unique_id=264047810]
 wait_time = 10.0
@@ -295,3 +302,5 @@ offset_bottom = 142.0
 texture = ExtResource("8_kxse7")
 expand_mode = 3
 stretch_mode = 5
+
+[connection signal="timeout" from="QuizManager/initialTimer" to="QuizManager" method="_on_initial_timer_timeout"]
