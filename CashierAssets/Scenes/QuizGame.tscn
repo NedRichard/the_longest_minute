@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://cy8cnmiofuj2o" path="res://Audio/machine fault.wav" id="11_4pifc"]
 [ext_resource type="AudioStream" uid="uid://d4k43owvrgld8" path="res://Audio/freesound_community-strained-gibberish-103110.mp3" id="13_hisi2"]
 [ext_resource type="AudioStream" uid="uid://bq10swgp6tuq" path="res://Audio/781093__saangosu__videogame-sci-fi-metalish-damage-efect.wav" id="14_4pifc"]
+[ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="18_4pifc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxse7"]
 texture = ExtResource("7_cvnos")
@@ -185,10 +186,11 @@ grow_vertical = 2
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(1, 0.92, 0.68, 0.9647059)
+theme_override_colors/font_color = Color(1, 0, 0.019607844, 0.9647059)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.8336643, 0.80470425, 0.7999792, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("18_4pifc")
+theme_override_font_sizes/font_size = 45
 text = "So your mom we666666666666666666666666666666666666666666666666666666666ghcg"
 horizontal_alignment = 1
 vertical_alignment = 1

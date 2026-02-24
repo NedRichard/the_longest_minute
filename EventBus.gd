@@ -1,5 +1,5 @@
 extends Node
-
+var phase: int = 1
 var strike: int = 0
 var is_on_cooldown: bool = false
 var current_mode: GameModes.Mode
