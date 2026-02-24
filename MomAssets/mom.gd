@@ -1,8 +1,11 @@
 extends Sprite2D
 
+
 @export var walking_sprite: Texture2D
 @export var waiting_sprite: Texture2D
+
 @onready var mom_close_up: Sprite2D = $"../MomCloseUp"
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var intermission_text_1: Label = $"../CanvasLayer/MarginContainer/IntermissionText1"
 @onready var intermission_text_2: Label = $"../CanvasLayer/MarginContainer/IntermissionText2"
@@ -31,6 +34,7 @@ var mom_is_walking: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	randomize()
 	initial_scale = self.scale
 	initial_pos = self.position
 
@@ -61,9 +65,9 @@ func _process(delta: float) -> void:
 	if intermission == true:
 		mom_close_up.visible = true
 		self.visible = false
+		intermission_text_1.visible = true
 		match dialogue:
-			1:
-				intermission_text_1.visible = true
+		
 			2:
 				intermission_text_1.visible = false
 				intermission_text_2.visible = true
@@ -95,7 +99,7 @@ func _on_sign_mom_timer_timeout() -> void:
 func mom_walks() -> void:
 	if !mom_is_walking:
 		mom_is_walking = true
-		texture = walking_sprite
+		animation_player.play("walking")
 		kid_animation_player.seek(animation_target_time, true)
 		kid_animation_player.play('wave')
 	
@@ -108,7 +112,9 @@ func mom_stops_walking() -> void:
 	mom_is_walking = false
 	animation_target_time = kid_animation_player.current_animation_position
 	kid_animation_player.stop()
-	texture = waiting_sprite
+	var anims = animation_player.get_animation_list()
+	anims.erase("walking")
+	animation_player.play(anims[randi() % anims.size()])
 	sfx_footsteps.stop()
 	sfx_squeak.stop()
 	

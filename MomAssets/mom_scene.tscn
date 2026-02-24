@@ -9,7 +9,82 @@
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_qce2s"]
 [ext_resource type="Texture2D" uid="uid://cecxseehe57bc" path="res://MomAssets/mum_hand_waving.png" id="5_t2wny"]
 [ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="6_8vr6q"]
+[ext_resource type="Texture2D" uid="uid://5cylm4kugwj8" path="res://MomAssets/mum_walking2.png" id="6_egldb"]
 [ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
+[ext_resource type="Texture2D" uid="uid://b5pr4rlmj6bbq" path="res://MomAssets/mum_leaving1.png" id="7_48vwb"]
+[ext_resource type="Texture2D" uid="uid://bwodkkas2ngbp" path="res://MomAssets/mum_leaving_2.png" id="8_px3ym"]
+
+[sub_resource type="Animation" id="Animation_8vr6q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8n2mh")]
+}
+
+[sub_resource type="Animation" id="Animation_egldb"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8n2mh")]
+}
+
+[sub_resource type="Animation" id="Animation_0g53w"]
+resource_name = "walking"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_3rct6"), ExtResource("6_egldb"), ExtResource("4_3rct6")]
+}
+
+[sub_resource type="Animation" id="Animation_qesb7"]
+resource_name = "walking_back"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_48vwb"), ExtResource("8_px3ym")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0g53w"]
+_data = {
+&"RESET": SubResource("Animation_8vr6q"),
+&"idle": SubResource("Animation_egldb"),
+&"walking": SubResource("Animation_0g53w"),
+&"walking_back": SubResource("Animation_qesb7")
+}
 
 [sub_resource type="Animation" id="Animation_t2wny"]
 length = 0.001
@@ -69,6 +144,9 @@ sfx_footsteps = NodePath("Footsteps")
 stream = ExtResource("4_78lb6")
 volume_db = 10.811
 parameters/looping = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mom" unique_id=1642315705]
+libraries/ = SubResource("AnimationLibrary_0g53w")
 
 [node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
 visible = false
