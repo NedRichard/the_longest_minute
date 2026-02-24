@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://cpg7u055pjmpi"]
 
 [ext_resource type="Texture2D" uid="uid://bf3db8c3r86ae" path="res://MomAssets/mum_background_neutral.png" id="1_unoao"]
-[ext_resource type="Texture2D" uid="uid://ro4007y645c2" path="res://MomAssets/istockphoto-886619850-1024x1024.jpg" id="2_e3y17"]
+[ext_resource type="Texture2D" uid="uid://d0ts0pnrpc0ex" path="res://MomAssets/mum_standing.png" id="2_8n2mh"]
 [ext_resource type="Script" uid="uid://do27nspitxjk0" path="res://MomAssets/mom.gd" id="3_65yso"]
+[ext_resource type="Texture2D" uid="uid://cgy7gpbmf00m5" path="res://MomAssets/mum_walking1.png" id="4_3rct6"]
 [ext_resource type="AudioStream" uid="uid://cxgo414ijmcbi" path="res://MomAssets/SFX_Footsteps.mp3" id="4_78lb6"]
+[ext_resource type="StyleBox" uid="uid://bx5uscbmapojf" path="res://HUD/dialogue_box.tres" id="5_8n2mh"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_qce2s"]
 [ext_resource type="Texture2D" uid="uid://cecxseehe57bc" path="res://MomAssets/mum_hand_waving.png" id="5_t2wny"]
 [ext_resource type="AudioStream" uid="uid://bqlipk42bvxft" path="res://Audio/SFX_Squeak.mp3" id="6_q3qsy"]
@@ -53,11 +55,18 @@ position = Vector2(964.2222, 538)
 scale = Vector2(0.49907407, 0.49907407)
 texture = ExtResource("1_unoao")
 
+[node name="MomCloseUp" type="Sprite2D" parent="." unique_id=886085141]
+position = Vector2(964.2222, 538)
+scale = Vector2(0.49907407, 0.49907407)
+texture = ExtResource("1_unoao")
+
 [node name="Mom" type="Sprite2D" parent="." unique_id=1144749035 node_paths=PackedStringArray("sfx_footsteps")]
 position = Vector2(1014.49, 518.695)
 scale = Vector2(0.055, 0.055)
-texture = ExtResource("2_e3y17")
+texture = ExtResource("2_8n2mh")
 script = ExtResource("3_65yso")
+walking_sprite = ExtResource("4_3rct6")
+waiting_sprite = ExtResource("2_8n2mh")
 sfx_footsteps = NodePath("Footsteps")
 
 [node name="Footsteps" type="AudioStreamPlayer" parent="Mom" unique_id=1410745507]
@@ -73,10 +82,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
 
 [node name="WinText" type="Label" parent="CanvasLayer/MarginContainer" unique_id=1158044603]
 visible = false
@@ -85,6 +94,42 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
 text = "YOU WIN OMG!!!"
+
+[node name="IntermissionText1" type="Label" parent="CanvasLayer/MarginContainer" unique_id=2006387398]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = ExtResource("5_8n2mh")
+text = "Hey love, I got you M&M's:
+your favorites!"
+horizontal_alignment = 1
+
+[node name="IntermissionText2" type="Label" parent="CanvasLayer/MarginContainer" unique_id=880446483]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = ExtResource("5_8n2mh")
+text = "Bread? Oh oops, mama forgot it hehe
+I'll be just a minute honey!"
+horizontal_alignment = 1
+
+[node name="IntermissionText3" type="Label" parent="CanvasLayer/MarginContainer" unique_id=816197138]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = ExtResource("5_8n2mh")
+text = "Chit chat with the lovely cashier and
+stall for momma, will ya?"
+horizontal_alignment = 1
 
 [node name="ToRightScreen" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=1794463846]
 visible = false
