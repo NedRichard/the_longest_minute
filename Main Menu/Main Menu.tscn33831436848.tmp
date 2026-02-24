@@ -24,9 +24,8 @@ border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_wpo0r"]
 
-[node name="MainMenu" type="Node2D" unique_id=435551171 node_paths=PackedStringArray("buttonHolder")]
+[node name="MainMenu" type="Node2D" unique_id=435551171]
 script = ExtResource("1_5ms5j")
-buttonHolder = NodePath("CanvasLayer/Control/VBoxContainer")
 mum_path = NodePath("CanvasLayer2/MumStanding")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=244979916]
@@ -114,9 +113,9 @@ anchor_bottom = 1.0
 offset_top = -305.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/margin_left = 400
+theme_override_constants/margin_left = 500
 theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 400
+theme_override_constants/margin_right = 500
 theme_override_constants/margin_bottom = 50
 
 [node name="Panel" type="Panel" parent="CanvasLayer3/MarginContainer" unique_id=1300528436]
@@ -147,7 +146,7 @@ text = "*"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = SubResource("SystemFont_wpo0r")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "asdasdasdadasdasdasdasdasdasdadasdadad"
 
 [node name="Label3" type="Label" parent="CanvasLayer3/MarginContainer/MarginContainer/HBoxContainer" unique_id=1884404399]
