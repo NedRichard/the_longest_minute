@@ -172,6 +172,10 @@ func _spawn_answers(answers: Array[String]) -> void:
 	#	card.position =  answer_spawn_points[i].position
 		current_answer_card.append(card)
 		current_answer_card[0].grab_click_focus.call_deferred()
+		card.set_anchors_preset(Control.PRESET_CENTER)
+		card.position = Vector2.ZERO
+		card.pivot_offset = card.size * 0.5
+		card.play_spawn_in(i * 0.05)
 		EventBus.start_talking.emit()
 		
 	current_answer_card[0].grab_focus.call_deferred()	
@@ -204,8 +208,8 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 	answer_timer.stop()
 
 	# Disable drop zone if you use it
-	if drop_zone:
-		drop_zone.set_enabled(false)
+	#if drop_zone:
+		#drop_zone.set_enabled(false)
 
 	var is_correct: bool = _is_answer_accepted(answercard.answer_index)
 	if is_correct:
@@ -213,7 +217,11 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 		OnCorrectAnswer.emit()
 		var i = randi_range(0,audio_stream_correct.size()-1)
 		play_SFX(audio_stream_correct[i])
-		
+		answercard.play_correct()
+		for c in current_answer_card :
+			if c!= answercard:
+				answercard.play_drop_out()
+
 		
 	else:
 		feedback_label.text = "❌ Wrong!"
@@ -221,9 +229,15 @@ func _on_answer_clicked(answercard: AnswerCard) -> void:
 		EventBus.add_strike()
 		var i = randi_range(0,audio_stream_fail.size()-1)
 		play_SFX(audio_stream_fail[i])
+		answercard.play_wrong_shake()
+		for j in range(current_answer_card.size()):
+			var c := current_answer_card[j]
+			c.play_drop_out(0.05) # tiny delay so shake reads; adjust or remove
+
 
 	# If you want to hide popup and clear answers immediately (like you do now):
 	questionPopup.hide()
+	await get_tree().create_timer(0.35).timeout
 	_clear_answers()
 
 

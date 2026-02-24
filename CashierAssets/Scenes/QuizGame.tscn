@@ -52,7 +52,7 @@ interval_timer = NodePath("Interval")
 initial_timer = NodePath("initialTimer")
 
 [node name="initialTimer" type="Timer" parent="QuizManager" unique_id=192186641]
-wait_time = 15.0
+wait_time = 5.0
 one_shot = true
 
 [node name="AnswerTimer" type="Timer" parent="QuizManager" unique_id=264047810]
