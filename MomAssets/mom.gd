@@ -3,6 +3,8 @@ extends Sprite2D
 const walking_sprite = preload("uid://bmdxw7p3ivss2")
 const waiting_sprite = preload("uid://ro4007y645c2")
 
+var phase: int = 1
+
 @onready var sign_mom_timer: Timer = $"../SignMomTimer"
 @onready var win_text: Label = $"../CanvasLayer/MarginContainer/WinText"
 @onready var sfx_squeak: AudioStreamPlayer = $"../KidHand/SFX_Squeak"

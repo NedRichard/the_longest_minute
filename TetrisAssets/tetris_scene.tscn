@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cucg4ee5d6ju6" path="res://TetrisAssets/tetris_background_neutral.png" id="2_4xfwj"]
 [ext_resource type="PackedScene" uid="uid://meqwv1el5pnk" path="res://TetrisAssets/tetris_hud.tscn" id="3_lw01v"]
 [ext_resource type="Texture2D" uid="uid://b603qtc7o1jb3" path="res://TetrisAssets/tetris_bag.png" id="3_rdkc4"]
+[ext_resource type="Texture2D" uid="uid://cp3ef5tbutacm" path="res://TetrisAssets/tetris_hand.png" id="4_i6enk"]
 [ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="4_ppmu1"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_ci6gq"]
 [ext_resource type="AudioStream" uid="uid://dd2edl0jw6xnh" path="res://Audio/product scan 2.mp3" id="7_4xfwj"]
@@ -260,11 +261,17 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4xfwj")
 
 [node name="Bag" type="Sprite2D" parent="." unique_id=791330192]
-position = Vector2(915, 586)
-scale = Vector2(0.38211516, 0.6007449)
+position = Vector2(915, 650.77936)
+scale = Vector2(0.38211516, 0.51437247)
 texture = ExtResource("3_rdkc4")
 
+[node name="Hand" type="Sprite2D" parent="." unique_id=19162908]
+position = Vector2(1508, 184)
+scale = Vector2(0.37935877, 0.5106621)
+texture = ExtResource("4_i6enk")
+
 [node name="TetrisHUD" parent="." unique_id=1845199848 instance=ExtResource("3_lw01v")]
+visible = false
 
 [node name="MarginContainer" parent="TetrisHUD" index="0" unique_id=2133695815]
 theme_override_constants/margin_left = 50
@@ -285,13 +292,13 @@ size_flags_vertical = 0
 texture = ExtResource("5_ci6gq")
 
 [node name="Board" type="TileMapLayer" parent="." unique_id=501633393]
-position = Vector2(618, 172)
-scale = Vector2(0.4, 0.4)
+position = Vector2(651.14, 288.2)
+scale = Vector2(0.35, 0.35)
 tile_set = SubResource("TileSet_ps2ti")
 
 [node name="Active" type="TileMapLayer" parent="." unique_id=706441616]
-position = Vector2(618, 172)
-scale = Vector2(0.4, 0.4)
+position = Vector2(651.14, 288.2)
+scale = Vector2(0.35, 0.35)
 tile_set = SubResource("TileSet_bdwim")
 
 [node name="SFX_Scan" type="AudioStreamPlayer" parent="." unique_id=966299150]
