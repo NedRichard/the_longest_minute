@@ -150,7 +150,7 @@ func initialize_tetromino() -> void:
 	current_position = START_POSITION
 	active_tetromino = current_tetromino_type[rotation_index]
 	render_tetromino(active_tetromino, current_position, piece_atlas)
-	render_tetromino(next_tetromino_type[0], Vector2i(5,-4), next_piece_atlas)
+	render_tetromino(next_tetromino_type[0], Vector2i(16,-4), next_piece_atlas)
 	sfx_scan.play()
 
 func render_tetromino(tetromino: Array, position: Vector2i, atlas: Vector2i) -> void:
@@ -192,7 +192,7 @@ func land_tetromino() -> void:
 		board_layer.set_cell(current_position + i, tile_id, piece_atlas)
 			
 func clear_next_tetromino_preview() -> void:
-	for i in range(5, 10):
+	for i in range(14, 20):
 		for j in range(-4, 1):
 			active_layer.erase_cell(Vector2i(i, j))
 
