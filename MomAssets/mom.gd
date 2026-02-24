@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 	if mom_is_walking:
 		mom_walks()
 		scale += Vector2(0.005,0.005)
+		position += Vector2(0, 1.5)
 	else:
 		if scale >= Vector2(0.055,0.055):
 			scale -= Vector2(0.0001,0.0001)
