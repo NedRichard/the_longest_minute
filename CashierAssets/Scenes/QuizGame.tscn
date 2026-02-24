@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://c8uq6u2sa2dt2" path="res://Audio/glass shatter 1.wav" id="9_wpvef"]
 [ext_resource type="AudioStream" uid="uid://bda8g3e0j8vhe" path="res://Audio/glass shatter 2.wav" id="10_hisi2"]
 [ext_resource type="AudioStream" uid="uid://cy8cnmiofuj2o" path="res://Audio/machine fault.wav" id="11_4pifc"]
+[ext_resource type="AudioStream" uid="uid://d4k43owvrgld8" path="res://Audio/freesound_community-strained-gibberish-103110.mp3" id="13_hisi2"]
+[ext_resource type="AudioStream" uid="uid://bq10swgp6tuq" path="res://Audio/781093__saangosu__videogame-sci-fi-metalish-damage-efect.wav" id="14_4pifc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxse7"]
 texture = ExtResource("7_cvnos")
@@ -46,26 +48,29 @@ bg_cashier = NodePath("../UI/PanelContainer/TextureRect_CashierBG")
 angryleveltextures = Array[Texture2D]([ExtResource("4_cvnos"), ExtResource("5_fw8rb"), ExtResource("6_4vs4d"), ExtResource("7_v0wym")])
 sfxPlayer = NodePath("AudioStreamPlayer2")
 audio_stream_correct = Array[AudioStream]([ExtResource("7_h2e7g"), ExtResource("8_v0wym")])
-audio_stream_fail = Array[AudioStream]([ExtResource("9_wpvef"), ExtResource("10_hisi2"), ExtResource("11_4pifc")])
+audio_stream_fail = Array[AudioStream]([ExtResource("9_wpvef"), ExtResource("10_hisi2"), ExtResource("11_4pifc"), ExtResource("13_hisi2"), ExtResource("14_4pifc")])
 answer_timer = NodePath("AnswerTimer")
 interval_timer = NodePath("Interval")
 initial_timer = NodePath("initialTimer")
 
 [node name="initialTimer" type="Timer" parent="QuizManager" unique_id=192186641]
-wait_time = 5.0
+wait_time = 15.0
 one_shot = true
 
 [node name="AnswerTimer" type="Timer" parent="QuizManager" unique_id=264047810]
-wait_time = 10.0
+wait_time = 20.0
 one_shot = true
 
 [node name="Interval" type="Timer" parent="QuizManager" unique_id=1595800105]
-wait_time = 11.0
+wait_time = 35.0
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="QuizManager" unique_id=99416742]
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="QuizManager" unique_id=8346359]
+volume_db = 2.979
+pitch_scale = 1.09
+mix_target = 1
 
 [node name="UI" type="Control" parent="." unique_id=1513484850]
 layout_mode = 1
