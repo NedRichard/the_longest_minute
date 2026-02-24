@@ -1,7 +1,7 @@
 extends Sprite2D
 
-const walking_sprite = preload("uid://bmdxw7p3ivss2")
-const waiting_sprite = preload("uid://ro4007y645c2")
+@export var walking_sprite: Texture2D
+@export var waiting_sprite: Texture2D
 
 var phase: int = 1
 
@@ -38,7 +38,10 @@ func _process(delta: float) -> void:
 			scale -= Vector2(0.0001,0.0001)
 
 	if scale >= Vector2(1.0, 1.0):
-		EventBus.win.emit()
+		if phase == 1:
+			pass
+		elif phase == 2:
+			EventBus.win.emit()
 
 
 func _on_sign_mom_timer_timeout() -> void:

@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bx5uscbmapojf"]
+
+[ext_resource type="Texture2D" uid="uid://crfoafbj2itw6" path="res://CashierAssets/cashier_dialogue_box.png" id="1_y4s4d"]
+
+[resource]
+texture = ExtResource("1_y4s4d")
+expand_margin_left = 100.0
+expand_margin_top = 100.0
+expand_margin_right = 180.0
+expand_margin_bottom = 100.0
