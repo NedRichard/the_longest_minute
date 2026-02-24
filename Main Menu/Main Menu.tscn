@@ -13,6 +13,14 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i0jnm"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62v7d"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+
 [node name="MainMenu" type="Node2D" unique_id=435551171]
 script = ExtResource("1_5ms5j")
 mum_path = NodePath("CanvasLayer2/MumStanding")
@@ -80,6 +88,35 @@ visibility_layer = 7
 position = Vector2(1578, 763)
 scale = Vector2(0.38154277, 0.38496375)
 texture = ExtResource("1_ku1ks")
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=1206550002]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer3" unique_id=530432512]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -305.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 500
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 50
+
+[node name="Panel" type="Panel" parent="CanvasLayer3/MarginContainer" unique_id=1300528436]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_62v7d")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer3/MarginContainer" unique_id=624608088]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Panel" type="Panel" parent="CanvasLayer3/MarginContainer/MarginContainer" unique_id=1880096017]
+layout_mode = 2
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
