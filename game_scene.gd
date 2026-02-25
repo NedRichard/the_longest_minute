@@ -39,6 +39,7 @@ func _ready() -> void:
 	switch_to_tetris_screen()
 	EventBus.start_talking.connect(start_talking_sfx)
 	EventBus.game_over.connect(is_game_over)
+	bgm.play()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

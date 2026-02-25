@@ -67,7 +67,6 @@ autoplay = true
 [node name="BGM" type="AudioStreamPlayer" parent="Audio" unique_id=709621734]
 stream = ExtResource("7_6e45b")
 volume_db = -6.0
-autoplay = true
 
 [node name="CashierVoice" type="AudioStreamPlayer" parent="Audio" unique_id=85850532]
 stream = ExtResource("8_e35lh")

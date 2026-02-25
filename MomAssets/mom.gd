@@ -18,6 +18,7 @@ extends Sprite2D
 @onready var intermission_text_3: Label = $"../CanvasLayer/MarginContainer/IntermissionText3"
 
 @onready var skip_dialogue_timer: Timer = $"../SkipDialogueTimer"
+@onready var mom_disappear_timer: Timer = $"../MomDisappearTimer"
 
 var dialogue: int = 0
 var can_skip_dialogue = true
@@ -102,6 +103,7 @@ func _process(delta: float) -> void:
 				self.scale = initial_scale
 				self.position = initial_pos
 				EventBus.phase = 2
+				mom_disappear_timer.start()
 			
 	if scale >= Vector2(1.0, 1.0):
 		if EventBus.phase == 1:
@@ -157,3 +159,9 @@ func display_bg3() -> void:
 
 func display_bg4() -> void:
 	background.texture = bg_4
+
+
+func _on_mom_disappear_timer_timeout() -> void:
+	self.visible = false
+	await get_tree().create_timer(10.0).timeout
+	self.visible = true
