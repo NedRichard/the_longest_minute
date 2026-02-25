@@ -24,6 +24,7 @@ border_width_bottom = 10
 border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_wpo0r"]
+subpixel_positioning = 0
 
 [node name="MainMenu" type="Node2D" unique_id=435551171 node_paths=PackedStringArray("buttonHolder")]
 script = ExtResource("1_5ms5j")

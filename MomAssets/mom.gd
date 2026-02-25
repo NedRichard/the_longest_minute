@@ -22,6 +22,7 @@ extends Sprite2D
 
 var dialogue: int = 0
 var can_skip_dialogue = true
+var mom_can_disappear = true
 
 var initial_scale: Vector2
 var initial_pos: Vector2
@@ -103,7 +104,7 @@ func _process(delta: float) -> void:
 				self.scale = initial_scale
 				self.position = initial_pos
 				EventBus.phase = 2
-				mom_disappear_timer.start()
+				mom_can_disappear = true
 			
 	if scale >= Vector2(1.0, 1.0):
 		if EventBus.phase == 1:
@@ -162,6 +163,8 @@ func display_bg4() -> void:
 
 
 func _on_mom_disappear_timer_timeout() -> void:
-	self.visible = false
-	await get_tree().create_timer(10.0).timeout
-	self.visible = true
+	if mom_can_disappear:
+		self.visible = false
+		mom_can_disappear = false
+		await get_tree().create_timer(10.0).timeout
+		self.visible = true
