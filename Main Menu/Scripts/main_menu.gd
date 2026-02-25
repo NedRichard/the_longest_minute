@@ -1,5 +1,7 @@
 extends Node2D
 
+#var game_scene: PackedScene = preload("res://game_scene.gd")
+
 @export var buttonHolder:Container
 @export var mum_path: NodePath
 @onready var mum: Sprite2D = get_node_or_null(mum_path)
@@ -59,16 +61,15 @@ func _process(_delta: float) -> void:
 					_dialog_done = true
 					
 					momSkidadle()
+					
 					return
 				change_state(State.READY)
-			
-			
+				
 
 # -------------------
 # Button: Play pressed
 # -------------------
 func _on_play_pressed() -> void:
-	
 	if _busy:
 		return
 	_busy = true
@@ -79,6 +80,7 @@ func momSkidadle()-> void:
 	if mum == null:
 		push_error("mum_path not assigned or Sprite2D not found!")
 		_busy = false
+		
 		return
 
 	if momtween and momtween.is_valid():
@@ -98,7 +100,7 @@ func momSkidadle()-> void:
 		beginGame()
 	)	
 func beginGame()->void:
-	onGameStart.emit()
+	get_tree().change_scene_to_file("res://game_scene.tscn")
 func _on_exit_pressed() -> void:
 	get_tree().quit()
 
