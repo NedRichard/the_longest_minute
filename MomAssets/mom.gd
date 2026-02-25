@@ -72,16 +72,16 @@ func _process(delta: float) -> void:
 			scale += Vector2(0.0015,0.0015)
 			position += Vector2(0, 0.6)
 		elif EventBus.phase == 2:
-			scale += Vector2(0.0003,0.0003)
+			scale += Vector2(0.0006,0.0006)
 			position += Vector2(0, 0.1)
 	else:
 		if scale >= initial_scale:
 			if EventBus.phase == 1:
-				scale -= Vector2(0.00015,0.00015)
-				position -= Vector2(0, 0.06)
+				scale -= Vector2(0.00001,0.00001)
+				position -= Vector2(0, 0.006)
 			elif EventBus.phase == 2:
-				scale -= Vector2(0.00015,0.00015)
-				position -= Vector2(0, 0.01)
+				scale -= Vector2(0.00001,0.00001)
+				position -= Vector2(0, 0.001)
 	
 	if EventBus.intermission == true:
 		mom_close_up.visible = true
@@ -141,6 +141,7 @@ func mom_stops_walking() -> void:
 	kid_animation_player.stop()
 	var anims = animation_player.get_animation_list()
 	anims.erase("walking")
+	anims.erase("idle")
 	animation_player.play(anims[randi() % anims.size()])
 	sfx_footsteps.stop()
 	sfx_squeak.stop()

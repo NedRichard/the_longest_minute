@@ -68,7 +68,7 @@ var current_position: Vector2i
 
 
 @export var fall_timer: float = 0
-@export var fall_interval: float = 1.0
+@export var fall_interval: float = 1.4
 @export var fast_fall_multipler: float = 10.0
 
 
@@ -246,7 +246,7 @@ func is_within_bounds(pos: Vector2i) -> bool:
 	return tile_id == -1
 
 func raise_difficulty() -> void:
-	fall_interval -= 0.1
+	fall_interval -= 0.05
 
 func is_game_over() -> void:
 	for i in active_tetromino:

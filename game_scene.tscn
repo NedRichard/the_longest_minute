@@ -57,6 +57,9 @@ offset_bottom = 69.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
+[node name="ToLeftScreen" parent="HUDCanvas/HUD/Control/MarginContainer" parent_id_path=PackedInt32Array(1911995513, 1931752843) index="0" unique_id=824756103]
+visible = false
+
 [node name="Audio" type="Node" parent="." unique_id=444948966]
 
 [node name="Ambience" type="AudioStreamPlayer" parent="Audio" unique_id=1293822707]
@@ -70,7 +73,8 @@ volume_db = -6.0
 
 [node name="CashierVoice" type="AudioStreamPlayer" parent="Audio" unique_id=85850532]
 stream = ExtResource("8_e35lh")
-volume_db = 9.0
+volume_db = 17.667
 pitch_scale = 1.16
+autoplay = true
 
 [editable path="HUDCanvas/HUD"]

@@ -36,9 +36,12 @@ var cashier_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	switch_to_tetris_screen()
+	switch_to_mom_screen()
 	EventBus.start_talking.connect(start_talking_sfx)
 	EventBus.game_over.connect(is_game_over)
+	EventBus.strike1.connect(higher_bgm_pitch)
+	EventBus.strike2.connect(higher_bgm_pitch)
+	EventBus.strike3.connect(higher_bgm_pitch)
 	bgm.play()
 	
 
@@ -99,6 +102,5 @@ func is_game_over() -> void:
 	bgm.stop()
 	cashier_voice.stop()
 
-
-
-	pass # Replace with function body.
+func higher_bgm_pitch() -> void:
+	bgm.pitch_scale += 0.1
