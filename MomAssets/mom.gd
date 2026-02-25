@@ -74,7 +74,12 @@ func _process(delta: float) -> void:
 			position += Vector2(0, 0.1)
 	else:
 		if scale >= initial_scale:
-			scale -= Vector2(0.0001,0.0001)
+			if EventBus.phase == 1:
+				scale -= Vector2(0.00015,0.00015)
+				position -= Vector2(0, 0.06)
+			elif EventBus.phase == 2:
+				scale -= Vector2(0.00015,0.00015)
+				position -= Vector2(0, 0.01)
 	
 	if EventBus.intermission == true:
 		mom_close_up.visible = true
