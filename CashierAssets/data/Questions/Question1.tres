@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_0yp4n")
-question_text = "Did you find everything?"
-answers = Array[String](["Yes, we did", "No, We didn't get anything", "No, nothing", "We, didn't buy anything"])
-correct_answer_indices = Array[int]([0])
+question_text = "Are you shopping with your mom today?"
+answers = Array[String](["No I'm all alone", "Yes I'm a good swimmer", "Yes, we came together", "No, she brought me along"])
+correct_answer_indices = Array[int]([2])
 metadata/_custom_type_script = "uid://d4mnncm6ubd8l"
