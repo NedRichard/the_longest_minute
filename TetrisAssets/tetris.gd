@@ -99,28 +99,30 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if is_game_running:
-		var move_direction = Vector2i.ZERO
+	if EventBus.intermission:
+		return
 		
-		if Input.is_action_just_pressed("ui_left"):
-			move_direction = Vector2i.LEFT
-		elif Input.is_action_just_pressed("ui_right"):
-			move_direction = Vector2i.RIGHT
-		
-		if move_direction != Vector2i.ZERO:
-			move_tetromino(move_direction)
-		
-		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("interact"):
-			rotate_tetromino()
-		
-		var current_fall_interval = fall_interval
-		if Input.is_action_pressed("ui_down"):
-			current_fall_interval /= fast_fall_multipler
-		
-		fall_timer += delta
-		if fall_timer >= current_fall_interval:
-			move_tetromino(Vector2i.DOWN)
-			fall_timer = 0
+	var move_direction = Vector2i.ZERO
+	
+	if Input.is_action_just_pressed("ui_left"):
+		move_direction = Vector2i.LEFT
+	elif Input.is_action_just_pressed("ui_right"):
+		move_direction = Vector2i.RIGHT
+	
+	if move_direction != Vector2i.ZERO:
+		move_tetromino(move_direction)
+	
+	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("interact"):
+		rotate_tetromino()
+	
+	var current_fall_interval = fall_interval
+	if Input.is_action_pressed("ui_down"):
+		current_fall_interval /= fast_fall_multipler
+	
+	fall_timer += delta
+	if fall_timer >= current_fall_interval:
+		move_tetromino(Vector2i.DOWN)
+		fall_timer = 0
 
 func start_new_game() -> void:
 	next_bag_button.visible = false
