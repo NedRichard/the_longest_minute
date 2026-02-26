@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cgy7gpbmf00m5" path="res://MomAssets/mum_walking1.png" id="4_3rct6"]
 [ext_resource type="Texture2D" uid="uid://ct58wl2nkqe3f" path="res://MomAssets/mum_background_angry1.png" id="4_6kdu6"]
 [ext_resource type="AudioStream" uid="uid://cxgo414ijmcbi" path="res://MomAssets/SFX_Footsteps.mp3" id="4_78lb6"]
-[ext_resource type="StyleBox" uid="uid://bx5uscbmapojf" path="res://HUD/dialogue_box.tres" id="5_8n2mh"]
+[ext_resource type="StyleBox" path="res://HUD/dialogue_box.tres" id="5_8n2mh"]
 [ext_resource type="Texture2D" uid="uid://dd7fypi3nugm0" path="res://MomAssets/mum_background_angry2.png" id="5_jpvox"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_qce2s"]
 [ext_resource type="Texture2D" uid="uid://cecxseehe57bc" path="res://MomAssets/mum_hand_waving.png" id="5_t2wny"]

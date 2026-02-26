@@ -105,9 +105,6 @@ func _start_question(index: int) -> void:
 	questionPopup.show()
 	juice_popup()
 	_current_question = question_bank.get_question(index)
-	if _current_question == null:
-		_finish_quiz()
-		return
 
 	var validation_error: String = _current_question.validate()
 	if validation_error != "":
@@ -151,11 +148,20 @@ func _updateCashierMood(index: int) -> void:
 	
 func _process(_delta: float) -> void:
 	# Update countdown label using the Timer's remaining time
+	var val = EventBus.intermission
 	if _accepting_input and answer_timer and answer_timer.is_stopped() == false:
 		timer_label.text = "Time: %.1f" % answer_timer.time_left
 	else:
 		# After answer/timeout, you can either keep it at 0.0 or clear it
-		timer_label.text = "Time: 0.0"
+		if not val:
+			timer_label.text = "Time: 0.0"
+		
+	
+	if val:
+		
+		answer_timer.paused=val
+		interval_timer.paused=val
+		
 
 func _clear_answers() -> void:
 	# Safe disconnect + free
@@ -338,21 +344,10 @@ func _is_answer_accepted(answer_index: int) -> bool:
 	return _current_question.correct_answer_indices.has(answer_index)
 
 
-func _finish_quiz() -> void:
-	_accepting_input = false
-	if drop_zone:
-		drop_zone.set_enabled(false)
-
-	answer_timer.stop()
-	interval_timer.stop()
-	set_process(false)
-
-	_clear_answers()
-	question_label.text = "Quiz complete!"
-	feedback_label.text = "Thanks for playing."
-	timer_label.text = ""
-	voice_player.stop()
-
-
+func Pause()-> void:
+	
+	pass
+func Play()-> void:
+	pass	
 func _on_initial_timer_timeout() -> void:
 	start_quiz()
