@@ -291,13 +291,13 @@ size_flags_vertical = 0
 texture = ExtResource("5_ci6gq")
 
 [node name="Board" type="TileMapLayer" parent="." unique_id=501633393]
-position = Vector2(550, 59)
-scale = Vector2(0.45, 0.45)
+position = Vector2(545, 59)
+scale = Vector2(0.48999998, 0.48999998)
 tile_set = SubResource("TileSet_ps2ti")
 
 [node name="Active" type="TileMapLayer" parent="." unique_id=706441616]
-position = Vector2(550, 59)
-scale = Vector2(0.45, 0.45)
+position = Vector2(545, 59)
+scale = Vector2(0.48999998, 0.48999998)
 tile_set = SubResource("TileSet_bdwim")
 
 [node name="SFX_Scan" type="AudioStreamPlayer" parent="." unique_id=966299150]

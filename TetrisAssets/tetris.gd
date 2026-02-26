@@ -201,7 +201,7 @@ func check_rows() -> void:
 	while row > 0:
 		var cells_filled: int = 0
 		for i in range(COLS):
-			if not is_within_bounds(Vector2i(i + 1, row)):
+			if board_layer.get_cell_source_id(Vector2i(i, row)) != -1:
 				cells_filled += 1
 		if cells_filled == COLS:
 			shift_rows(row)
@@ -212,16 +212,16 @@ func shift_rows(row) -> void:
 	var atlas: Vector2i
 	for i in range(row, 1, -1):
 		for j in range(COLS):
-			atlas = board_layer.get_cell_atlas_coords(Vector2i(j + 1, i - 1))
+			atlas = board_layer.get_cell_atlas_coords(Vector2i(j, i - 1))
 			if atlas == Vector2i(-1, -1):
-				board_layer.erase_cell(Vector2i(j +1, i))
+				board_layer.erase_cell(Vector2i(j, i))
 			else:
-				board_layer.set_cell(Vector2i(j + 1, i), tile_id, atlas)
+				board_layer.set_cell(Vector2i(j, i), tile_id, atlas)
 
 func clear_board() -> void:
 	for i in range(ROWS):
 		for j in range(COLS):
-			board_layer.erase_cell(Vector2i(j + 1, i + 1))
+			board_layer.erase_cell(Vector2i(j, i))
 	
 func is_valid_move(new_position: Vector2i) -> bool:
 	for block in active_tetromino:
@@ -230,7 +230,7 @@ func is_valid_move(new_position: Vector2i) -> bool:
 	return true
 
 func is_valid_rotation() -> bool:
-	var next_rotation = (rotation_index + 1) % 4
+	var next_rotation = (rotation_index - 1) % 4
 	var rotated_tetromino = current_tetromino_type[next_rotation]
 	
 	for block in rotated_tetromino:
@@ -239,7 +239,7 @@ func is_valid_rotation() -> bool:
 	return true
 
 func is_within_bounds(pos: Vector2i) -> bool:
-	if pos.x < 0 or pos.x >= COLS + 1 or pos.y < 0 or pos.y >= ROWS + 1:
+	if pos.x < 0 or pos.x >= COLS or pos.y < 0 or pos.y >= ROWS:
 		return false
 	
 	var tile_id = board_layer.get_cell_source_id(pos)
