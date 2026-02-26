@@ -36,9 +36,9 @@ func _ready() -> void:
 	print("Starting state: State.READY")
 	hide_textbox()
 
-	queue_text("Oh I am so forgetful, I forgot the bread. Just wait here Nono, I will be back in just a moment.    ")
+	queue_text("Oh I am so forgetful, I forgot the bread. Just wait here [b]Nono[/b], I will be back in just a moment.    ")
 	queue_text("You are a big boy already, after all. Already eight. Maybe you can start packing our groceries already   ")
-	queue_text("I will be back in just a minute   ")
+	queue_text("I will [b]be back in just a minute[/b]   ")
 	queue_text(".....")
 
 func _process(_delta: float) -> void:
