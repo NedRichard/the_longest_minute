@@ -100,6 +100,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if EventBus.intermission:
+		fall_timer = 0
 		return
 		
 	var move_direction = Vector2i.ZERO

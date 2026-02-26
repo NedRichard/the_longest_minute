@@ -42,6 +42,7 @@ func _ready() -> void:
 	EventBus.strike1.connect(higher_bgm_pitch)
 	EventBus.strike2.connect(higher_bgm_pitch)
 	EventBus.strike3.connect(higher_bgm_pitch)
+	bgm.seek(10.0)
 	bgm.play()
 	
 
@@ -103,4 +104,4 @@ func is_game_over() -> void:
 	cashier_voice.stop()
 
 func higher_bgm_pitch() -> void:
-	bgm.pitch_scale += 0.1
+	bgm.pitch_scale += 0.03
