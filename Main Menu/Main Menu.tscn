@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bbyirkvv443tk" path="res://Main Menu/ButtonsAssets/quit_button_pressed.png" id="6_hx6c7"]
 [ext_resource type="Texture2D" uid="uid://os5ds8fr3fbq" path="res://Main Menu/ButtonsAssets/quit_button_hower.png" id="7_wpo0r"]
 [ext_resource type="Texture2D" uid="uid://dhthdw0ccy17f" path="res://Main Menu/main_menu_backgroud.png" id="9_hx6c7"]
+[ext_resource type="FontFile" uid="uid://c0g28rvhdmavn" path="res://MomAssets/Fonts/Neucha-Regular.ttf" id="10_wpo0r"]
+[ext_resource type="AudioStream" uid="uid://dsj1v3hpjso8b" path="res://Audio/SFX_SupermarketAmbience.mp3" id="11_re3ss"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5ms5j"]
 
@@ -23,6 +25,7 @@ border_width_bottom = 10
 border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_wpo0r"]
+subpixel_positioning = 0
 
 [node name="MainMenu" type="Node2D" unique_id=435551171 node_paths=PackedStringArray("buttonHolder")]
 script = ExtResource("1_5ms5j")
@@ -146,7 +149,7 @@ text = "*"
 [node name="quote" type="Label" parent="CanvasLayer3/MarginContainer/MarginContainer/HBoxContainer" unique_id=1759657733]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = SubResource("SystemFont_wpo0r")
+theme_override_fonts/font = ExtResource("10_wpo0r")
 theme_override_font_sizes/font_size = 20
 text = "asdasdasdadasdasdasdasdasdasdadasdadad"
 
@@ -156,6 +159,11 @@ size_flags_vertical = 8
 theme_override_fonts/font = SubResource("SystemFont_wpo0r")
 theme_override_font_sizes/font_size = 30
 text = "V"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1100391119]
+stream = ExtResource("11_re3ss")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

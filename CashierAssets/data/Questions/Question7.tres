@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_7vxao")
-question_text = "The store closes at 9pm and it is already 8:30pm. How much longer will it stay open?
+question_text = "So, how old are you?
 "
-answers = Array[String](["1h 30 minutes", "1h", "30 minutes ", "20 minutes "])
-correct_answer_indices = Array[int]([2])
+answers = Array[String](["6 yo", "8 yo", "1 hour, I was just born", "10 yo"])
+correct_answer_indices = Array[int]([1])
 metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

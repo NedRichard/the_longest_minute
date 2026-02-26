@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_8l7s6")
-question_text = "What is 3 x 4 = ?"
-answers = Array[String](["3", "11", "12", "4"])
-correct_answer_indices = Array[int]([2])
+question_text = "So what's your name, darling?"
+answers = Array[String](["Momo", "Nono", "Nino", "Robby"])
+correct_answer_indices = Array[int]([1])
 metadata/_custom_type_script = "uid://d4mnncm6ubd8l"

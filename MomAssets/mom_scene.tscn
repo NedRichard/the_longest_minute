@@ -254,6 +254,9 @@ wait_time = 0.5
 [node name="SkipDialogueTimer" type="Timer" parent="." unique_id=1633681860]
 wait_time = 2.0
 
+[node name="MomDisappearTimer" type="Timer" parent="." unique_id=1811874512]
+wait_time = 15.0
+
 [node name="KidHand" type="Sprite2D" parent="." unique_id=1830020499]
 position = Vector2(482.00003, 1009.0001)
 scale = Vector2(0.5, 0.5)
@@ -269,3 +272,6 @@ parameters/looping = true
 [connection signal="timeout" from="SignMomTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
 [connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_skip_dialogue_timer_timeout"]
 [connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
+[connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_mom_disappear_timer_timeout"]
+[connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_skip_dialogue_timer_timeout"]
+[connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_sign_mom_timer_timeout"]

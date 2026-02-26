@@ -18,9 +18,11 @@ extends Sprite2D
 @onready var intermission_text_3: Label = $"../CanvasLayer/MarginContainer/IntermissionText3"
 
 @onready var skip_dialogue_timer: Timer = $"../SkipDialogueTimer"
+@onready var mom_disappear_timer: Timer = $"../MomDisappearTimer"
 
 var dialogue: int = 0
 var can_skip_dialogue = true
+var mom_can_disappear = true
 
 var initial_scale: Vector2
 var initial_pos: Vector2
@@ -70,11 +72,16 @@ func _process(delta: float) -> void:
 			scale += Vector2(0.0015,0.0015)
 			position += Vector2(0, 0.6)
 		elif EventBus.phase == 2:
-			scale += Vector2(0.0003,0.0003)
+			scale += Vector2(0.0006,0.0006)
 			position += Vector2(0, 0.1)
 	else:
 		if scale >= initial_scale:
-			scale -= Vector2(0.0001,0.0001)
+			if EventBus.phase == 1:
+				scale -= Vector2(0.00001,0.00001)
+				position -= Vector2(0, 0.006)
+			elif EventBus.phase == 2:
+				scale -= Vector2(0.00001,0.00001)
+				position -= Vector2(0, 0.001)
 	
 	if EventBus.intermission == true:
 		mom_close_up.visible = true
@@ -97,6 +104,7 @@ func _process(delta: float) -> void:
 				self.scale = initial_scale
 				self.position = initial_pos
 				EventBus.phase = 2
+				mom_can_disappear = true
 			
 	if scale >= Vector2(1.0, 1.0):
 		if EventBus.phase == 1:
@@ -133,6 +141,7 @@ func mom_stops_walking() -> void:
 	kid_animation_player.stop()
 	var anims = animation_player.get_animation_list()
 	anims.erase("walking")
+	anims.erase("idle")
 	animation_player.play(anims[randi() % anims.size()])
 	sfx_footsteps.stop()
 	sfx_squeak.stop()
@@ -152,3 +161,11 @@ func display_bg3() -> void:
 
 func display_bg4() -> void:
 	background.texture = bg_4
+
+
+func _on_mom_disappear_timer_timeout() -> void:
+	if mom_can_disappear:
+		self.visible = false
+		mom_can_disappear = false
+		await get_tree().create_timer(10.0).timeout
+		self.visible = true

@@ -68,7 +68,7 @@ var current_position: Vector2i
 
 
 @export var fall_timer: float = 0
-@export var fall_interval: float = 1.0
+@export var fall_interval: float = 1.5
 @export var fast_fall_multipler: float = 10.0
 
 
@@ -99,28 +99,31 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if is_game_running:
-		var move_direction = Vector2i.ZERO
+	if EventBus.intermission:
+		fall_timer = 0
+		return
 		
-		if Input.is_action_just_pressed("ui_left"):
-			move_direction = Vector2i.LEFT
-		elif Input.is_action_just_pressed("ui_right"):
-			move_direction = Vector2i.RIGHT
-		
-		if move_direction != Vector2i.ZERO:
-			move_tetromino(move_direction)
-		
-		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("interact"):
-			rotate_tetromino()
-		
-		var current_fall_interval = fall_interval
-		if Input.is_action_pressed("ui_down"):
-			current_fall_interval /= fast_fall_multipler
-		
-		fall_timer += delta
-		if fall_timer >= current_fall_interval:
-			move_tetromino(Vector2i.DOWN)
-			fall_timer = 0
+	var move_direction = Vector2i.ZERO
+	
+	if Input.is_action_just_pressed("ui_left"):
+		move_direction = Vector2i.LEFT
+	elif Input.is_action_just_pressed("ui_right"):
+		move_direction = Vector2i.RIGHT
+	
+	if move_direction != Vector2i.ZERO:
+		move_tetromino(move_direction)
+	
+	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("interact"):
+		rotate_tetromino()
+	
+	var current_fall_interval = fall_interval
+	if Input.is_action_pressed("ui_down"):
+		current_fall_interval /= fast_fall_multipler
+	
+	fall_timer += delta
+	if fall_timer >= current_fall_interval:
+		move_tetromino(Vector2i.DOWN)
+		fall_timer = 0
 
 func start_new_game() -> void:
 	next_bag_button.visible = false
@@ -150,7 +153,7 @@ func initialize_tetromino() -> void:
 	current_position = START_POSITION
 	active_tetromino = current_tetromino_type[rotation_index]
 	render_tetromino(active_tetromino, current_position, piece_atlas)
-	render_tetromino(next_tetromino_type[0], Vector2i(16,-4), next_piece_atlas)
+	render_tetromino(next_tetromino_type[0], Vector2i(14,1), next_piece_atlas)
 	sfx_scan.play()
 
 func render_tetromino(tetromino: Array, position: Vector2i, atlas: Vector2i) -> void:
@@ -192,8 +195,8 @@ func land_tetromino() -> void:
 		board_layer.set_cell(current_position + i, tile_id, piece_atlas)
 			
 func clear_next_tetromino_preview() -> void:
-	for i in range(14, 20):
-		for j in range(-4, 1):
+	for i in range(12, 20):
+		for j in range(-4, 5):
 			active_layer.erase_cell(Vector2i(i, j))
 
 func check_rows() -> void:
@@ -201,7 +204,7 @@ func check_rows() -> void:
 	while row > 0:
 		var cells_filled: int = 0
 		for i in range(COLS):
-			if not is_within_bounds(Vector2i(i + 1, row)):
+			if board_layer.get_cell_source_id(Vector2i(i, row)) != -1:
 				cells_filled += 1
 		if cells_filled == COLS:
 			shift_rows(row)
@@ -212,16 +215,16 @@ func shift_rows(row) -> void:
 	var atlas: Vector2i
 	for i in range(row, 1, -1):
 		for j in range(COLS):
-			atlas = board_layer.get_cell_atlas_coords(Vector2i(j + 1, i - 1))
+			atlas = board_layer.get_cell_atlas_coords(Vector2i(j, i - 1))
 			if atlas == Vector2i(-1, -1):
-				board_layer.erase_cell(Vector2i(j +1, i))
+				board_layer.erase_cell(Vector2i(j, i))
 			else:
-				board_layer.set_cell(Vector2i(j + 1, i), tile_id, atlas)
+				board_layer.set_cell(Vector2i(j, i), tile_id, atlas)
 
 func clear_board() -> void:
 	for i in range(ROWS):
 		for j in range(COLS):
-			board_layer.erase_cell(Vector2i(j + 1, i + 1))
+			board_layer.erase_cell(Vector2i(j, i))
 	
 func is_valid_move(new_position: Vector2i) -> bool:
 	for block in active_tetromino:
@@ -230,7 +233,7 @@ func is_valid_move(new_position: Vector2i) -> bool:
 	return true
 
 func is_valid_rotation() -> bool:
-	var next_rotation = (rotation_index + 1) % 4
+	var next_rotation = (rotation_index - 1) % 4
 	var rotated_tetromino = current_tetromino_type[next_rotation]
 	
 	for block in rotated_tetromino:
@@ -239,21 +242,22 @@ func is_valid_rotation() -> bool:
 	return true
 
 func is_within_bounds(pos: Vector2i) -> bool:
-	if pos.x < 0 or pos.x >= COLS + 1 or pos.y < 0 or pos.y >= ROWS + 1:
+	if pos.x < 0 or pos.x >= COLS or pos.y < 0 or pos.y >= ROWS:
 		return false
 	
 	var tile_id = board_layer.get_cell_source_id(pos)
 	return tile_id == -1
 
 func raise_difficulty() -> void:
-	fall_interval -= 0.1
+	fall_interval -= 0.05
 
 func is_game_over() -> void:
 	for i in active_tetromino:
 		if not is_within_bounds(i + current_position):
 			land_tetromino()
 			#game_over_label.visible = true
-			next_bag_button.visible = true
-			is_game_running = false
-			if is_game_running == false:
-				EventBus.add_strike()
+			#next_bag_button.visible = true
+			#is_game_running = false
+			#if is_game_running == false:
+			EventBus.add_strike()
+			start_new_game()

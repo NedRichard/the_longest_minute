@@ -253,7 +253,7 @@ sources/0 = SubResource("TileSetAtlasSource_621yq")
 
 [node name="Tetris" type="Node2D" unique_id=1779908368]
 script = ExtResource("1_621yq")
-fall_interval = 0.2
+fall_interval = 1.0
 
 [node name="Background" type="Sprite2D" parent="." unique_id=412107219]
 position = Vector2(960, 540)
@@ -266,7 +266,7 @@ scale = Vector2(0.4794203, 0.6697058)
 texture = ExtResource("3_rdkc4")
 
 [node name="Hand" type="Sprite2D" parent="." unique_id=19162908]
-position = Vector2(1508, 184)
+position = Vector2(1591, 184)
 scale = Vector2(0.37935877, 0.5106621)
 texture = ExtResource("4_i6enk")
 
@@ -292,13 +292,13 @@ size_flags_vertical = 0
 texture = ExtResource("5_ci6gq")
 
 [node name="Board" type="TileMapLayer" parent="." unique_id=501633393]
-position = Vector2(550, 59)
-scale = Vector2(0.45, 0.45)
+position = Vector2(545, 59)
+scale = Vector2(0.48999998, 0.48999998)
 tile_set = SubResource("TileSet_ps2ti")
 
 [node name="Active" type="TileMapLayer" parent="." unique_id=706441616]
-position = Vector2(550, 59)
-scale = Vector2(0.45, 0.45)
+position = Vector2(545, 59)
+scale = Vector2(0.48999998, 0.48999998)
 tile_set = SubResource("TileSet_bdwim")
 
 [node name="SFX_Scan" type="AudioStreamPlayer" parent="." unique_id=966299150]
