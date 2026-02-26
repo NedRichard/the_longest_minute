@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://kagn8c2gacb3" path="res://HUD/win.jpg" id="6_1xsix"]
 [ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="7_61f8s"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="8_g10ll"]
+[ext_resource type="Texture2D" uid="uid://dr1m31ptq0cnq" path="res://HUD/hud_pack_groceries.png" id="10_4u2vk"]
+[ext_resource type="Texture2D" uid="uid://dhsb0cb70pm3g" path="res://HUD/hud_call_mom.png" id="11_4q17s"]
+[ext_resource type="Texture2D" uid="uid://b6gao0tehka1w" path="res://HUD/hud_answer_cashier.png" id="13_2d608"]
 
 [node name="HUD" type="Control" unique_id=971369467 node_paths=PackedStringArray("anxious_frame", "sweat_frame", "smoke_frame")]
 layout_mode = 3
@@ -153,19 +156,71 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="ToLeftScreen" type="TextureRect" parent="Control/MarginContainer" unique_id=824756103]
+[node name="Left" type="VBoxContainer" parent="Control/MarginContainer" unique_id=137260289]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = -14
+
+[node name="ToLeftScreen" type="TextureRect" parent="Control/MarginContainer/Left" unique_id=824756103]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("7_61f8s")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ToRightScreen" type="TextureRect" parent="Control/MarginContainer" unique_id=1528665552]
+[node name="GroceriesL" type="TextureRect" parent="Control/MarginContainer/Left" unique_id=670166154]
+visible = false
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+texture = ExtResource("10_4u2vk")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CallMom" type="TextureRect" parent="Control/MarginContainer/Left" unique_id=1505340706]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+texture = ExtResource("11_4q17s")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Right" type="VBoxContainer" parent="Control/MarginContainer" unique_id=1691463743]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = -25
+
+[node name="ToRightScreen" type="TextureRect" parent="Control/MarginContainer/Right" unique_id=1528665552]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture = ExtResource("8_g10ll")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GroceriesR" type="TextureRect" parent="Control/MarginContainer/Right" unique_id=345620446]
+visible = false
+custom_minimum_size = Vector2(280, 70)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("10_4u2vk")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Cashier" type="TextureRect" parent="Control/MarginContainer/Right" unique_id=1328463755]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("13_2d608")
+expand_mode = 3
+stretch_mode = 5

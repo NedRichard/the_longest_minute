@@ -6,8 +6,14 @@ extends Node2D
 @onready var camera_cashier: Camera2D = $CameraCashier
 
 @onready var hud: Control = $HUDCanvas/HUD
-@onready var to_left_screen: TextureRect = $HUDCanvas/HUD/Control/MarginContainer/ToLeftScreen
-@onready var to_right_screen: TextureRect = $HUDCanvas/HUD/Control/MarginContainer/ToRightScreen
+
+@export var to_left_screen: TextureRect
+@export var to_right_screen: TextureRect
+@export var groceries_l: TextureRect
+@export var groceries_r: TextureRect
+@export var cashier: TextureRect
+@export var call_mom: TextureRect
+
 
 @onready var ambience: AudioStreamPlayer = $Audio/Ambience
 @onready var bgm: AudioStreamPlayer = $Audio/BGM
@@ -76,6 +82,9 @@ func switch_to_mom_screen() -> void:
 	EventBus.current_mode = GameModes.Mode.MOM
 	to_left_screen.visible = false
 	to_right_screen.visible = true
+	groceries_r.visible = true
+	call_mom.visible = false
+	cashier.visible = false
 	
 func switch_to_tetris_screen() -> void:
 	camera_game.position = camera_tetris.position
@@ -86,6 +95,11 @@ func switch_to_tetris_screen() -> void:
 	EventBus.current_mode = GameModes.Mode.TETRIS
 	to_left_screen.visible = true
 	to_right_screen.visible = true
+	groceries_r.visible = false
+	call_mom.visible = true
+	cashier.visible = true
+	groceries_l.visible = false
+	
 func switch_to_cashier_screen() -> void:
 	camera_game.position = camera_cashier.position
 	camera_cashier.make_current()
@@ -95,6 +109,11 @@ func switch_to_cashier_screen() -> void:
 	EventBus.current_mode = GameModes.Mode.CASHIER
 	to_left_screen.visible = true
 	to_right_screen.visible = false
+	groceries_r.visible = false
+	call_mom.visible = false
+	cashier.visible = false
+	groceries_l.visible = true
+	
 func start_talking_sfx() -> void:
 	cashier_voice.play()
 
