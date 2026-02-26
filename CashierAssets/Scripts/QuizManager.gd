@@ -149,6 +149,7 @@ func _updateCashierMood(index: int) -> void:
 func _process(_delta: float) -> void:
 	# Update countdown label using the Timer's remaining time
 	var val = EventBus.intermission
+	print(answer_timer.paused)
 	if _accepting_input and answer_timer and answer_timer.is_stopped() == false:
 		timer_label.text = "Time: %.1f" % answer_timer.time_left
 	else:
@@ -157,10 +158,9 @@ func _process(_delta: float) -> void:
 			timer_label.text = "Time: 0.0"
 		
 	
-	if val:
+	answer_timer.paused=val
+	interval_timer.paused=val
 		
-		answer_timer.paused=val
-		interval_timer.paused=val
 		
 
 func _clear_answers() -> void:

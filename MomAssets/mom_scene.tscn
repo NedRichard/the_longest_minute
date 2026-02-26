@@ -272,6 +272,6 @@ parameters/looping = true
 [connection signal="timeout" from="SignMomTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
 [connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_skip_dialogue_timer_timeout"]
 [connection signal="timeout" from="SkipDialogueTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
-[connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_mom_disappear_timer_timeout"]
 [connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_skip_dialogue_timer_timeout"]
 [connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_sign_mom_timer_timeout"]
+[connection signal="timeout" from="MomDisappearTimer" to="Mom" method="_on_mom_disappear_timer_timeout"]
