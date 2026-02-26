@@ -68,7 +68,7 @@ var current_position: Vector2i
 
 
 @export var fall_timer: float = 0
-@export var fall_interval: float = 1.4
+@export var fall_interval: float = 1.5
 @export var fast_fall_multipler: float = 10.0
 
 

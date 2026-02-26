@@ -253,7 +253,6 @@ sources/0 = SubResource("TileSetAtlasSource_621yq")
 
 [node name="Tetris" type="Node2D" unique_id=1779908368]
 script = ExtResource("1_621yq")
-fall_interval = 0.2
 
 [node name="Background" type="Sprite2D" parent="." unique_id=412107219]
 position = Vector2(960, 540)
