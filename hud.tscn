@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://ch7dxdnrku23d"]
 
-[ext_resource type="Texture2D" uid="uid://do82ammygieki" path="res://HUD/anxious_frame.png" id="1_37p78"]
 [ext_resource type="Script" uid="uid://lj1lmvl3g1mp" path="res://hud.gd" id="1_640wx"]
+[ext_resource type="Texture2D" uid="uid://dwt600hdy4b22" path="res://HUD/vignette3.png" id="2_61f8s"]
 [ext_resource type="Texture2D" uid="uid://dnhyi7qw0ijve" path="res://HUD/sweat.png" id="2_64ctp"]
+[ext_resource type="Texture2D" uid="uid://bt27c27syq405" path="res://HUD/vignette2.png" id="2_g10ll"]
 [ext_resource type="Texture2D" uid="uid://c6u0wpfpivh7p" path="res://HUD/smoke.png" id="3_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://c13yg2bojn008" path="res://HUD/vignette1.png" id="4_gpiub"]
 [ext_resource type="Texture2D" uid="uid://vuuotlgtgken" path="res://HUD/crying.jpg" id="5_a2258"]
 [ext_resource type="Texture2D" uid="uid://kagn8c2gacb3" path="res://HUD/win.jpg" id="6_1xsix"]
 [ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="7_61f8s"]
@@ -20,6 +22,8 @@ script = ExtResource("1_640wx")
 anxious_frame = NodePath("Control/AnxiousFrame")
 sweat_frame = NodePath("Control/SweatFrame")
 smoke_frame = NodePath("Control/SmokeFrame")
+anxious_texture_2 = ExtResource("2_g10ll")
+anxious_texture_3 = ExtResource("2_61f8s")
 
 [node name="Control" type="Control" parent="." unique_id=680563422]
 layout_mode = 1
@@ -37,7 +41,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_37p78")
+texture = ExtResource("4_gpiub")
+expand_mode = 3
 
 [node name="SweatFrame" type="TextureRect" parent="Control" unique_id=118015268]
 visible = false
@@ -53,7 +58,7 @@ expand_mode = 3
 
 [node name="SmokeFrame" type="TextureRect" parent="Control" unique_id=1209141104]
 visible = false
-modulate = Color(1, 1, 1, 0.38039216)
+modulate = Color(1, 1, 1, 0.050980393)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

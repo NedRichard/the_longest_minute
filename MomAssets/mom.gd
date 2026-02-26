@@ -1,5 +1,9 @@
 extends Sprite2D
 
+@onready var background: Sprite2D = $"../Background"
+@export var bg_2: Texture2D
+@export var bg_3: Texture2D
+@export var bg_4: Texture2D
 
 @export var walking_sprite: Texture2D
 @export var waiting_sprite: Texture2D
@@ -16,7 +20,6 @@ extends Sprite2D
 @onready var skip_dialogue_timer: Timer = $"../SkipDialogueTimer"
 
 var dialogue: int = 0
-var intermission: bool = false
 var can_skip_dialogue = true
 
 var initial_scale: Vector2
@@ -39,17 +42,19 @@ func _ready() -> void:
 	randomize()
 	initial_scale = self.scale
 	initial_pos = self.position
+	EventBus.strike1.connect(display_bg2)
+	EventBus.strike2.connect(display_bg3)
+	EventBus.strike3.connect(display_bg4)
 
 func _input(event: InputEvent) -> void:
 	if EventBus.current_mode == GameModes.Mode.MOM:
 		if event.is_action_pressed('interact'):
-			if intermission == false:
+			if EventBus.intermission == false:
 				mom_walks()
 				sign_mom_timer.stop()
 				sign_mom_timer.start()
 				
-			elif intermission == true:
-				
+			elif EventBus.intermission == true:
 				if can_skip_dialogue == true:
 					dialogue += 1
 					can_skip_dialogue = false
@@ -61,19 +66,22 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if mom_is_walking:
 		mom_walks()
-		scale += Vector2(0.005,0.005)
-		position += Vector2(0, 1.5)
+		if EventBus.phase == 1:
+			scale += Vector2(0.0015,0.0015)
+			position += Vector2(0, 0.6)
+		elif EventBus.phase == 2:
+			scale += Vector2(0.0003,0.0003)
+			position += Vector2(0, 0.1)
 	else:
 		if scale >= initial_scale:
 			scale -= Vector2(0.0001,0.0001)
 	
-	if intermission == true:
+	if EventBus.intermission == true:
 		mom_close_up.visible = true
 		self.visible = false
 		match dialogue:
 			1:
 				intermission_text_1.visible = true
-		
 			2:
 				intermission_text_1.visible = false
 				intermission_text_2.visible = true
@@ -81,27 +89,31 @@ func _process(delta: float) -> void:
 				intermission_text_2.visible = false
 				intermission_text_3.visible = true
 			4:
-				intermission = false
+				EventBus.intermission = false
+				mom_close_up.visible = false
 				intermission_text_3.visible = false
+				self.visible = true
+				mom_close_up.visible = false
+				self.scale = initial_scale
+				self.position = initial_pos
 				EventBus.phase = 2
-				
-	
+			
 	if scale >= Vector2(1.0, 1.0):
 		if EventBus.phase == 1:
-			intermission = true
+			EventBus.intermission = true
 		elif EventBus.phase == 2:
-			self.visible = true
-			mom_close_up.visible = false
-			self.scale = Vector2(0.055, 0.055)
-			self.position = initial_pos
+			#self.visible = true
+			#mom_close_up.visible = false
+			#self.scale = initial_scale
+			#self.position = initial_pos
 			EventBus.phase = 3
 		elif EventBus.phase == 3:
 			EventBus.win.emit()
 
-
 func _on_sign_mom_timer_timeout() -> void:
-	if mom_is_walking:
+	if mom_is_walking == true:
 		mom_stops_walking()
+		
 
 func mom_walks() -> void:
 	if !mom_is_walking:
@@ -128,6 +140,15 @@ func mom_stops_walking() -> void:
 
 
 func _on_skip_dialogue_timer_timeout() -> void:
-	if intermission == true:
+	if EventBus.intermission == true:
 		can_skip_dialogue = true
 		press_space.visible = true
+
+func display_bg2() -> void:
+	background.texture = bg_2
+
+func display_bg3() -> void:
+	background.texture = bg_3
+
+func display_bg4() -> void:
+	background.texture = bg_4

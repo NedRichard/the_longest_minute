@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cjhh17udniogq" path="res://HUD/hud_q.png" id="4_ppmu1"]
 [ext_resource type="Texture2D" uid="uid://b2lgafwm38uvm" path="res://HUD/hud_e.png" id="5_ci6gq"]
 [ext_resource type="AudioStream" uid="uid://dd2edl0jw6xnh" path="res://Audio/product scan 2.mp3" id="7_4xfwj"]
-[ext_resource type="Texture2D" uid="uid://v58jrenx4yyn" path="res://TetrisAssets/Tileset128.png" id="7_i6enk"]
+[ext_resource type="Texture2D" uid="uid://dc4mvqax5pa2" path="res://TetrisAssets/Final_tileset.png" id="8_i6enk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_075lc"]
-texture = ExtResource("7_i6enk")
+texture = ExtResource("8_i6enk")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 1:0/0 = 0
@@ -132,7 +132,7 @@ tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_075lc")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_621yq"]
-texture = ExtResource("7_i6enk")
+texture = ExtResource("8_i6enk")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 1:0/0 = 0
@@ -261,8 +261,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4xfwj")
 
 [node name="Bag" type="Sprite2D" parent="." unique_id=791330192]
-position = Vector2(915, 650.77936)
-scale = Vector2(0.38211516, 0.51437247)
+position = Vector2(857.5, 534.27936)
+scale = Vector2(0.4794203, 0.6697058)
 texture = ExtResource("3_rdkc4")
 
 [node name="Hand" type="Sprite2D" parent="." unique_id=19162908]
@@ -292,13 +292,13 @@ size_flags_vertical = 0
 texture = ExtResource("5_ci6gq")
 
 [node name="Board" type="TileMapLayer" parent="." unique_id=501633393]
-position = Vector2(651.14, 288.2)
-scale = Vector2(0.35, 0.35)
+position = Vector2(550, 59)
+scale = Vector2(0.45, 0.45)
 tile_set = SubResource("TileSet_ps2ti")
 
 [node name="Active" type="TileMapLayer" parent="." unique_id=706441616]
-position = Vector2(651.14, 288.2)
-scale = Vector2(0.35, 0.35)
+position = Vector2(550, 59)
+scale = Vector2(0.45, 0.45)
 tile_set = SubResource("TileSet_bdwim")
 
 [node name="SFX_Scan" type="AudioStreamPlayer" parent="." unique_id=966299150]

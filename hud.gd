@@ -6,6 +6,9 @@ extends Control
 @onready var game_over: Control = $Control/GameOver
 @onready var win: Control = $Control/Win
 
+@export var anxious_texture_2: Texture
+@export var anxious_texture_3: Texture
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBus.strike1.connect(display_anxiety)
@@ -25,9 +28,11 @@ func display_anxiety() -> void:
 	anxious_frame.visible = true
 
 func display_sweat() -> void:
+	anxious_frame.texture = anxious_texture_2
 	sweat_frame.visible = true
 	
 func display_smoke() -> void:
+	anxious_frame.texture = anxious_texture_3
 	smoke_frame.visible = true
 
 func display_game_over() -> void:
