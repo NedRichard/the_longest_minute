@@ -54,12 +54,26 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=329476234]
-visible = false
-layout_mode = 0
-offset_right = 930.0
-offset_bottom = 827.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -217.0
+offset_right = 217.0
+offset_bottom = 401.0
+grow_horizontal = 2
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = 144
 theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 200
+
+[node name="Controls" type="Label" parent="CanvasLayer/Control/MarginContainer" unique_id=1719569244]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("10_wpo0r")
+theme_override_font_sizes/font_size = 53
+text = "Press Space"
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/Control" unique_id=1172561926]
 visible = false

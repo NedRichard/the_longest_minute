@@ -5,6 +5,8 @@ extends Node2D
 @export var buttonHolder:Container
 @export var mum_path: NodePath
 @onready var mum: Sprite2D = get_node_or_null(mum_path)
+@onready var play: TextureButton = $CanvasLayer/Control/VBoxContainer/Play
+@onready var controls: Label = $CanvasLayer/Control/MarginContainer/Controls
 
 var mom_flip_tween: Tween
 var _mom_base_scale: Vector2
@@ -32,15 +34,21 @@ var text_tween: Tween  # typewriter tween
 func _ready() -> void:
 	if mum:
 		_mom_base_scale = mum.scale
-
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	play.grab_focus()
+	
 	print("Starting state: State.READY")
 	hide_textbox()
 
-	queue_text("Oh I am so forgetful, I forgot the bread. Just wait here [b]Nono[/b], I will be back in just a moment.    ")
-	queue_text("You are a big boy already, after all. Already eight. Maybe you can start packing our groceries already   ")
-	queue_text("I will [b]be back in just a minute[/b]   ")
+	queue_text("Oh where's my head today, I forgot the bread! Just wait here [b]Nono[/b], I'll go get it.    ")
+	queue_text("You're a big boy, okay? You're already eight. You could start packing our groceries already!")
+	queue_text("I will be back in [b]just a minute[/b]   ")
 	queue_text(".....")
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("interact"):
+		_on_play_pressed()
+		
 func _process(_delta: float) -> void:
 	match current_state:
 		State.READY:
@@ -73,6 +81,7 @@ func _on_play_pressed() -> void:
 	if _busy:
 		return
 	_busy = true
+	controls.visible = false
 	print("pressed")
 	current_state = State.READY
 func momSkidadle()-> void:
